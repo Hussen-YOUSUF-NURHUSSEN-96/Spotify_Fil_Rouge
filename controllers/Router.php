@@ -17,10 +17,23 @@
                 // Déterminer le contrôleur à appeler en fonction de l'action
                 switch ($action) 
                 {
+                    
+                    case 'home':
+                        require_once 'controllers/HomeController.php';
+                        $controller = new HomeController();
+                        $controller->home();
+                        break;
+
                     case 'login':
                         require_once 'controllers/UserController.php';
                         $controller = new UserController();
                         $controller->login();
+                        break;
+
+                    case 'loginSubmit':
+                        require_once 'controllers/UserController.php';
+                        $controller = new UserController();
+                        $controller->loginSubmit();
                         break;
 
                     case 'register':
@@ -29,11 +42,6 @@
                         $controller->register();
                         break;
 
-                    case 'home':
-                        require_once 'controllers/HomeController.php';
-                        $controller = new HomeController();
-                        $controller->home();
-                        break;
 
                     default:
                         // Action non reconnue
