@@ -3,7 +3,7 @@
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'Music platform');
 define('DB_USER', 'root');
-define('DB_PASSWORD', 'Roshan');
+define('DB_PASSWORD', '');
 define('DB_PORT', '3306'); // Adjust the port if necessary
 
 // Establish a PDO connection
