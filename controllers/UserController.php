@@ -19,6 +19,8 @@
             $ViewLogin->generer([]);  
         }
 
+        // ---------------------------------------------------------------
+
 
         // Traiter la soumission du formulaire de connexion
 
@@ -44,6 +46,8 @@
 
                 // Rediriger vers la page d'accueil
                 header('Location: index.php?action=home');
+
+                exit();
             }
             else
             {

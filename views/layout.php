@@ -7,7 +7,10 @@
 
         <title> <?= $title ?? 'Project-Spotify' ?> </title>
 
-        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/styles.css">
+
+        <!-- Page de login -->
+        <link rel="stylesheet" href="assets/css/login.css">
     </head>
 
     <body>
