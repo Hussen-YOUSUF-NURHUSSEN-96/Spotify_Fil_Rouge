@@ -6,6 +6,18 @@
     class User extends BaseModel
     {
 
+    // Code permettant l'inscirption
+        public static function create($username,$email,$password){
+            global $dsn; //Utilisation de la connexion globale
+            $sql="INSERT INTO users(username, email, password) VALUES (:username, :email, :password)";
+            $stmt=$dsn->prepare($sql);
+            //Sécurisations de la donnée
+            $stmt->bindParam(":username", $username);
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":password", $password);
+            return $stmt->execute();
+        }
+
         // Authentifier un utilisateur à partir de son nom d'utilisateur et de son mot de passe
 
         public function authenticateUser($username, $password)
