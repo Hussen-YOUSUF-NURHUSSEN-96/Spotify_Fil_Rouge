@@ -389,8 +389,39 @@ $ViewLogin->generer( ['login_Key' => $stagiaire] );        // Envoie les donnees
 
 
 
+
+# 2.  Preparer le routeur   :   controllers/Router.php
+
+
+# ajouter une nouvelle case dans le switch 
+
+    case 'login':
+        require_once 'controllers/UserController.php';          # Pour login  j'ai choisi que le contrôleur soit UserController.php
+        $controller = new UserController();
+        $controller->login();
+        break;
+
+
+
     
-# 2.  Preparer La controlleur  :   Creer la methode login() dans UserController.php
+# 3.  Preparer La controlleur  :   
+
+
+/*
+
+    Creer la methode login() dans UserController.php
+
+
+    Si login() de ce contrôleur reçoit un formulaire via POST
+
+        -  il vérifie auprès de la base de données dans le modèle /model/ si les informations sont correctes
+
+        -  puis appelle la vue home.php.
+
+
+    Si login() de ce contrôleur ne reçoit pas de POST, il appelle seulement la vue login.php
+
+*/
 
 
 class UserController 
@@ -429,7 +460,7 @@ class UserController
 
 
 
-# 3.   Preparer le Modèle :     /models/ User.php    
+# 4.   Preparer le Modèle :     /models/ User.php    
 
 
 <?php
@@ -465,6 +496,3 @@ class UserController
 
 
 
-
-
-#  Preparer fichers avec git.
