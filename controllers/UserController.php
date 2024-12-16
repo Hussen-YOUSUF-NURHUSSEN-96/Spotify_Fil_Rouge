@@ -63,17 +63,34 @@
      // }
 
      public function register(){
+        //Vérification de la methode http
         if($_SERVER['REQUEST_METHOD']=='POST'){
+            //Récupérations des données du formulaires
             $username = $_POST['username'];
             $email = $_POST['email'];
-            $password = password_hash($_POST['password'],PASSWORD_BCRYPT);
-            //Appel du modèle pour créer l'utilisateur
+            $password = $_POST['password'];
+
+            //Vérifications si le pseudo est déjà utilisé
+            if(User::userNameExist($username)){
+                $errorMessage = "Le nom d'utilisateur est déjà pris.";
+            }
+
+            //Si l'email existe déjà
+            elseif(User::emailExist($email)){
+                $errorMessage = "L'adresse email est déjà utilisée.";
+
+            }else{
+                //Si l'email et le pseudo sont disponible cryptage du mot de passe
+                $passwordHash=password_hash($password,PASSWORD_BCRYPT);
+
+                //Créationd de l'utilisateur
             if(User::create($username,$email,$password)){
                 header("Location: views/templates/home.php"); //Redirection apès succes
-                
+    
                 exit();
             } else {
-                echo"Erreur lors de l'inscriptions.";
+                 echo"Erreur lors de l'inscriptions.";
+            }
             }
         }
         //Charger la vue
