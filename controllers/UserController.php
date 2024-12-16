@@ -9,8 +9,6 @@
     class UserController 
     {
 
-        
-        
         // Affiche le formulaire de connexion
 
         public function login()  
@@ -58,31 +56,30 @@
         // ##################################################################
 
 
-//  public function register()  // Affiche le formulaire d'inscription
-//  {
-//      $ViewRegister = new View('templates/register');      // charge  register.php  
-//      $ViewRegister->generer([]);       
-//  }
+     // public function register()  // Affiche le formulaire d'inscription
+     // {
+     //     $ViewRegister = new View('templates/register');      // charge  register.php  
+     //     $ViewRegister->generer([]);       
+     // }
 
-        //Formulaire d'inscription
-        public function registrer(){
-            if($_SERVER['REQUEST_METHOD']=='POST'){
-                $username = $_POST['username'];
-                $email = $_POST['email'];
-                $password = password_hash($_POST['password'],PASSWORD_BCRYPT);
-                //Appel du modèle pour créer l'utilisateur
-                if(User::create($username,$email,$password)){
-                    header("Location: /success"); //Redirection apès succes
-                    
-                    exit();
-                } else {
-                    echo"Erreur lors de l'inscriptions.";
-                }
+     public function register(){
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            $password = password_hash($_POST['password'],PASSWORD_BCRYPT);
+            //Appel du modèle pour créer l'utilisateur
+            if(User::create($username,$email,$password)){
+                header("Location: views/templates/home.php"); //Redirection apès succes
+                
+                exit();
+            } else {
+                echo"Erreur lors de l'inscriptions.";
             }
-            //Charger la vue
-            require_once 'views/templates/register.php';
-          }
-          
+        }
+        //Charger la vue
+        require_once 'views/templates/register.php';
+      }
+      
     }
 
 ?>

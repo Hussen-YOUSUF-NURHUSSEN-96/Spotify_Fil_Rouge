@@ -1,21 +1,30 @@
 <?php
 
-    require_once 'BaseModel.php';        // Inclure la classe Modele pour la connexion à la base de données
+    require_once 'models/BaseModel.php';        // Inclure la classe Modele pour la connexion à la base de données
+    require_once 'config/config.php';                                                                                                                                                                                                                     
 
-
-    class User extends BaseModel
-    {
+    class User extends BaseModel{
+        
 
     // Code permettant l'inscirption
         public static function create($username,$email,$password){
-            global $dsn; //Utilisation de la connexion globale
-            $sql="INSERT INTO users(username, email, password) VALUES (:username, :email, :password)";
-            $stmt=$dsn->prepare($sql);
-            //Sécurisations de la donnée
-            $stmt->bindParam(":username", $username);
-            $stmt->bindParam(":email", $email);
-            $stmt->bindParam(":password", $password);
-            return $stmt->execute();
+            try{
+                $pdo = connect_to_db(); // rend pdo accessible
+            
+             $sql="INSERT INTO users(username, email, password) VALUES (:username, :email, :password)";
+             
+             $query=$pdo->prepare($sql);
+             //Sécurisations de la donnée
+             
+             $query->bindParam(":username", $username);
+             $query->bindParam(":email", $email);
+             $query->bindParam(":password", $password);
+             
+             return $query->execute();
+            }catch (PDOException $e) {
+                error_log("Error in User::create: " . $e->getMessage()); // Log the error for debugging
+                return false; // Return false to indicate failure
+            }
         }
 
         // Authentifier un utilisateur à partir de son nom d'utilisateur et de son mot de passe

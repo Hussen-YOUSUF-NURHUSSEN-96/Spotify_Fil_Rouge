@@ -4,20 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription - Spotifeux</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/register.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     
-    <div class="form-container">
-    <h1>Inscrivez-vous</h1>
-    <form action="" method="POST">
-        <input type="text" name="username" placeholder="Nom d'utilisateur" required>
-        <input type="text" name="email" placeholder="Email" required>
-        <input type="text" name="password" placeholder="Mot de passe" required>
-        <br>
-        <button type="submit">S'inscrire</button>
-    </form>
-    </div>
-</body>
+</head>
+    <body>
+    
+        <div class="form-container">
+            <h1>Inscrivez-vous</h1>
+            <form action="" method="POST">
+                 <label for="username">Nom d'utilisateur</label>
+                 <input type="text" name="username" placeholder="username" required>
+                 <br></br>
+                 <label for="email">Entrez votre email</label>
+                 <input type="text" name="email" placeholder="nom@domaine.com" required>
+                 <br></br>
+                 <label for="password">Entrez un mot de passe sécurisé</label>
+                 <input type="text" name="password" placeholder="Password" required>
+                 <br></br>
+                 <button class="btn-donate" type="submit">S'inscrire</button>
+                <p>Vous possédez déjà un compte chez nous ?<a href="views/templates/login.php">Connectez-vous.</a></p>
+            </form>
+        </div>
+
+        <div class="background">
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </body>
 </html>
 
