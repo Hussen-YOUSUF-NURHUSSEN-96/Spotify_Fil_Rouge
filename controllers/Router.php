@@ -42,6 +42,17 @@
                         $controller->register();
                         break;
 
+                    case 'index':
+                        require_once 'controllers/PlaylistController.php';
+                        $controller = new PlaylistController();
+                        $controller->index();
+                        break;
+                    
+                    case 'create':
+                        require_once 'controllers/PlaylistController.php';
+                        $controller = new PlaylistController();
+                        $controller->create();
+                        break;
 
                     default:
                         // Action non reconnue
