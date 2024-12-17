@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription - Spotifeux</title>
     <link rel="stylesheet" href="css/register.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
     
 </head>
     <body>
     
         <div class="form-container">
+
             <h1>Inscrivez-vous pour commencer à écouter.</h1>
 <!--Message d'erreur si erreur-->
        <?php if(!empty($errorMessage)): ?>
@@ -19,16 +20,17 @@
         </div>
         <?php endif; ?>
 <!--Formulaire-->
+
             <form action="" method="POST">
                  <label for="username">Nom d'utilisateur</label>
                  <input type="text" name="username" placeholder=" username" required>
                 
                  <label for="email">Entrez votre email</label>
+
                  <input type="text" name="email" placeholder=" nom@domaine.com" required>
                 
                  <label for="password">Entrez un mot de passe</label>
                  <input type="text" name="password" placeholder=" Password" required>
-                 
                  <button class="btn-donate" type="submit">S'inscrire</button>
                 <p>Vous possédez déjà un compte chez nous ? <a href="views/templates/login.php">Connectez-vous.</a></p>
             </form>
