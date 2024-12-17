@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="fr">
 
     <head>
         <meta charset="UTF-8">
@@ -11,16 +11,31 @@
 
         <!-- Page de login -->
         <link rel="stylesheet" href="assets/css/login.css">
+        <link rel="stylesheet" href="assets/css/home.css">
+        <link rel="stylesheet" href="assets/css/register.css">
+        <link rel="stylesheet" href="assets/css/layout.css">
     </head>
 
     <body>
-        <header>
+<!--    <header>
             <h1>Project-Spotify</h1>
             <nav>
                 <a href="index.php?action=home"> Home </a>
                 <a href="index.php?action=login"> Login </a>
                 <a href="index.php?action=register"> Register </a>
             </nav>
+        </header>-->
+        <header class="header">
+            <div class="search">
+                <input type="text" placeholder=" Rechercher">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="icon">
+                <a href="index.php?action=home"><i class="fas fa-home"></i></a>
+            </div>
+            <div class="icon">
+             <a href="index.php?action=login"><i class="fas fa-user"></i></a>
+            </div>
         </header>
 
         <main>
