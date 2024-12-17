@@ -71,3 +71,4 @@ CREATE TABLE user_video_interactions (
     UNIQUE KEY (user_id, video_id)         -- Garantit qu'un utilisateur ne peut interagir avec une vidéo qu'une seule fois
 ) ENGINE=InnoDB;
 
+
