@@ -9,6 +9,10 @@
 <body>
    <section>
     <div class="library">
+<!--Playlist favoris par defaut-->
+        <div class="favoris">
+        
+        </div>
 
     </div>
     <div class="video-lecture">
@@ -18,6 +22,9 @@
 
     </div>
     <div class="artiste-en-cours">
+        
+
+        </div>
 
     </div>
 
