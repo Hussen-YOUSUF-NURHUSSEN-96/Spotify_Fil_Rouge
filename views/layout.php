@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="assets/css/home.css">
         <link rel="stylesheet" href="assets/css/register.css">
         <link rel="stylesheet" href="assets/css/layout.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     </head>
 
     <body>

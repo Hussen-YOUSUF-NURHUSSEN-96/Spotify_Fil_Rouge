@@ -4,6 +4,45 @@
 }
 
 body{
-    width: 100%;
     background-color: black;
+}
+
+/*Bibliothèquee*/
+
+.library{
+    width: 100px;
+    height: 800px;
+    background-color: rgb(12, 73, 30);
+    border-radius: 10px;
+    
+}
+
+.video-lecture{
+    width: 75%;
+    height: 800px;
+    background-color: rgb(70, 102, 79);
+    border-radius: 10px;
+    
+}
+
+.suggestion{
+    width: 100px;
+    height: 800px;
+    background-color: rgb(86, 129, 98);
+    border-radius: 10px;
+    
+}
+
+section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.artiste-en-cours{
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    background-color: rgb(26, 26, 26);
 }
