@@ -1,0 +1,10 @@
+body {
+    background-color: #121212; /* Fond sombre */
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+header nav a {
+    color: red;
+    margin-left: 20px;
+}
