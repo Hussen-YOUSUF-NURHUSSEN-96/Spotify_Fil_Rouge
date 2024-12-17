@@ -31,7 +31,7 @@
 
                     */
                     $this->bdd = new PDO(
-                                            'mysql:host=localhost;dbname=spotifyDB;charset=utf8',  
+                                            'mysql:host=localhost;dbname=musicplatform;charset=utf8',  
                                             'root', '',
                                             [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
                                         );
