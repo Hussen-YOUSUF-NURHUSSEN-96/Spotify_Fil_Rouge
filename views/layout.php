@@ -43,9 +43,9 @@
             <?= $contenu ?>    <!-- Le contenu specifique à chaque page sera insere ici  -->
         </main>
 
-        <footer>
+       <!-- <footer>
             <p>&copy; 2024 Project-Spotify</p>
-        </footer>
+        </footer>-->
     </body>
 
 </html>
