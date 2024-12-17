@@ -7,7 +7,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-   <h1>BLABLABLA</h1>
+   <section>
+    <div class="library">
+
+    </div>
+    <div class="video-lecture">
+
+    </div>
+    <div class="suggestion">
+
+    </div>
+    <div class="artiste-en-cours">
+
+    </div>
+
+   </section>
 </body>
 </html>
 
