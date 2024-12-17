@@ -29,7 +29,7 @@
             $password = $_POST['password'] ?? '';  
 
             // Instancier le modèle User
-            $userModel = new User();
+            $userModel = new User($username, " ", $password);
 
             // Verifier les informations de connexion
             $user = $userModel->authenticateUser($username, $password);

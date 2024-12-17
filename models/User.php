@@ -74,25 +74,34 @@
         public function authenticateUser($username, $password)
         {
 
-            // Récupérer les informations de l'utilisateur par le nom d'utilisateur
-
-            $sql = "SELECT * FROM users WHERE username = ?";
-            
-
-            // Exécuter 
-            $result = $this->executeQuery($sql, [$username]);
-
-
-            $user = $result->fetch(PDO::FETCH_ASSOC);
-
-            // Si l'utilisateur existe 
-            if ($user && password_verify($password, $user['password'])) 
+            try 
             {
-                return $user; // Retourner les données de l'utilisateur
-            }
+                $pdo = connect_to_db(); // Connexion via config.php
 
-            // Sinon, retourner false 
-            return false;
+                $sql = "SELECT * FROM users WHERE username = :username";
+                
+                $query = $pdo->prepare($sql);
+                $query->bindParam(":username", $username, PDO::PARAM_STR);
+                $query->execute();
+
+                $user = $query->fetch(PDO::FETCH_ASSOC);
+
+                // Si l'utilisateur existe 
+                // if ($user && password_verify($password, $user['password'])) 
+                if ($user && $password == $user['password'])
+                {
+                    return $user; // Retourner les données de l'utilisateur
+                }
+
+                // Sinon, retourner false 
+                return false;
+            }
+            catch (PDOException $e) 
+            {
+                error_log("Error in User::authenticateUser: " . $e->getMessage());
+                return false;
+            }
+            
         }
 
         // ###################################################################################
