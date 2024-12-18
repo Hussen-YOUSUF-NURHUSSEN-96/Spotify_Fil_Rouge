@@ -36,10 +36,16 @@
 
             if ($user) 
             {
-                 // Si la connexion est reussie, demarrer une session
-                session_start();
+                
+                
+                
+                
 
-                $_SESSION['user'] = $user;    // Stocker les donnees de l'utilisateur dans la session
+                $_SESSION['user'] = [
+                    'id'=>$user['id'],
+                    'username'=>$user['username'],
+                    'email'=>$user['email']
+                ];// Stocker les donnees de l'utilisateur dans la session
 
 
                 // Rediriger vers la page d'accueil
@@ -83,18 +89,30 @@
             elseif(User::emailExist($email)){
                 $errorMessage = "L'adresse email est déjà utilisée.";
 
-            }else{
-                //Si l'email et le pseudo sont disponible cryptage du mot de passe
-                $passwordHash=password_hash($password,PASSWORD_BCRYPT);
+            }else {
+                //Si l'email et le pseudo sont disponible
 
-                //Créationd de l'utilisateur
-            if(User::create($username,$email,$password)){
-                header("Location: views/templates/home.php"); //Redirection apès succes
-    
-                exit();
-            } else {
-                 echo"Erreur lors de l'inscriptions.";
-            }
+               
+
+                if(User::create($username, $email, $password)){
+                   
+                    $user = User::getUserByUsername($username);
+                  
+                    if($user){
+                    $_SESSION['user'] = ['id'=>$user['user_id'],
+                                        'username'=>$user['username'],
+                                        'email'=>$user['email']];
+                    
+                    
+                    header("Location:index.php?action=home");
+                    exit();
+                   } else{
+                    $errorMessage="Erreur : impossible de récupérer les informations de l'utilisateur";
+                   }
+
+                }else{
+                    $errorMessage = "Erreur lors de l'inscription:getbyusername";
+                }
             }
         }
         //Charger la vue

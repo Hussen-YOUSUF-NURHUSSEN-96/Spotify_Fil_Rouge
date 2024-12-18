@@ -8,6 +8,18 @@
     
 </head>
 <body>
+<header class="header">
+    <?php  if (isset($_SESSION['user_id'])): ?>
+        <a href="index.php?action=logout">Déconnexion</a>
+    <?php endif; ?>
+    <div class="search">
+        <input type="text" placeholder=" Rechercher">
+        <button type="submit"><i class="fas fa-search"></i></button>
+    </div>
+    <div class="icon">
+        <a href="index.php?action=home"><i class="fas fa-home"></i></a>
+    </div>
+</header>
    <section>
 
 <!--BIBLIOTHÈQUE-->

@@ -13,7 +13,18 @@
         
             // Méthode pour créer une nouvelle playlist
             public function create() {
-                if (isset($_POST['name'])) {
+                session_start();
+
+                //Verifiez si l'utilisateur est connecté
+                if(!isset($_SESSION['user_id'])){
+                    echo "Erreur : aucun utilisateur connecté";
+                    exit();
+                }
+
+                $userId = $_SESSION['user_id'];
+
+                  // Exemple de création de la playlist
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $name = $_POST['name'];
                     Playlist::create($name); // Créer une nouvelle playlist
                     header('Location:index.php?action=home'); // Rediriger vers la page principale après création
