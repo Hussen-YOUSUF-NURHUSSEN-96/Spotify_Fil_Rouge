@@ -8,15 +8,28 @@
     <link rel="stylesheet" href="assets/css/home.css">
 </head>
 <body>
-<header class="header">
-    <div class="search">
-        <input type="text" placeholder=" Rechercher">
-        <button type="submit"><i class="fas fa-search"></i></button>
-    </div>
-    <div class="icon">
-        <a href="index.php?action=home"><i class="fas fa-home"></i></a>
-    </div>
-</header>
+
+    <header class="header">
+        <div class="search">
+            <form action="index.php" method="GET">
+                <input type="hidden" name="action" value="search">
+                <input type="text" name="query" placeholder="Rechercher une vidéo" value="<?= htmlspecialchars($searchTerm ?? '') ?>">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+
+            <?php if (isset($videos)): ?>
+                <span style="font-size: 0.8rem; color: white; margin-left: 10px; font-style: italic; opacity: 0.7;">
+                    <?= count($videos) ?> résultat trouvé
+                </span>
+            <?php endif; ?>
+
+        </div>
+        <div class="icon">
+            <a href="index.php?action=home"><i class="fas fa-home"></i></a>
+        </div>
+    </header>
+
+
    <section>
 
 <!--BIBLIOTHÈQUE-->

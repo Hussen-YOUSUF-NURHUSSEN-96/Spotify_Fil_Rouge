@@ -15,9 +15,14 @@
     
             // Rechercher les videos
             $videos = Video::searchVideos($searchTerm);
-    
+            
+
+            // Option 1
             // Charger la vue avec les resultats
             $view = new View('templates/home');
             $view->generer(['videos' => $videos, 'searchTerm' => $searchTerm]);
+
+            // Option 2 
+            // include 'views/templates/home.php';
         }
     }
