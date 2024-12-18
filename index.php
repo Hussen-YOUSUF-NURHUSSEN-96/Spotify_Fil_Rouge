@@ -6,8 +6,6 @@
     
     $router->routeRequest();            // Analyse l'URL et redirige vers le bon contrôleur
 
-
-
 ?>
 
 

@@ -7,11 +7,13 @@
     class Router
     {
         public function routeRequest()
-        {
+        { 
             try 
             {
+                session_start();
+
                 // Vérifier si une action est définie dans l'URL
-                $action = $_GET['action'] ?? 'home';                // Action par défaut : home
+                $action = $_GET['action'] ?? 'login';                // Action par défaut : home
 
 
                 // Déterminer le contrôleur à appeler en fonction de l'action
@@ -52,6 +54,17 @@
                         require_once 'controllers/PlaylistController.php';
                         $controller = new PlaylistController();
                         $controller->create();
+                        break;
+
+                    case 'logout':
+                        require_once 'controllers/LogOutController.php';
+                        $controller = new LogoutController();
+                        $controller->logout();
+                    // Rechercher une video
+                    case 'search':
+                        require_once 'controllers/VideoController.php';
+                        $controller = new VideoController();
+                        $controller->search();
                         break;
 
                     default:

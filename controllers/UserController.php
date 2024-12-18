@@ -3,7 +3,6 @@
     require_once 'models/User.php';  // Inclure le modèle User
     require_once 'views/View.php';   // Inclure le gestionnaire des vues
 
-
     # Le UserController gère les actions liees aux utilisateurs, comme la connexion ou l'inscription.
 
     class UserController 
@@ -23,13 +22,17 @@
         // Traiter la soumission du formulaire de connexion
 
         public function loginSubmit() 
-        {
+        {    // Si la connexion est reussie, demarrer une session
+            if (session_status() === PHP_SESSION_NONE) {
+               session_start();
+           }
+                           
             // Recuperer les donnees du formulaire
             $username = $_POST['username'] ?? ''; 
             $password = $_POST['password'] ?? '';  
 
             // Instancier le modèle User
-            $userModel = new User();
+            $userModel = new User($username, " ", $password);
 
             // Verifier les informations de connexion
             $user = $userModel->authenticateUser($username, $password);
@@ -73,21 +76,28 @@
      // }
 
      public function register(){
-        //Vérification de la methode http
-        if($_SERVER['REQUEST_METHOD']=='POST'){
-            //Récupérations des données du formulaires
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+
+        if($_SERVER['REQUEST_METHOD']==='POST'){
+
+            //Récupérations des données du formulaire
             $username = $_POST['username'];
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            //Vérifications si le pseudo est déjà utilisé
+            //Vérifications si le pseudo est dejà utilisé
             if(User::userNameExist($username)){
-                $errorMessage = "Le nom d'utilisateur est déjà pris.";
+                $errorMessage = "Le nom d'utilisateur est déjà utiliser";
+
             }
 
             //Si l'email existe déjà
             elseif(User::emailExist($email)){
-                $errorMessage = "L'adresse email est déjà utilisée.";
+                $errorMessage = "L'email est déjà utilisé.";
 
             }else {
                 //Si l'email et le pseudo sont disponible
@@ -115,9 +125,21 @@
                 }
             }
         }
-        //Charger la vue
+        //Charger la vue 
         require_once 'views/templates/register.php';
       }
+
+
+   
+
+
+
+
+
+
+
+
+
       
     }
 

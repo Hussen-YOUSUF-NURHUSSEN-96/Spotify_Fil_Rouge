@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Spotifeux</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <link rel="stylesheet" href="assets/css/home.css">
 </head>
 <body>
 <header class="header">
@@ -27,24 +27,27 @@
     <!--Playlist favoris par defaut-->
         <div class="logo">
             <img src="assets/css/etagere-a-livres.png" alt="">
-            
+            <button class="add-playlist" onclick="openPopup()">+</button>
         </div>
-        <button class="add-playlist" onclick="openPopup()">+</button>
         <div class="favoris">
             <a href="#"><i class="fa-solid fa-heart"></i></a>
         </div>
             <div id="playlistContainer"class="cont-playlist">
-                <?php if (isset($playlists) && is_array($playlists)): ?>
-            <?php foreach ($playlists as $playlist): ?>
-                <div class="playlist">
-                    <p><?= htmlspecialchars($playlist['name']) ?></p>
-                </div>
-                <?php endforeach; ?>
-                <?php else: ?>
-                 <p>Aucune playlist</p>
-                <?php endif; ?>
+
+                <ul>
+                
+                    <?php if (!empty($playlists)): ?>
+                    <!--<?php print_r($playlists); ?>-->
+                        <?php foreach ($playlists as $playlist): ?>
+                         <li><?= htmlspecialchars($playlist['name']) ?></li>
+                        <?php endforeach; ?>
+                     <?php else: ?>
+                        <p>Aucune playlist</p>
+                    <?php endif; ?>
                     
-        </div>
+                </ul>
+                    
+            </div>
         <!-- pour créer une playlist-->
         <div id="popUp" class="popUp">
         <div class="popUp-content">
@@ -58,12 +61,18 @@
  </div>
 
     </div>
-            <!--<div class="video-lecture">
-    </div>-->
+    <div class="video-lecture">
+    </div>
     <div class="suggestion">
 
     </div>
     <div class="artiste-en-cours">
+        <div class="artiste">
+            <img src="assets/css/babymetal-album.jpeg" alt="">
+            <h2>Gimme Chocolate</h2>
+            <p>Baby Metal</p>
+
+        </div>
         
     </div>
 

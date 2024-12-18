@@ -26,10 +26,18 @@
                   // Exemple de création de la playlist
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $name = $_POST['name'];
-                    Playlist::create($name); // Créer une nouvelle playlist
-                    header('Location:index.php?action=home'); // Rediriger vers la page principale après création
+
+                    if (Playlist::create($name,$userId )) {
+//echo "Playlist créée avec succès.";
+                        header("Location: index.php?action=home");
+                    } 
+                    else {
+                        echo "Erreur lors de la création de la playlist.";
+                    }
+    
                 }
             }
+
         }
         
        

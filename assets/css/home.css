@@ -6,13 +6,31 @@
 body{
     background-color: black;
 }
+header{
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    padding: 10px;
+}
+main{
+    width: 100%;
+}
 
+.search{
+    width: 30%;
+}
+
+.icon{
+    width: 50px;
+    text-align: right;
+    padding-right: 10px;
+}
 /*Bibliothèquee*/
 
 .library{
     width: 10vh;
-    height: 100%;
-    background-color: rgb(12, 73, 30);
+    height: 72%;
+    background-color: rgb(47, 88, 59);
     border-radius: 10px;
     display: flex;
     flex-wrap: wrap;
@@ -31,6 +49,7 @@ body{
     border-radius: 10px;
     padding: 10px;
     margin-top: 10px;
+    margin-right: 10px;
 }
 
 .favoris a  {
@@ -38,14 +57,15 @@ body{
 }
 
 .logo{
-    width: 60px;
+    width: 100%;
     height: 60px;
     padding: 10px;
     margin-top: 10px;
+    display: flex;
 }
 
 .logo img  {
-    width: 100%;
+    width: 50%;
     
     
 }
@@ -58,7 +78,7 @@ body{
 
 .video-lecture{
     width: 75%;
-    height: 100%;
+    height: 72%;
     background-color: rgb(70, 102, 79);
     border-radius: 10px;
     
@@ -66,7 +86,7 @@ body{
 
 .suggestion{
     width: 100px;
-    height: 100vh;
+    height: 72%;
     background-color: rgb(86, 129, 98);
     border-radius: 10px;
     
@@ -77,7 +97,7 @@ section{
     flex-wrap: wrap;
     justify-content: space-around;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     padding-top: 30px;
 }
 
@@ -89,16 +109,37 @@ section{
     background-color: rgb(26, 26, 26);
 }
 
+.artiste{
+    display: flex;
+    flex-wrap: wrap;
+    width: 40%;
+    
+}
+
+.artiste img{
+    width: 150px;
+    border-radius: 15px;
+}
+
+.artiste h2{
+    font-size: 16px;
+    width: 30%;
+}
+
+.artiste p{
+    font-size: 16px;
+    width: 35%;
+}
 /*Boite modal*/
 
 .add-playlist{
     font-size: 30px;
     padding: 10px;
     cursor: pointer;
-    background-color: #4CAF50;
+    background-color: #1e1e1e5f;
     color: white;
     border: none;
-    border-radius: 50%;
+    border-radius: 10px;
 }
 
 .popUp{
@@ -137,3 +178,6 @@ section{
     background-color: #f1f1f1;
     border-radius: 5px;
 }
+
+/* responsive*/
+
