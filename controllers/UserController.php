@@ -22,7 +22,11 @@
         // Traiter la soumission du formulaire de connexion
 
         public function loginSubmit() 
-        {
+        {    // Si la connexion est reussie, demarrer une session
+            if (session_status() === PHP_SESSION_NONE) {
+               session_start();
+           }
+                           
             // Recuperer les donnees du formulaire
             $username = $_POST['username'] ?? ''; 
             $password = $_POST['password'] ?? '';  
@@ -35,10 +39,16 @@
 
             if ($user) 
             {
-                 // Si la connexion est reussie, demarrer une session
-                session_start();
+                
+                
+                
+                
 
-                $_SESSION['user_id'] = $user;    // Stocker les donnees de l'utilisateur dans la session
+                $_SESSION['user'] = [
+                    'id'=>$user['id'],
+                    'username'=>$user['username'],
+                    'email'=>$user['email']
+                ];// Stocker les donnees de l'utilisateur dans la session
 
 
                 // Rediriger vers la page d'accueil
@@ -67,7 +77,10 @@
 
      public function register(){
 
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
 
         if($_SERVER['REQUEST_METHOD']==='POST'){
 
@@ -96,9 +109,11 @@
                     $user = User::getUserByUsername($username);
                   
                     if($user){
-                    $_SESSION['user_id'] = $user['user_id'];
-                    $_SESSION['username'] = $user['username'];
-                    $_SESSION['email'] = $user['email'];
+                    $_SESSION['user'] = ['id'=>$user['user_id'],
+                                        'username'=>$user['username'],
+                                        'email'=>$user['email']];
+                    
+                    
                     header("Location:index.php?action=home");
                     exit();
                    } else{
@@ -115,16 +130,16 @@
       }
 
 
-      //Deconnexion
+   
 
-      public function logout(){
-        session_start();
 
-        session_unset();
 
-        header("Location: index.php?action=login");
-        exit();
-      }
+
+
+
+
+
+
       
     }
 

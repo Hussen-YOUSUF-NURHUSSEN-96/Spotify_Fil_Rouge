@@ -7,9 +7,11 @@
     class Router
     {
         public function routeRequest()
-        {
+        { 
             try 
             {
+                session_start();
+                
                 // Vérifier si une action est définie dans l'URL
                 $action = $_GET['action'] ?? 'login';                // Action par défaut : home
 
@@ -52,6 +54,12 @@
                         require_once 'controllers/PlaylistController.php';
                         $controller = new PlaylistController();
                         $controller->create();
+                        break;
+
+                    case 'logout':
+                        require_once 'controllers/LogOutController.php';
+                        $controller = new LogoutController();
+                        $controller->logout();
                         break;
 
                     default:

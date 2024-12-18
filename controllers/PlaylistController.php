@@ -16,7 +16,7 @@
                 session_start();
 
                 //Verifiez si l'utilisateur est connecté
-                if(isset($_SESSION['user_id'])){
+                if(!isset($_SESSION['user_id'])){
                     echo "Erreur : aucun utilisateur connecté";
                     exit();
                 }
@@ -25,15 +25,19 @@
 
                   // Exemple de création de la playlist
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $playlistTitle = $_POST['name'];
+                    $name = $_POST['name'];
 
-                    if (Playlist::create($playlistTitle,$userId )) {
-                    echo "Playlist créée avec succès.";
-                    } else {
-                    echo "Erreur lors de la création de la playlist.";
+                    if (Playlist::create($name,$userId )) {
+//echo "Playlist créée avec succès.";
+                        header("Location: index.php?action=home");
+                    } 
+                    else {
+                        echo "Erreur lors de la création de la playlist.";
+                    }
+    
                 }
-    }
             }
+
         }
         
        

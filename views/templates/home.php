@@ -9,6 +9,9 @@
 </head>
 <body>
 <header class="header">
+    <?php  if (isset($_SESSION['user_id'])): ?>
+        <a href="index.php?action=logout">Déconnexion</a>
+    <?php endif; ?>
     <div class="search">
         <input type="text" placeholder=" Rechercher">
         <button type="submit"><i class="fas fa-search"></i></button>
@@ -24,24 +27,27 @@
     <!--Playlist favoris par defaut-->
         <div class="logo">
             <img src="assets/css/etagere-a-livres.png" alt="">
-            
+            <button class="add-playlist" onclick="openPopup()">+</button>
         </div>
-        <button class="add-playlist" onclick="openPopup()">+</button>
         <div class="favoris">
             <a href="#"><i class="fa-solid fa-heart"></i></a>
         </div>
             <div id="playlistContainer"class="cont-playlist">
-                <?php if (isset($playlists) && is_array($playlists)): ?>
-            <?php foreach ($playlists as $playlist): ?>
-                <div class="playlist">
-                    <p><?= htmlspecialchars($playlist['name']) ?></p>
-                </div>
-                <?php endforeach; ?>
-                <?php else: ?>
-                 <p>Aucune playlist</p>
-                <?php endif; ?>
+
+                <ul>
+                
+                    <?php if (!empty($playlists)): ?>
+                    <!--<?php print_r($playlists); ?>-->
+                        <?php foreach ($playlists as $playlist): ?>
+                         <li><?= htmlspecialchars($playlist['name']) ?></li>
+                        <?php endforeach; ?>
+                     <?php else: ?>
+                        <p>Aucune playlist</p>
+                    <?php endif; ?>
                     
-        </div>
+                </ul>
+                    
+            </div>
         <!-- pour créer une playlist-->
         <div id="popUp" class="popUp">
         <div class="popUp-content">
@@ -61,6 +67,12 @@
 
     </div>
     <div class="artiste-en-cours">
+        <div class="artiste">
+            <img src="assets/css/babymetal-album.jpeg" alt="">
+            <h2>Gimme Chocolate</h2>
+            <p>Baby Metal</p>
+
+        </div>
         
     </div>
 

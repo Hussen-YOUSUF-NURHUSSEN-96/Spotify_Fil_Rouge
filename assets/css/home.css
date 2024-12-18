@@ -30,7 +30,7 @@ main{
 .library{
     width: 10vh;
     height: 72%;
-    background-color: rgb(12, 73, 30);
+    background-color: rgb(47, 88, 59);
     border-radius: 10px;
     display: flex;
     flex-wrap: wrap;
@@ -49,6 +49,7 @@ main{
     border-radius: 10px;
     padding: 10px;
     margin-top: 10px;
+    margin-right: 10px;
 }
 
 .favoris a  {
@@ -56,14 +57,15 @@ main{
 }
 
 .logo{
-    width: 60px;
+    width: 100%;
     height: 60px;
     padding: 10px;
     margin-top: 10px;
+    display: flex;
 }
 
 .logo img  {
-    width: 100%;
+    width: 50%;
     
     
 }
@@ -107,16 +109,37 @@ section{
     background-color: rgb(26, 26, 26);
 }
 
+.artiste{
+    display: flex;
+    flex-wrap: wrap;
+    width: 40%;
+    
+}
+
+.artiste img{
+    width: 150px;
+    border-radius: 15px;
+}
+
+.artiste h2{
+    font-size: 16px;
+    width: 30%;
+}
+
+.artiste p{
+    font-size: 16px;
+    width: 35%;
+}
 /*Boite modal*/
 
 .add-playlist{
     font-size: 30px;
     padding: 10px;
     cursor: pointer;
-    background-color: #4CAF50;
+    background-color: #1e1e1e5f;
     color: white;
     border: none;
-    border-radius: 50%;
+    border-radius: 10px;
 }
 
 .popUp{
@@ -155,3 +178,6 @@ section{
     background-color: #f1f1f1;
     border-radius: 5px;
 }
+
+/* responsive*/
+
