@@ -54,6 +54,13 @@
                         $controller->create();
                         break;
 
+                    // Rechercher une video
+                    case 'search':
+                        require_once 'controllers/VideoController.php';
+                        $controller = new VideoController();
+                        $controller->search();
+                        break;
+
                     default:
                         // Action non reconnue
                         $this->handleError("Action inconnue : $action");
