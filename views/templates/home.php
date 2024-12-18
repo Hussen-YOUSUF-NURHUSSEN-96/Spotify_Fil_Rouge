@@ -5,9 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Spotifeux</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <link rel="stylesheet" href="assets/css/home.css">
 </head>
 <body>
+<header class="header">
+    <div class="search">
+        <input type="text" placeholder=" Rechercher">
+        <button type="submit"><i class="fas fa-search"></i></button>
+    </div>
+    <div class="icon">
+        <a href="index.php?action=home"><i class="fas fa-home"></i></a>
+    </div>
+</header>
    <section>
 
 <!--BIBLIOTHÈQUE-->

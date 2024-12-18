@@ -26,18 +26,6 @@
                 <a href="index.php?action=register"> Register </a>
             </nav>
         </header>-->
-        <header class="header">
-            <div class="search">
-                <input type="text" placeholder=" Rechercher">
-                <button type="submit"><i class="fas fa-search"></i></button>
-            </div>
-            <div class="icon">
-                <a href="index.php?action=home"><i class="fas fa-home"></i></a>
-            </div>
-            <div class="icon">
-             <a href="index.php?action=login"><i class="fas fa-user"></i></a>
-            </div>
-        </header>
 
         <main>
             <?= $contenu ?>    <!-- Le contenu specifique à chaque page sera insere ici  -->

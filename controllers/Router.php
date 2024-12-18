@@ -11,7 +11,7 @@
             try 
             {
                 // Vérifier si une action est définie dans l'URL
-                $action = $_GET['action'] ?? 'home';                // Action par défaut : home
+                $action = $_GET['action'] ?? 'login';                // Action par défaut : home
 
 
                 // Déterminer le contrôleur à appeler en fonction de l'action

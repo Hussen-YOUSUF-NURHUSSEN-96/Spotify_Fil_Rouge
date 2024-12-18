@@ -3,7 +3,6 @@
     require_once 'models/User.php';  // Inclure le modèle User
     require_once 'views/View.php';   // Inclure le gestionnaire des vues
 
-
     # Le UserController gère les actions liees aux utilisateurs, comme la connexion ou l'inscription.
 
     class UserController 
@@ -67,38 +66,64 @@
      // }
 
      public function register(){
-        //Vérification de la methode http
-        if($_SERVER['REQUEST_METHOD']=='POST'){
-            //Récupérations des données du formulaires
+
+        session_start();
+
+        if($_SERVER['REQUEST_METHOD']==='POST'){
+
+            //Récupérations des données du formulaire
             $username = $_POST['username'];
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            //Vérifications si le pseudo est déjà utilisé
+            //Vérifications si le pseudo est dejà utilisé
             if(User::userNameExist($username)){
-                $errorMessage = "Le nom d'utilisateur est déjà pris.";
+                $errorMessage = "Le nom d'utilisateur est déjà utiliser";
+
             }
 
             //Si l'email existe déjà
             elseif(User::emailExist($email)){
-                $errorMessage = "L'adresse email est déjà utilisée.";
+                $errorMessage = "L'email est déjà utilisé.";
 
-            }else{
-                //Si l'email et le pseudo sont disponible cryptage du mot de passe
-                $passwordHash=password_hash($password,PASSWORD_BCRYPT);
+            }else {
+                //Si l'email et le pseudo sont disponible
 
-                //Créationd de l'utilisateur
-            if(User::create($username,$email,$password)){
-                header("Location: views/templates/home.php"); //Redirection apès succes
-    
-                exit();
-            } else {
-                 echo"Erreur lors de l'inscriptions.";
-            }
+               
+
+                if(User::create($username, $email, $password)){
+                   
+                    $user = User::getUserByUsername($username);
+                  
+                    if($user){
+                    $_SESSION['user_id'] = $user['user_id'];
+                    $_SESSION['username'] = $user['username'];
+                    $_SESSION['email'] = $user['email'];
+                    header("Location:index.php?action=home");
+                    exit();
+                   } else{
+                    $errorMessage="Erreur : impossible de récupérer les informations de l'utilisateur";
+                   }
+
+                }else{
+                    $errorMessage = "Erreur lors de l'inscription:getbyusername";
+                }
             }
         }
-        //Charger la vue
+        //Charger la vue 
         require_once 'views/templates/register.php';
+      }
+
+
+      //Deconnexion
+
+      public function logout(){
+        session_start();
+
+        session_unset();
+
+        header("Location: index.php?action=login");
+        exit();
       }
       
     }

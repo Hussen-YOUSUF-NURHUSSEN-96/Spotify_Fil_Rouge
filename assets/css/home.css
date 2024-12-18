@@ -6,7 +6,25 @@
 body{
     background-color: black;
 }
+header{
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    padding: 10px;
+}
+main{
+    width: 100%;
+}
 
+.search{
+    width: 30%;
+}
+
+.icon{
+    width: 50px;
+    text-align: right;
+    padding-right: 10px;
+}
 /*Bibliothèquee*/
 
 .library{

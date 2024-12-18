@@ -36,10 +36,12 @@
 
         }
 
-        public static function create($name){
+        public static function create($name, $userId){
             $pdo = connect_to_db(); // rend pdo accessible
-            $query=$pdo->prepare('INSERT INTO playlists (name) VALUES(:name)');
+            $query=$pdo->prepare('INSERT INTO playlists (user_id, name) VALUES(:user_id, :name)');
+            $query->bindParam(':user_id',$userId);
             $query->bindParam(':name',$name);
+            
             $query->execute();
 
         }

@@ -1,4 +1,5 @@
 <?php
+    
 
     require_once 'models/BaseModel.php';        // Inclure la classe Modele pour la connexion à la base de données
     require_once 'config/config.php';                                                                                                                                                                                                                     
@@ -32,8 +33,12 @@
              $query->bindParam(":username", $username);
              $query->bindParam(":email", $email);
              $query->bindParam(":password", $password);
+
+             if($query->execute()){
+                return $pdo->lastInsertId();
+             }
              
-             return $query->execute();
+             return false;
             }catch (PDOException $e) {
                 error_log("Error in User::create: " . $e->getMessage()); // Log the error for debugging
                 return false; // Return false to indicate failure
@@ -63,6 +68,30 @@
             return $query->fetchColumn()>0;
             
         }
+
+        public static function getUserByUsername($username){
+
+            try{
+                $pdo = connect_to_db(); // rend pdo accessible
+
+                $sql = "SELECT * FROM users WHERE username =:username";
+                $query = $pdo->prepare($sql);
+
+                $query->bindParam(":username", $username,PDO::PARAM_STR);
+                $query->execute();
+
+                $user = $query->fetch(PDO::FETCH_ASSOC);
+
+                if($user === false){
+                    return false;
+                } return $user;
+                
+            }catch (PDOException $e){
+                return false;
+            }
+        }
+
+
 
 
 
