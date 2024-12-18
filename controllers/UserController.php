@@ -109,7 +109,7 @@
                     $user = User::getUserByUsername($username);
                   
                     if($user){
-                    $_SESSION['user'] = ['id'=>$user['user_id'],
+                    $_SESSION['user'] = ['id'=>$user['id'],
                                         'username'=>$user['username'],
                                         'email'=>$user['email']];
                     

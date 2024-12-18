@@ -9,7 +9,7 @@
 </head>
 <body>
 <header class="header">
-    <?php  if (isset($_SESSION['user_id'])): ?>
+    <?php  if (isset($_SESSION['user'])): ?>
         <a href="index.php?action=logout">Déconnexion</a>
     <?php endif; ?>
     <div class="search">

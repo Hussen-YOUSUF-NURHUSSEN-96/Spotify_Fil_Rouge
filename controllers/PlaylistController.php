@@ -13,15 +13,17 @@
         
             // Méthode pour créer une nouvelle playlist
             public function create() {
-                session_start();
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();  // Démarre la session si ce n'est pas déjà fait
+                }
 
                 //Verifiez si l'utilisateur est connecté
-                if(!isset($_SESSION['user_id'])){
+                if(!isset($_SESSION['user']['id'])){
                     echo "Erreur : aucun utilisateur connecté";
                     exit();
                 }
 
-                $userId = $_SESSION['user_id'];
+                $userId = $_SESSION['user']['id'];
 
                   // Exemple de création de la playlist
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
