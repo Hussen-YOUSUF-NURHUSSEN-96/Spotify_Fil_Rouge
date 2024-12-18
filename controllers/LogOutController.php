@@ -6,9 +6,6 @@ class LogoutController {
         session_start();
 }
 
-    if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
         // Supprime toutes les variables de session
         session_unset();
