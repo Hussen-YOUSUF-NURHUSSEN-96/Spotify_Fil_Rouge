@@ -11,7 +11,7 @@
             try 
             {
                 session_start();
-                
+
                 // Vérifier si une action est définie dans l'URL
                 $action = $_GET['action'] ?? 'login';                // Action par défaut : home
 
@@ -60,6 +60,11 @@
                         require_once 'controllers/LogOutController.php';
                         $controller = new LogoutController();
                         $controller->logout();
+                    // Rechercher une video
+                    case 'search':
+                        require_once 'controllers/VideoController.php';
+                        $controller = new VideoController();
+                        $controller->search();
                         break;
 
                     default:
