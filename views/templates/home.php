@@ -55,8 +55,8 @@
  </div>
 
     </div>
-            <!--<div class="video-lecture">
-    </div>-->
+    <div class="video-lecture">
+    </div>
     <div class="suggestion">
 
     </div>

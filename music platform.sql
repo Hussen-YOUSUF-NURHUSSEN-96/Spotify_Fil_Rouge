@@ -11,7 +11,6 @@ DROP TABLE IF EXISTS users;
 -- Table des utilisateurs : Cette table stocke les informations des utilisateurs inscrits sur la plateforme.
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL UNIQUE,
     username VARCHAR(50) NOT NULL UNIQUE,  -- Nom d'utilisateur unique
     email VARCHAR(100) NOT NULL UNIQUE,    -- Adresse e-mail unique
     password VARCHAR(255) NOT NULL,         -- Mot de passe de l'utilisateur

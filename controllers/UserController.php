@@ -38,7 +38,7 @@
                  // Si la connexion est reussie, demarrer une session
                 session_start();
 
-                $_SESSION['user'] = $user;    // Stocker les donnees de l'utilisateur dans la session
+                $_SESSION['user_id'] = $user;    // Stocker les donnees de l'utilisateur dans la session
 
 
                 // Rediriger vers la page d'accueil
