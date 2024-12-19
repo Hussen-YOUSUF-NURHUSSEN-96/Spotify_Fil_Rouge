@@ -33,7 +33,7 @@
             }
         ?>
         <!-- Pour tester -->
-        <?php if (isset($videos) && !empty($videos)): ?>
+        <?php if (isset($videos)): ?>
 
             <div class="search-results-container">
                 <span class="search-results">
