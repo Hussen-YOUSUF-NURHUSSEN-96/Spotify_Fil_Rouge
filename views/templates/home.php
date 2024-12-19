@@ -101,6 +101,7 @@
 
     </div>
     <div class="video-lecture">
+  <!--Parti Majdoline-->
     <?php if ($selectedPlaylist): ?>
             <h2><?= htmlspecialchars(($selectedPlaylist['name'])) ?></h2>
             <p><?= htmlspecialchars(($selectedPlaylist['description'])) ?> </p>
@@ -118,6 +119,9 @@
         <p>Liste de titre</p>
 
         <!--Fin liste video-->
+        <!-- Hussen-->
+        <?php elseif:?>
+
         <?php endif; ?>
     </div>
     <div class="suggestion">
