@@ -1,7 +1,5 @@
 <?php $title = $title ?? 'Login'; ?>
 
-<h1 class="login-title"> Connexion </h1>
-
 
 <!-- Afficher un message d'erreur si il existe -->
 

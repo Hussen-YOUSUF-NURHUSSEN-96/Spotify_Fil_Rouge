@@ -115,9 +115,9 @@
         <?php else: ?>
         <!-- Liste video pour Masihulah-->
 
-        <p>Liste de playlist</p>
+        <p>Liste de titre</p>
 
-        <!--Fin liste playlist-->
+        <!--Fin liste video-->
         <?php endif; ?>
     </div>
     <div class="suggestion">
