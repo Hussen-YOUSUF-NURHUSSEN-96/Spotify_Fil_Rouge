@@ -15,12 +15,12 @@
     <?php endif; ?>
     <!-- Recherche -->
     <div class="search">
-        <form method="GET" action="index.php">
+        <form method="GET" action="index.php" class="search-form">
             <input type="hidden" name="action" value="search">
-            <input type="text" name="query" placeholder="Rechercher" value="<?= htmlspecialchars($searchTerm ?? '') ?>">
-            <button type="submit"><i class="fas fa-search"></i></button>
+            <input type="text" name="query" placeholder="Rechercher" value="<?= htmlspecialchars($searchTerm ?? '') ?>" class="search-input">
+            <button type="submit" class="search-button"> <i class="fas fa-search"></i> </button>
         </form>
-
+ 
         <?php
             // Vérifier s'il y a des resultats de recherche dans la session
             if (isset($_SESSION['search_results'])) 
