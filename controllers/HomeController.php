@@ -30,6 +30,16 @@
 
             $playlists = Playlist::getByUserId($userId);
 
+            //Initialiser des variables pour la playlist selectionner
+            $selectedPlaylist = null;
+            $videos =[];
+
+            //Si la playlist est séléctionner
+            if($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['playlist_id'])){
+                $playlistsId = intval($_POST['playlist_id']);
+                $selectedPlaylist = Playlist::getPlaylistWithVideos($playlistsId);
+            }
+
             
 //var_dump($playlists);
 
@@ -39,8 +49,9 @@
 
                 $View->generer( [
                     'title' => 'Page d\'Accueil',
-                    'playlists' =>$playlists //Passez les playlists à la vue
-                    ]);              // afficher la vue sans donne. 
+                    'playlists' =>$playlists, //Passez les playlists à la vue
+                    'selectedPlaylist'=>$selectedPlaylist
+                ]);              // 
             }
             catch (Exception $e) 
             {

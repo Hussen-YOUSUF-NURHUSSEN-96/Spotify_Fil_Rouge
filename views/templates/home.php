@@ -74,7 +74,11 @@
                     <?php if (!empty($playlists)): ?>
                     <!--<?php print_r($playlists); ?>-->
                         <?php foreach ($playlists as $playlist): ?>
-                         <li><?= htmlspecialchars($playlist['name']) ?></li>
+                         <li>
+                            <a href="index.php?action=home&playlist_id=<?= htmlspecialchars($playlist['id'])?>">
+                                <?= htmlspecialchars($playlist['name']) ?>
+                            </a>
+                        </li>
                         <?php endforeach; ?>
                      <?php else: ?>
                         <p>Aucune playlist</p>
@@ -109,7 +113,11 @@
                 <?php endforeach; ?>
             </ul>
         <?php else: ?>
-            <p>Selectionner une playlist dans votre bibliothèque.</p>
+        <!-- Liste video pour Masihulah-->
+
+        <p>Liste de playlist</p>
+
+        <!--Fin liste playlist-->
         <?php endif; ?>
     </div>
     <div class="suggestion">
