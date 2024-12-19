@@ -73,6 +73,42 @@
                 return [];                                               
             }
         }
+
+        public static function getPlaylistWithVideos($playlistId){
+            try{
+                $pdo = connect_to_db(); // rend pdo accessible
+
+                $sql="SELECT * FROM videos WHERE id = :playlist_id";
+                $query = $pdo->prepare($sql);
+                $query->bindParam(':playlist_id', $playlistId,PDO::PARAM_INT);
+                $query->execute();
+                $playlist = $query->fetch(PDO::FETCH_ASSOC);
+
+                if(!$playlist){
+                    return null; //si la playlist n'existe pas 
+                }
+
+                $sqlVideos = "SELECT v.id, v.title, v.artist, v.video_url, v.thumbnail_url
+                            FROM playlist_videos pv
+                            JOIN videos v ON pv.video_id = v.id
+                            WHERE pv.playlist_id = :playlist_id
+                            ORDER BY pv.position ASC";
+                
+                $queryVideos = $pdo->prepare($sqlVideos);
+                $queryVideos->bindParam(':playlist_id',$playlistId,PDO::PARAM_INT);
+                $queryVideos->execute();
+                $videos = $queryVideos->fetchAll(PDO::FETCH_ASSOC);
+
+                //Ajouter les vidéos à la playlist
+
+                $playlist['videos'] = $videos;
+
+                return $playlist;
+            } catch(PDOException $e){
+                error_log("Erreur dans Playlist::GetPlaylistWithVideos: ".$e->getMessage());
+                return null;
+            }
+        }
         
 
     }

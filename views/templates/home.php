@@ -62,6 +62,20 @@
 
     </div>
     <div class="video-lecture">
+    <?php if ($selectedPlaylist): ?>
+            <h2><?= htmlspecialchars(($selectedPlaylist['name'])) ?></h2>
+            <p><?= htmlspecialchars(($selectedPlaylist['description'])) ?> </p>
+            <ul>
+                <?php foreach ($videos as $video): ?>
+                    <li>
+                        <h3><?= htmlspecialchars($video['title']) ?></h3>
+                        <iframe src="<?= htmlspecialchars($video['url']) ?>" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php else: ?>
+            <p>Selectionner une playlist dans votre bibliothèque.</p>
+        <?php endif; ?>
     </div>
     <div class="suggestion">
 

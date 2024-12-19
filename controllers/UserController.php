@@ -39,10 +39,6 @@
 
             if ($user) 
             {
-                
-                
-                
-                
 
                 $_SESSION['user'] = [
                     'id'=>$user['id'],
