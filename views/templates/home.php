@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +13,43 @@
     <?php  if (isset($_SESSION['user'])): ?>
         <a href="index.php?action=logout">Déconnexion</a>
     <?php endif; ?>
+    <!-- Recherche -->
     <div class="search">
-        <input type="text" placeholder=" Rechercher">
-        <button type="submit"><i class="fas fa-search"></i></button>
+        <form method="GET" action="index.php">
+            <input type="hidden" name="action" value="search">
+            <input type="text" name="query" placeholder="Rechercher" value="<?= htmlspecialchars($searchTerm ?? '') ?>">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+
+        <?php
+            // Vérifier s'il y a des resultats de recherche dans la session
+            if (isset($_SESSION['search_results'])) 
+            {
+                $videos     = $_SESSION['search_results']['videos'];
+                $searchTerm = $_SESSION['search_results']['searchTerm'];
+
+                // Supprimer les résultats de la session après les avoir récupérés
+                unset($_SESSION['search_results']);
+            }
+        ?>
+        <!-- Pour tester -->
+        <?php if (isset($videos) && !empty($videos)): ?>
+
+            <div class="search-results-container">
+                <span class="search-results">
+                    <?= count($videos) ?> résultat(s) trouvé(s)      
+                </span>
+
+                <ul class="search-results-list">
+                    <?php foreach ($videos as $video): ?>
+                        <li class="search-result-item">
+                            <h4><?= htmlspecialchars($video['title']) ?></h3>
+                            <p>Artiste : <?= htmlspecialchars($video['artist']) ?></p>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
     </div>
     <div class="icon">
         <a href="index.php?action=home"><i class="fas fa-home"></i></a>

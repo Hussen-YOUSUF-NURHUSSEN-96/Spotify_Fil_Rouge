@@ -15,6 +15,11 @@
             {
                 $pdo = connect_to_db(); // Connexion à la base de données
 
+                if (trim($searchTerm) === '') {
+                    // Si le terme de recherche est vide, retourner un tableau vide
+                    return [];
+                }
+
                 $sql = "SELECT * FROM videos WHERE title LIKE :searchTerm  OR artist LIKE :searchTerm";
 
                 $query    = $pdo->prepare($sql);
