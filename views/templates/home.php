@@ -70,7 +70,6 @@
             <div id="playlistContainer"class="cont-playlist">
 
                 <ul>
-                
                     <?php if (!empty($playlists)): ?>
                     <!--<?php print_r($playlists); ?>-->
                         <?php foreach ($playlists as $playlist): ?>
@@ -79,6 +78,7 @@
                                 <?= htmlspecialchars($playlist['name']) ?>
                             </a>
                         </li>
+                        
                         <?php endforeach; ?>
                      <?php else: ?>
                         <p>Aucune playlist</p>
@@ -90,9 +90,9 @@
         <!-- pour créer une playlist-->
         <div id="popUp" class="popUp">
         <div class="popUp-content">
-        <?php if(!empty($errorMessage)): ?>
+        <?php if(!isset($error)&& !empty($error)): ?>
             <div class="error-message">
-            <?= htmlspecialchars($errorMessage); ?>
+            <?= htmlspecialchars($error); ?>
             </div>
         <?php endif; ?>
         <h3>Créer une playlist</h3>
@@ -115,6 +115,7 @@
                 <?php foreach ($selectedPlaylist['videos'] as $video): ?>
                     <li>
                         <h3><?= htmlspecialchars($video['title']) ?></h3>
+    
                         <iframe src="<?= htmlspecialchars($video['url']) ?>" width="560" height="315" frameborder="0" allowfullscreen></iframe>
                     </li>
                 <?php endforeach; ?>

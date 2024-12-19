@@ -34,31 +34,65 @@
                 }
 
                 $userId = $_SESSION['user']['id'];
-
+                
+                
                   // Exemple de création de la playlist
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $name = trim($_POST['name']);
 
                     //Verifier si une playlist existe deja
                     if(Playlist::exists($name,$userId)){
-                        echo "<p style='color:red;'>Erreur : une playlist avec ce nom existe déjà.</p>";
-                        error_log("Erreur : tentative de création d'une playlist déjà existante.");
-                        return;
+                        $errorMessage = "Le nom de playlist est déjà utilisé.";
                     }
 
-                    if (Playlist::create($name,$userId )) {
+                    else{
+                        if (Playlist::create($name,$userId )) {
 //echo "Playlist créée avec succès.";
                         header("Location: index.php?action=home");
                         exit();
-                    } 
-                    else {
-                        echo "Erreur lors de la création de la playlist.";
+                        } 
+                            else {
+                        $errorMessage = "Erreur lors de la création de la playlist.";
                     }
     
-                }
+                }}
             }
 
-        }
+            public function delete(){
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();  // Démarre la session si ce n'est pas déjà fait
+                }
+                //Verifiez si l'utilisateur est connecté
+                if(!isset($_SESSION['user']['id'])){
+                    echo "Erreur : aucun utilisateur connecté";
+                    exit();
+                }
+
+                $userId = $_SESSION['user']['id'];
+
+                if($_SERVER['REQUEST_METHOD']==='POST'&& isset($_POST['playlist_id'])){
+                    $playlistId=intval($_POST['playlist_id']);
+
+                    //Verifie si la playlist appartiens àun utilisateur.
+
+                    if (Playlist::belongsToUser($playlistId, $userId)) {
+                        if (Playlist::delete($playlistId)) {
+                            header("Location: index.php?action=home&message=playlist_deleted");
+                            exit();
+                        } else {
+                            echo "Erreur lors de la suppression de la playlist.";
+                        }
+                    } else {
+                        echo "Erreur : cette playlist ne vous appartient pas.";
+                    }
+                } else {
+                    echo "Aucune playlist spécifiée pour la suppression.";
+                }
+                }
+
+            }
+            
+        
         
        
     

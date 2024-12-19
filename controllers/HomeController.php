@@ -51,7 +51,7 @@
                     'title' => 'Page d\'Accueil',
                     'playlists' =>$playlists, //Passez les playlists à la vue
                     'selectedPlaylist'=>$selectedPlaylist //Playlist séléctionnées
-                ]);              // 
+                    ]);              // 
             }
             catch (Exception $e) 
             {

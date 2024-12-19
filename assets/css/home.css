@@ -216,10 +216,29 @@ main{
     
     
 }
+/*Playlist*/
 
-.cont-playlist p{
- margin-top: 30%;
+#playlistContainer{
+    color: white;
+    text-decoration: none;
 }
+
+#playlistContainer ul{
+    color: white;
+    text-decoration: none;
+    list-style: none;
+}
+
+#playlistContainer ul li a{
+    color: white;
+    text-decoration: none;
+    list-style: none;
+}
+
+
+
+
+
 
 .error-message{
     color: red;

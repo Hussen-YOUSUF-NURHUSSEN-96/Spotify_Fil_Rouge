@@ -49,7 +49,7 @@
                         $controller = new PlaylistController();
                         $controller->index();
                         break;
-                    
+                    //Créer une nouvelle playlist
                     case 'create':
                         require_once 'controllers/PlaylistController.php';
                         $controller = new PlaylistController();
@@ -65,6 +65,12 @@
                         require_once 'controllers/VideoController.php';
                         $controller = new VideoController();
                         $controller->search();
+                        break;
+                    //Supprimer une Playlist
+                    case 'delete_playlist':
+                        require_once 'controllers/PlaylistController.php';
+                        $controller = new PlaylistController();
+                        $controller->delete();
                         break;
 
                     default:
