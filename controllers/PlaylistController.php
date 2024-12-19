@@ -42,7 +42,7 @@
 
                     //Verifier si une playlist existe deja
                     if(Playlist::exists($name,$userId)){
-                        $errorMessage = "Le nom de playlist est déjà utilisé.";
+                        $error =  "Le nom de playlist est déjà utilisé.";
                     }
 
                     else{
@@ -52,10 +52,11 @@
                         exit();
                         } 
                             else {
-                        $errorMessage = "Erreur lors de la création de la playlist.";
+                        echo  "Erreur lors de la création de la playlist.";
                     }
     
                 }}
+                require_once 'views/templates/home.php';
             }
 
             public function delete(){
@@ -88,8 +89,8 @@
                 } else {
                     echo "Aucune playlist spécifiée pour la suppression.";
                 }
-                }
-
+            }
+                
             }
             
         

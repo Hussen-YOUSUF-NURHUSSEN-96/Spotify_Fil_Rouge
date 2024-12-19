@@ -77,6 +77,12 @@
                             <a href="index.php?action=home&playlist_id=<?= htmlspecialchars($playlist['id'])?>">
                                 <?= htmlspecialchars($playlist['name']) ?>
                             </a>
+                            <form method="POST" action="index.php?action=delete_playlist">
+                            <input type="hidden" name="playlist_id" value="<?= $playlist['id'] ?>">
+                            <button type="submit" class="delete-btn" title="Supprimer cette playlist">
+                            <i class="fas fa-times"></i> <!-- Icône croix -->
+                            </button>
+                            </form>
                         </li>
                         
                         <?php endforeach; ?>
@@ -88,13 +94,13 @@
                     
             </div>
         <!-- pour créer une playlist-->
+        <?php if (isset($erreur)): ?>
+<div class="alert alert-danger">
+<?= htmlspecialchars($erreur) ?>
+</div>
+<?php endif; ?>
         <div id="popUp" class="popUp">
         <div class="popUp-content">
-        <?php if(!isset($error)&& !empty($error)): ?>
-            <div class="error-message">
-            <?= htmlspecialchars($error); ?>
-            </div>
-        <?php endif; ?>
         <h3>Créer une playlist</h3>
         <form action="index.php?action=create" method="POST">
             <input type="text" name="name" id="playlistName" placeholder="Titre de la playlist" required>

@@ -69,8 +69,8 @@
                 return $query->fetchAll(PDO::FETCH_ASSOC);
 
             }catch(PDOException $e){
-                error_log("Erreur dans Playlist::getByUserId".$e->getMessage());
-                return [];                                               
+                echo"Erreur dans Playlist::getByUserId";
+                return [];                             
             }
         }
 
@@ -105,7 +105,7 @@
 
                 return $playlist;
             } catch(PDOException $e){
-                error_log("Erreur dans Playlist::GetPlaylistWithVideos: ".$e->getMessage());
+                echo"Erreur dans Playlist::GetPlaylistWithVideos: ";
                 return null;
             }
         }
@@ -137,16 +137,15 @@
                 return $query->execute();
 
             }catch (PDOException $e){
-                error_log("Erreur dans la playlist::delete:".$e->getMessage());
+                echo"Erreur dans la playlist::delete:";
                 return false;
             }
         }
 
         public static function belongsToUser($playlistId, $userId){
-            try{
                 $pdo = connect_to_db(); // rend pdo accessible
 
-                $sql = "SELECT COUNT(*) FROM playlists WHERE id = :playlist_id AND user_id";
+                $sql = "SELECT COUNT(*) FROM playlists WHERE id = :playlist_id AND user_id = :user_id";
                 $query = $pdo->prepare($sql);
                 $query->bindParam(':playlist_id', $playlistId, PDO::PARAM_INT);
                 $query->bindParam(':user_id', $userId, PDO::PARAM_INT);
@@ -154,15 +153,11 @@
 
                 //Retourne true si la playlist apparient à l'utilisateur
 
-                return $query->fetchColumn()>0;
-
-            }catch(PDOException $e){
-                error_log("Erreur dans la playlist::belongsToUser:".$e->getMessage());
-                return false;
-            }
-        }
-
+                return $query->rowCount()>0;
 
         }
+
+
+    }
         
 ?>

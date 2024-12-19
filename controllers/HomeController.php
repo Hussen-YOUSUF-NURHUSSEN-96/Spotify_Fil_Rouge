@@ -43,6 +43,18 @@
             
 //var_dump($playlists);
 
+            if($_SERVER['REQUEST_METHOD']==='POST'){
+                $playlistName =trim($_POST['name']);
+
+                if(Playlist::exists($playlistName,$userId)){
+                    $error = "Le nom de la playlist existe déjà.";
+                }else {
+                    Playlist::create($playlistName,$userId);
+                    header("Location: index.php?action=home");
+                    exit();
+                }
+            }
+
             try
             {
                 $View = new View('templates/home');                            // charge  home.php dans views/templates/home.php ;     
@@ -50,7 +62,8 @@
                 $View->generer( [
                     'title' => 'Page d\'Accueil',
                     'playlists' =>$playlists, //Passez les playlists à la vue
-                    'selectedPlaylist'=>$selectedPlaylist //Playlist séléctionnées
+                    'selectedPlaylist'=>$selectedPlaylist, //Playlist séléctionnées
+                    'error'=> isset($error)?$error :null
                     ]);              // 
             }
             catch (Exception $e) 
