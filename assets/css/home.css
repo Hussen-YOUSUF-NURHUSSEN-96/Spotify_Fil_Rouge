@@ -31,33 +31,54 @@ header{
     padding: 5px 10px;
 }
 
-.search input[type="text"] {
+/* Conteneur du formulaire de recherche */
+.search-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  /*  le champ et le bouton   */
     width: 100%;
-    border: none;
-    outline: none;
-    padding: 10px;
-    font-size: 14px;
-    background-color: transparent;
-    color: white;
+    max-width: 500px;  
+    margin: 0 auto;  
 }
 
-.search button {
-    background-color: transparent;
-    border: none;
+/* Champ de recherche */
+.search-input {
+    flex: 1;               /* Prend tout l'espace disponible a gauche */
+    padding: 8px 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;  
+    outline: none;
+}
+
+/* Bouton de recherche */
+.search-button {
+    padding: 8px 15px;     
+    margin-left: 14px;
+    background-color: #4caf50;
     color: white;
-    font-size: 20px;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: transform 0.2s;
 }
-
 .search button:hover {
     transform: scale(1.1);
 }
 
-.search-results {
-    margin-left: 10px;
-    color: rgb(76, 223, 122);
-    font-size: 14px;
+
+.search-button i {
+    font-size: 1.2rem;  
+}
+
+/* Bouton au survol */
+.search-button:hover {
+    background-color: #45a049;  
 }
 
 .icon {
@@ -79,6 +100,7 @@ header{
 
 /* --------------- */
 
+/* Temporaire pour aficher resultat */
  .search-results-container {
     max-width: 300px;
     background-color: rgba(0, 0, 0, 0.8);
@@ -97,7 +119,10 @@ header{
 .search-results {
     font-weight: bold;
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 8px; 
+    margin-left: 10px;
+    color: rgb(76, 223, 122);
+    font-size: 14px;
 }
 
 /* Liste des résultats */
