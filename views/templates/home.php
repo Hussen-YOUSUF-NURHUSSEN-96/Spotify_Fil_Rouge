@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Spotifeux</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/home.css?v=1.0">
 </head>
 <body>
 <header class="header">
@@ -90,6 +90,11 @@
         <!-- pour créer une playlist-->
         <div id="popUp" class="popUp">
         <div class="popUp-content">
+        <?php if(!empty($errorMessage)): ?>
+            <div class="error-message">
+            <?= htmlspecialchars($errorMessage); ?>
+            </div>
+        <?php endif; ?>
         <h3>Créer une playlist</h3>
         <form action="index.php?action=create" method="POST">
             <input type="text" name="name" id="playlistName" placeholder="Titre de la playlist" required>
@@ -103,10 +108,11 @@
     <div class="video-lecture">
   <!--Parti Majdoline-->
     <?php if ($selectedPlaylist): ?>
-            <h2><?= htmlspecialchars(($selectedPlaylist['name'])) ?></h2>
-            <p><?= htmlspecialchars(($selectedPlaylist['description'])) ?> </p>
+    <!--Détails de la playlist séléctionner-->
+            <h2><?= htmlspecialchars($selectedPlaylist['name'])?></h2>
+            <!--<p><?= htmlspecialchars($selectedPlaylist['description']) ?> </p>-->
             <ul>
-                <?php foreach ($videos as $video): ?>
+                <?php foreach ($selectedPlaylist['videos'] as $video): ?>
                     <li>
                         <h3><?= htmlspecialchars($video['title']) ?></h3>
                         <iframe src="<?= htmlspecialchars($video['url']) ?>" width="560" height="315" frameborder="0" allowfullscreen></iframe>

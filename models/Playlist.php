@@ -78,7 +78,7 @@
             try{
                 $pdo = connect_to_db(); // rend pdo accessible
 
-                $sql="SELECT * FROM videos WHERE id = :playlist_id";
+                $sql="SELECT * FROM playlists WHERE id = :playlist_id";
                 $query = $pdo->prepare($sql);
                 $query->bindParam(':playlist_id', $playlistId,PDO::PARAM_INT);
                 $query->execute();
@@ -108,6 +108,28 @@
                 error_log("Erreur dans Playlist::GetPlaylistWithVideos: ".$e->getMessage());
                 return null;
             }
+        }
+
+        public static function exists($name, $userId){
+           try{
+
+           $pdo = connect_to_db(); // rend pdo accessible
+
+            $sql ="SELECT COUNT(*) FROM playlists WHERE name = :name AND user_id = :user_id";
+            $query = $pdo->prepare($sql);
+            $query->bindParam(':name',$name,PDO::PARAM_STR);
+            $query->bindParam(':user_id',$userId,PDO::PARAM_INT);
+            $query->execute();
+
+            //Retourne true si une playlist existe
+            return $query->fetchColumn()>0;
+
+        }catch(PDOException $e){
+            error_log("Erreur dans Playlist::exists:".$e->getMessage());
+            return false;
+        }
+
+
         }
         
 
