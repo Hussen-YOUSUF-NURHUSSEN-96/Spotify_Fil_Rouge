@@ -36,4 +36,30 @@
             // Option 2 
             // include 'views/templates/home.php';
         }
+
+        public function getVideosByCategory()
+    {
+        $videosByCategory = Video::getVideosByCategory();
+        
+        // Stocker les vidéos par catégorie dans la session
+        $_SESSION['videos_by_category'] = $videosByCategory;
+
+        // Rediriger vers la page home
+        header('Location: index.php?action=home');
+        exit();
+    }
+
+    /**
+     * Affiche la page d'accueil avec les vidéos par catégorie
+     */
+    public function home()
+    {
+        // Si les vidéos par catégorie ne sont pas dans la session, les récupérer
+        if (!isset($_SESSION['videos_by_category'])) {
+            $this->getVideosByCategory();
+        }
+
+        $videosByCategory = $_SESSION['videos_by_category'];
+        require_once 'views/templates/home.php';
+    }
     }

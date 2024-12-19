@@ -191,10 +191,10 @@ main{
 
 .favoris{
     background-color: rgb(76, 223, 122);
-    width: 60px;
+    width: 50px;
     height: 60px;
     border-radius: 10px;
-    padding: 10px;
+    padding: 8px;
     margin-top: 10px;
     margin-right: 10px;
 }
@@ -224,7 +224,7 @@ main{
 /*Vidéo*/
 
 .video-lecture{
-    width: 75%;
+    width: 72%;
     height: 72%;
     background-color: rgb(70, 102, 79);
     border-radius: 10px;
@@ -281,7 +281,7 @@ section{
 
 .add-playlist{
     font-size: 30px;
-    padding: 10px;
+    padding: 5px;
     cursor: pointer;
     background-color: #1e1e1e5f;
     color: white;
@@ -326,5 +326,120 @@ section{
     border-radius: 5px;
 }
 
-/* responsive*/
+
+.zone1 {
+    width: 85%;
+    height: 85%;
+    background-color: rgb(70, 102, 79);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 20px;
+    position: relative;
+}
+
+.zone1-content {
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 20px; /* Add some padding for the scrollbar */
+}
+
+.videos-container {
+    position: relative;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.videos-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+
+.videos-row {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.category-section {
+    flex: 0 0 100%;
+    padding: 0 15px;
+}
+
+.video-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+}
+
+.scroll-button {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+.scroll-button:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.scroll-button.left {
+    left: 10px;
+}
+
+.scroll-button.right {
+    right: 10px;
+}
+
+.category-title {
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    color: #fff;
+}
+
+.video-card h4 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+.video-card p {
+    margin: 5px 0;
+    color: #ccc;
+}
+
+/* Ensure popups and other elements don't interfere with zone1 */
+.popUp {
+    z-index: 1000;
+}
+
+/* Adjust the library and suggestion sections to not overlap with zone1 */
+.library, .suggestion {
+    z-index: 1;
+}
 
