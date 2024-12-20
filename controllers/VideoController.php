@@ -9,7 +9,10 @@
 
         // Methode pour afficher les resultats de recherche
         public function search() 
-        {
+        { if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
             // Verifier si une recherche a ete effectue
             $searchTerm = $_GET['query'] ?? '';
     
@@ -38,7 +41,11 @@
         }
 
         public function getVideosByCategory()
-    {
+    {   
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
         $videosByCategory = Video::getVideosByCategory();
         
         // Stocker les vidéos par catégorie dans la session
@@ -53,7 +60,10 @@
      * Affiche la page d'accueil avec les vidéos par catégorie
      */
     public function home()
-    {
+    {   if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    
         // Si les vidéos par catégorie ne sont pas dans la session, les récupérer
         if (!isset($_SESSION['videos_by_category'])) {
             $this->getVideosByCategory();

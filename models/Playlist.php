@@ -50,7 +50,7 @@
                     return true;
                 } return false;
             } catch(PDOException $e){
-                error_log("Erreur dans Playlist::create".$e->getMessage());
+                echo"Erreur dans Playlist::create";
                 return false;
             }
         }

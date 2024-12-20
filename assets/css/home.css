@@ -221,24 +221,57 @@ main{
 #playlistContainer{
     color: white;
     text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 }
 
 #playlistContainer ul{
     color: white;
     text-decoration: none;
     list-style: none;
+    
+}
+
+#playlistContainer ul li{
+    color: white;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 #playlistContainer ul li a{
     color: white;
     text-decoration: none;
     list-style: none;
+    
 }
 
+#playlistContainer ul li a:hover{
+    color: rgb(168, 168, 168);
+}
 
+#playlistContainer ul form{
+    
+    text-decoration: none;
+    list-style: none;
+    width:10%;
+}
 
+.delete-btn{
+    background-color: #cccccc00;
+    border-radius: 1px;
+    border: solid transparent;
+    text-align: right;
+    font-size: 16px;
+    color: #1f1f1f;
+    margin-left: 5px;
+}
 
-
+.delete-btn:hover{
+    color: #ccc;
+}
 
 .error-message{
     color: red;
@@ -352,6 +385,10 @@ section{
 .popUp button{
     padding: 8px 16px;
     margin: 5px;
+}
+
+.popUp.open{
+    display: flex;
 }
 
 .playlists .playlist{
