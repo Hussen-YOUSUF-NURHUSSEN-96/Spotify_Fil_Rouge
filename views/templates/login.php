@@ -9,17 +9,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <!-- Afficher un message d'erreur si il existe -->
-
-<?php if (!empty($errorMessage)): ?>
-
-<p class="error-message"> <?= htmlspecialchars($errorMessage) ?> </p>
-
-<?php endif; ?>
 
 
 
 <div class="login-container">
+
+<!--Message d'erreur si erreur-->
+<?php if(!empty($errorMessage)): ?>
+
+    <div class="error-message"  style="margin-bottom: 32px;" >
+            <?= htmlspecialchars($errorMessage); ?>
+    </div>
+<?php endif; ?>
+
 
 <!-- Formulaire de connexion -->
 <form method="post" action="index.php?action=loginSubmit" class="login-form" >
