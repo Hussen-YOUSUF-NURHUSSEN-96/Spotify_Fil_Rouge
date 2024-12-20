@@ -216,21 +216,56 @@ main{
     
     
 }
+/*Playlist*/
 
-.cont-playlist p{
- margin-top: 30%;
+#playlistContainer{
+    color: white;
+    text-decoration: none;
 }
 
-/*Vidéo*/
+#playlistContainer ul{
+    color: white;
+    text-decoration: none;
+    list-style: none;
+}
 
+#playlistContainer ul li a{
+    color: white;
+    text-decoration: none;
+    list-style: none;
+}
+
+
+
+
+
+
+.error-message{
+    color: red;
+    font-size: 14px;
+    margin-bottom: 5px;
+    background-color: white;
+    padding: 5px;
+    border-radius: 10px;
+}
+/*Vidéo*/
+/*Playlist selectionner*/
 .video-lecture{
     width: 72%;
     height: 72%;
     background-color: rgb(70, 102, 79);
     border-radius: 10px;
+    display: flex;
+
     
 }
 
+.video-lecture h2{
+    margin: 20px;
+}
+
+
+/*Suggestion*/
 .suggestion{
     width: 100px;
     height: 72%;
@@ -325,6 +360,7 @@ section{
     background-color: #f1f1f1;
     border-radius: 5px;
 }
+
 
 
 .zone1 {
@@ -434,12 +470,12 @@ section{
 }
 
 /* Ensure popups and other elements don't interfere with zone1 */
-.popUp {
-    z-index: 1000;
-}
+
 
 /* Adjust the library and suggestion sections to not overlap with zone1 */
-.library, .suggestion {
-    z-index: 1;
-}
+
+
+
+/* responsive*/
+
 

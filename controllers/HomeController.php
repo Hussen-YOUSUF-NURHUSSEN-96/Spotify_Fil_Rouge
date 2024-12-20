@@ -32,16 +32,28 @@
 
             //Initialiser des variables pour la playlist selectionner
             $selectedPlaylist = null;
-            $videos =[];
+            
 
             //Si la playlist est séléctionner
-            if($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['playlist_id'])){
-                $playlistsId = intval($_POST['playlist_id']);
+            if(isset($_GET['playlist_id'])){
+                $playlistsId = intval($_GET['playlist_id']);
                 $selectedPlaylist = Playlist::getPlaylistWithVideos($playlistsId);
             }
 
             
 //var_dump($playlists);
+
+            if($_SERVER['REQUEST_METHOD']==='POST'){
+                $playlistName =trim($_POST['name']);
+
+                if(Playlist::exists($playlistName,$userId)){
+                    $error = "Le nom de la playlist existe déjà.";
+                }else {
+                    Playlist::create($playlistName,$userId);
+                    header("Location: index.php?action=home");
+                    exit();
+                }
+            }
 
             try
             {
@@ -50,8 +62,9 @@
                 $View->generer( [
                     'title' => 'Page d\'Accueil',
                     'playlists' =>$playlists, //Passez les playlists à la vue
-                    'selectedPlaylist'=>$selectedPlaylist
-                ]);              // 
+                    'selectedPlaylist'=>$selectedPlaylist, //Playlist séléctionnées
+                    'error'=> isset($error)?$error :null
+                    ]);              // 
             }
             catch (Exception $e) 
             {

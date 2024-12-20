@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Spotifeux</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/home.css?v=1.0">
 </head>
 <body>
 <header class="header">
@@ -70,7 +70,6 @@
             <div id="playlistContainer"class="cont-playlist">
 
                 <ul>
-                
                     <?php if (!empty($playlists)): ?>
                     <!--<?php print_r($playlists); ?>-->
                         <?php foreach ($playlists as $playlist): ?>
@@ -78,7 +77,14 @@
                             <a href="index.php?action=home&playlist_id=<?= htmlspecialchars($playlist['id'])?>">
                                 <?= htmlspecialchars($playlist['name']) ?>
                             </a>
+                            <form method="POST" action="index.php?action=delete_playlist">
+                            <input type="hidden" name="playlist_id" value="<?= $playlist['id'] ?>">
+                            <button type="submit" class="delete-btn" title="Supprimer cette playlist">
+                            <i class="fas fa-times"></i> <!-- Icône croix -->
+                            </button>
+                            </form>
                         </li>
+                        
                         <?php endforeach; ?>
                      <?php else: ?>
                         <p>Aucune playlist</p>
@@ -88,6 +94,11 @@
                     
             </div>
         <!-- pour créer une playlist-->
+        <?php if (isset($erreur)): ?>
+<div class="alert alert-danger">
+<?= htmlspecialchars($erreur) ?>
+</div>
+<?php endif; ?>
         <div id="popUp" class="popUp">
         <div class="popUp-content">
         <h3>Créer une playlist</h3>
@@ -106,12 +117,14 @@ $selectedPlaylist = $selectedPlaylist ?? null;
     <div class="video-lecture">
   <!--Parti Majdoline-->
     <?php if ($selectedPlaylist): ?>
-            <h2><?= htmlspecialchars(($selectedPlaylist['name'])) ?></h2>
-            <p><?= htmlspecialchars(($selectedPlaylist['description'])) ?> </p>
+    <!--Détails de la playlist séléctionner-->
+            <h2><?= htmlspecialchars($selectedPlaylist['name'])?></h2>
+            <!--<p><?= htmlspecialchars($selectedPlaylist['description']) ?> </p>-->
             <ul>
-                <?php foreach ($videos as $video): ?>
+                <?php foreach ($selectedPlaylist['videos'] as $video): ?>
                     <li>
                         <h3><?= htmlspecialchars($video['title']) ?></h3>
+    
                         <iframe src="<?= htmlspecialchars($video['url']) ?>" width="560" height="315" frameborder="0" allowfullscreen></iframe>
                     </li>
                 <?php endforeach; ?>
