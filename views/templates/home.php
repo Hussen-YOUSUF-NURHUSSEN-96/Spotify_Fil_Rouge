@@ -111,6 +111,9 @@
  </div>
 
     </div>
+    <?php 
+$selectedPlaylist = $selectedPlaylist ?? null;
+?>
     <div class="video-lecture">
   <!--Parti Majdoline-->
     <?php if ($selectedPlaylist): ?>
@@ -127,9 +130,59 @@
                 <?php endforeach; ?>
             </ul>
         <?php else: ?>
-        <!-- Liste video pour Masihulah-->
+           
+            <!-- First fix the undefined variable error by initializing $selectedPlaylist -->
+            <?php 
+$selectedPlaylist = $selectedPlaylist ?? null;
+?>
 
-        <p>Liste de titre</p>
+<div class="zone1">
+    <?php if ($selectedPlaylist): ?>
+        <h2><?= htmlspecialchars(($selectedPlaylist['name'])) ?></h2>
+        <p><?= htmlspecialchars(($selectedPlaylist['description'])) ?></p>
+    <?php else: ?>
+        <h2>Liste de titres par catégorie</h2>
+        
+        <?php if (isset($videosByCategory) && !empty($videosByCategory)): ?>
+            <div class="videos-container">
+                <button class="scroll-button left" id="scrollLeft">&lt;</button>
+                
+                <div class="videos-wrapper" id="videosWrapper">
+                    <div class="videos-row">
+                        <?php foreach ($videosByCategory as $category => $videos): ?>
+                            <div class="category-section">
+                                <h3 class="category-title"><?= htmlspecialchars($category) ?></h3>
+                                <?php foreach ($videos as $video): ?>
+                                    <div class="video-card">
+                                        <h4><?= htmlspecialchars($video['title']) ?></h4>
+                                        <p>Artiste : <?= htmlspecialchars($video['artist']) ?></p>
+                                        <?php if (!empty($video['video_url'])): ?>
+                                            <div class="video-wrapper">
+                                                <iframe 
+                                                    src="<?= htmlspecialchars(Video::convertToEmbedUrl($video['video_url'])) ?>" 
+                                                    frameborder="0" 
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                    allowfullscreen>
+                                                </iframe>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                
+                <button class="scroll-button right" id="scrollRight">&gt;</button>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+</div>
+
+
+
+
+<!--Fin liste video-->
 
         <!--Fin liste video-->
         <!-- Hussen-->
@@ -162,6 +215,51 @@
         function closePopup(){
             document.getElementById("popUp").style.display ="none";
         }
+
+        
+        
+        document.addEventListener('DOMContentLoaded', function() {
+    const wrapper = document.getElementById('videosWrapper');
+    const row = wrapper.querySelector('.videos-row');
+    const leftButton = document.getElementById('scrollLeft');
+    const rightButton = document.getElementById('scrollRight');
+    
+    let currentIndex = 0;
+    const sections = document.querySelectorAll('.category-section');
+    
+    // Hide left button initially
+    leftButton.style.display = 'none';
+    
+    function updateButtons() {
+        leftButton.style.display = currentIndex > 0 ? 'block' : 'none';
+        rightButton.style.display = currentIndex < sections.length - 1 ? 'block' : 'none';
+    }
+    
+    function scrollToSection(direction) {
+        if (direction === 'left' && currentIndex > 0) {
+            currentIndex--;
+        } else if (direction === 'right' && currentIndex < sections.length - 1) {
+            currentIndex++;
+        }
+        
+        const scrollAmount = wrapper.clientWidth * currentIndex;
+        row.style.transform = `translateX(-${scrollAmount}px)`;
+        updateButtons();
+    }
+    
+    leftButton.addEventListener('click', () => scrollToSection('left'));
+    rightButton.addEventListener('click', () => scrollToSection('right'));
+    
+    // Update buttons visibility on window resize
+    window.addEventListener('resize', updateButtons);
+    
+    // Initial button state
+    updateButtons();
+});
+
+
+
+
    </script>
 </body>
 </html>
