@@ -82,9 +82,12 @@
 
             //Récupérations des données du formulaire
             $username = $_POST['username'];
-            $email = $_POST['email'];
+            $email = trim($_POST['email']);
             $password = $_POST['password'];
 
+          //if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+          //    $errorMessage ="Veuillez entrer une adresse valide";
+          //}
             //Vérifications si le pseudo est dejà utilisé
             if(User::userNameExist($username)){
                 $errorMessage = "Le nom d'utilisateur est déjà utiliser";

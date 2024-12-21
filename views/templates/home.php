@@ -199,6 +199,31 @@
         </div>
 
     </section>
+                <!---Fond-->
+                <div class="background">
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+ <span></span>
+</div>
 
     <script>
         function openPopup() {
@@ -220,44 +245,44 @@
 
 
 
-        //     document.addEventListener('DOMContentLoaded', function() {
-        // const wrapper = document.getElementById('videosWrapper');
-        //// const row = wrapper.querySelector('.videos-row');
-        // const leftButton = document.getElementById('scrollLeft');
-        // const rightButton = document.getElementById('scrollRight');
-        //
-        // let currentIndex = 0;
-        // const sections = document.querySelectorAll('.category-section');
-        //
-        // // Hide left button initially
-        // //leftButton.style.display = 'none';
-        //
-        // function updateButtons() {
-        //     leftButton.style.display = currentIndex > 0 ? 'block' : 'none';
-        //     rightButton.style.display = currentIndex < sections.length - 1 ? 'block' : 'none';
-        // }
-        //
-        // function scrollToSection(direction) {
-        //     if (direction === 'left' && currentIndex > 0) {
-        //         currentIndex--;
-        //     } else if (direction === 'right' && currentIndex < sections.length - 1) {
-        //         currentIndex++;
-        //     }
-        //
-        //     const scrollAmount = wrapper.clientWidth * currentIndex;
-        //     row.style.transform = `translateX(-${scrollAmount}px)`;
-        //     updateButtons();
-        // }
-        //
-        // leftButton.addEventListener('click', () => scrollToSection('left'));
-        // rightButton.addEventListener('click', () => scrollToSection('right'));
-        //
-        // // Update buttons visibility on window resize
-        // window.addEventListener('resize', updateButtons);
-        //
-        // // Initial button state
-        // updateButtons();
-        //});
+           document.addEventListener('DOMContentLoaded', function() {
+       const wrapper = document.getElementById('videosWrapper');
+      // const row = wrapper.querySelector('.videos-row');
+       const leftButton = document.getElementById('scrollLeft');
+       const rightButton = document.getElementById('scrollRight');
+      
+       let currentIndex = 0;
+       const sections = document.querySelectorAll('.category-section');
+      
+       // Hide left button initially
+       //leftButton.style.display = 'none';
+      
+       function updateButtons() {
+           leftButton.style.display = currentIndex > 0 ? 'block' : 'none';
+           rightButton.style.display = currentIndex < sections.length - 1 ? 'block' : 'none';
+       }
+      
+       function scrollToSection(direction) {
+           if (direction === 'left' && currentIndex > 0) {
+               currentIndex--;
+           } else if (direction === 'right' && currentIndex < sections.length - 1) {
+               currentIndex++;
+           }
+      
+           const scrollAmount = wrapper.clientWidth * currentIndex;
+           row.style.transform = `translateX(-${scrollAmount}px)`;
+           updateButtons();
+       }
+      
+       leftButton.addEventListener('click', () => scrollToSection('left'));
+       rightButton.addEventListener('click', () => scrollToSection('right'));
+      
+       // Update buttons visibility on window resize
+       window.addEventListener('resize', updateButtons);
+      
+       // Initial button state
+       updateButtons();
+      });
 
 
 
