@@ -25,7 +25,7 @@
                 header("Location: index.php?action=login");
                 exit();
             }
-
+//var_dump($_SESSION['user']['id']);
             $userId = $_SESSION['user']['id'];
 
             $playlists = Playlist::getByUserId($userId);
@@ -43,17 +43,17 @@
             
 //var_dump($playlists);
 
-            if($_SERVER['REQUEST_METHOD']==='POST'){
-                $playlistName =trim($_POST['name']);
+       if($_SERVER['REQUEST_METHOD']==='POST'){
+         $name =trim($_POST['name']);
 
-                if(Playlist::exists($playlistName,$userId)){
-                    $error = "Le nom de la playlist existe déjà.";
-                }else {
-                    Playlist::create($playlistName,$userId);
-                    header("Location: index.php?action=home");
-                    exit();
-                }
-            }
+         if(Playlist::exists($name,$userId)){
+             $erreur = "Le nom de la playlist existe déjà.";
+         }else {
+             Playlist::create($name,$userId);
+             header("Location: index.php?action=home");
+             exit();
+         }
+       }
 
             try
             {
@@ -63,7 +63,7 @@
                     'title' => 'Page d\'Accueil',
                     'playlists' =>$playlists, //Passez les playlists à la vue
                     'selectedPlaylist'=>$selectedPlaylist, //Playlist séléctionnées
-                    'error'=> isset($error)?$error :null
+                    'erreur'=> isset($erreur)?$erreur :null
                     ]);              // 
             }
             catch (Exception $e) 

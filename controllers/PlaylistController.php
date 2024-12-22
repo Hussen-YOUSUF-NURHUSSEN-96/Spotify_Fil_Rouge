@@ -42,12 +42,12 @@
 
                     //Verifier si une playlist existe deja
                     if(Playlist::exists($name,$userId)){
-                        $error =  "Le nom de playlist est déjà utilisé.";
+                        $erreur =   "Le nom de playlist est déjà utilisé.";
                     }
 
                     else{
                         if (Playlist::create($name,$userId )) {
-//echo "Playlist créée avec succès.";
+                        //echo "Playlist créée avec succès.";
                         header("Location: index.php?action=home");
                         exit();
                         } 
@@ -56,6 +56,8 @@
                     }
     
                 }}
+
+                $playlists = Playlist::getByUserId($userId);
                 require_once 'views/templates/home.php';
             }
 

@@ -21,11 +21,10 @@
                 {
                     
                     case 'home':
-                        case 'home':
-                            require_once 'controllers/VideoController.php';
-                            $controller = new VideoController();
-                            $controller->home();
-                            break;
+                        require_once 'controllers/HomeController.php';
+                        $controller = new HomeController();
+                        $controller->home();
+                        break;
 
                     case 'login':
                         require_once 'controllers/UserController.php';
@@ -73,12 +72,6 @@
                         $controller = new PlaylistController();
                         $controller->delete();
                         break;
-
-                    case 'getVideosByCategory':
-                            require_once 'controllers/VideoController.php';
-                            $controller = new VideoController();
-                            $controller->getVideosByCategory();
-                            break;
 
                     default:
                         // Action non reconnue
