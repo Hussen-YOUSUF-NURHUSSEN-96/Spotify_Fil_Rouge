@@ -15,36 +15,66 @@
     <?php endif; ?>
     <!-- Recherche -->
     <div class="search">
-        <form method="GET" action="index.php" class="search-form">
+        <form method="GET" action="index.php" class="search-form"  >
             <input type="hidden" name="action" value="search">
             <input type="text" name="query" placeholder="Rechercher" value="<?= htmlspecialchars($searchTerm ?? '') ?>" class="search-input">
             <button type="submit" class="search-button"> <i class="fas fa-search"></i> </button>
         </form>
  
         <?php
+
+            // Initialisation stricte des variables
+            $videos_search  = $videos_search ?? [];
+            $searchTerm     = $searchTerm ?? '';
+
             // Vérifier s'il y a des resultats de recherche dans la session
             if (isset($_SESSION['search_results'])) 
             {
-                $videos     = $_SESSION['search_results']['videos'];
-                $searchTerm = $_SESSION['search_results']['searchTerm'];
+                $videos_search  = $_SESSION['search_results']['videos_search'];
+                $searchTerm     = $_SESSION['search_results']['searchTerm'];
 
                 // Supprimer les résultats de la session après les avoir récupérés
                 unset($_SESSION['search_results']);
             }
         ?>
+
+        <?php 
+            // Vérifie si la variable $videos n'est pas définie ou est vide
+            if ( empty($videos_search) || empty(trim($searchTerm))): ?>
+                <style>
+                    
+                    .zone1 {
+                        display: block;    /* Affiche la section .zone1 */
+                    }
+                    .zoneHussen {
+                        display: none;  
+                    }
+                </style>
+        <?php else: ?>
+                <style>
+                    /* Si $videos est définie et contient une valeur, on cache la zone1 */
+                    .zone1 {
+                        display: none;  
+                    }
+                    .zoneHussen {
+                        display: block;  
+                    }
+                </style>
+        <?php endif; ?>
+
         <!-- Pour tester -->
-        <?php if (isset($videos)): ?>
+        <?php if (isset($videos_search)): ?>
 
             <div class="search-results-container">
                 <span class="search-results">
-                    <?= count($videos) ?> résultat(s) trouvé(s)      
+                    <?= count($videos_search) ?> résultat(s) trouvé(s)  pour "<?= htmlspecialchars($searchTerm) ?>"   
                 </span>
 
                 <ul class="search-results-list">
-                    <?php foreach ($videos as $video): ?>
+                    <?php foreach ($videos_search as $video_get): ?>
                         <li class="search-result-item">
-                            <h4><?= htmlspecialchars($video['title']) ?></h3>
-                            <p>Artiste : <?= htmlspecialchars($video['artist']) ?></p>
+                            <h4><?= htmlspecialchars($video_get['title']) ?></h3>
+                            <p>Artiste : <?= htmlspecialchars($video_get['artist']) ?></p>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -186,7 +216,43 @@ $selectedPlaylist = $selectedPlaylist ?? null;
 
         <!--Fin liste video-->
         <!-- Hussen-->
-        
+
+        <!-- Section des résultats de recherche -->
+        <div id="zoneHussen">
+            <?php if (count($videos_search) > 0): ?>
+
+                <h2>Résultats de recherche pour "<?= htmlspecialchars($searchTerm) ?>" </h2>
+
+
+                <div class="videos-container">
+                    <button class="scroll-button left" id="scrollLeft">&lt;</button>
+                    
+                    <div class="videos-wrapper" id="videosWrapper">
+                        <div class="videos-row">
+                            <?php foreach ($videos_search as $video_get): ?>
+                                <div class="video-card">
+                                    <h4><?= htmlspecialchars($video_get['title']) ?></h4>
+                                    <p>Artiste : <?= htmlspecialchars($video_get['artist']) ?></p>
+                                    <?php if (!empty($video_get['video_url'])): ?>
+                                        <div class="video-wrapper">
+                                            <iframe 
+                                                src="<?= htmlspecialchars(Video::convertToEmbedUrl($video_get['video_url'])) ?>" 
+                                                frameborder="0" 
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen>
+                                            </iframe>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>  
+                    
+                    <!-- <button class="scroll-button right" id="scrollRight">&gt;</button> -->
+                </div>
+            <?php endif; ?>
+        </div>
+       
 
         <?php endif; ?>
     </div>
