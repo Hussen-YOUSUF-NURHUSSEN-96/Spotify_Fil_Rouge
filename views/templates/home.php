@@ -28,45 +28,44 @@
 
             <?php
 
-            // Initialisation stricte des variables
-            $videos_search = $videos_search ?? [];
-            $searchTerm = $searchTerm ?? '';
+                // Initialisation stricte des variables
+                $videos_search  = $videos_search ?? [];
+                $searchTerm     = $searchTerm ?? '';
 
-            // Vérifier s'il y a des resultats de recherche dans la session
-            if (isset($_SESSION['search_results'])) {
-                $videos_search = $_SESSION['search_results']['videos_search'];
-                $searchTerm = $_SESSION['search_results']['searchTerm'];
+                // Vérifier s'il y a des resultats de recherche dans la session
+                if (isset($_SESSION['search_results'])) 
+                {
+                    $videos_search  = $_SESSION['search_results']['videos_search'];
+                    $searchTerm     = $_SESSION['search_results']['searchTerm'];
 
-                // Supprimer les résultats de la session après les avoir récupérés
-                unset($_SESSION['search_results']);
-            }
+                    // Supprimer les résultats de la session après les avoir récupérés
+                    unset($_SESSION['search_results']);
+                }
 
             ?>
 
-            <?php
-            // Vérifie si la variable $videos n'est pas définie ou est vide
-            if (empty($videos_search) || empty(trim($searchTerm))): ?>
-                <style>
-                    .zone1 {
-                        display: block;
-                        /* Affiche la section .zone1 */
-                    }
-
-                    .zoneHussen {
-                        display: none;
-                    }
-                </style>
+            <?php 
+                // Vérifie si la variable $videos n'est pas définie ou est vide
+                if ( empty($videos_search) || empty(trim($searchTerm))): ?>
+                    <style>
+                        
+                        .zoneMasi {
+                            display: block;    /* Affiche la section .zone1 */
+                        }
+                        .zoneHussen {
+                            display: none;  
+                        }
+                    </style>
             <?php else: ?>
-                <style>
-                    /* Si $videos est définie et contient une valeur, on cache la zone1 */
-                    .zone1 {
-                        display: none;
-                    }
-
-                    .zoneHussen {
-                        display: block;
-                    }
-                </style>
+                    <style>
+                        /* Si $videos est définie et contient une valeur, on cache la zone1 */
+                        .zoneMasi {
+                            display: none;  
+                        }
+                        .zoneHussen {
+                            display: block;  
+                        }
+                    </style>
             <?php endif; ?>
 
             <!-- Pour tester -->
@@ -195,7 +194,7 @@
                         </ul>
                     <?php else: ?>
 
-
+                    <div class="zoneMasi">
                         <?php if (isset($videosByCategory) && !empty($videosByCategory)): ?>
                             <h2>Liste de titres par catégorie</h2>
                             <div class="videos-container">
@@ -247,8 +246,7 @@
                         <?php else: ?>
                             <p>Aucune playlist ou vidéo de disponible</p>
                         <?php endif; ?>
-
-
+                    </div>
 
 
 
@@ -281,12 +279,28 @@
                                                             </iframe>
                                                         </div>
                                                     <?php endif; ?>
+
+
+                                                    <!-- Formulaire pour ajouter une vidéo à une playlist -->
+                                                    <form action="index.php?action=addVideoToPlaylist" method="POST">
+                                                        <input type="hidden" name="video_id" value="<?= htmlspecialchars($video_get['id']) ?>">
+                                                        <select name="playlist_id" required>
+                                                            <option value="">Choisir une playlist</option>
+                                                            <?php foreach ($playlists as $playlist): ?>
+                                                                <option value="<?= htmlspecialchars($playlist['id']) ?>">
+                                                                    <?= htmlspecialchars($playlist['name']) ?>
+                                                                </option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                        <button type="submit" class="add-button">Ajouter à la playlist</button>
+                                                    </form>
+                
                                                 </div>
                                             <?php endforeach; ?>
                                         </div>
                                     </div>
 
-                                    <!-- <button class="scroll-button right" id="scrollRight">&gt;</button> -->
+                                    <button class="scroll-button right" id="scrollRight">&gt;</button>
                                 </div>
                             <?php endif; ?>
                         </div>
