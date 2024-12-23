@@ -132,12 +132,21 @@
 
                 $sql="DELETE FROM playlists WHERE id= :playlist_id";
                 $query=$pdo->prepare($sql);
-                $query->bindparam(':playlist_id',$playlistId,PDO::PARAM_INT);
+                
+                $query->bindParam(':playlist_id', $playlistId,PDO::PARAM_INT);
 
-                return $query->execute();
+                //Executer la requete de suppression
+                $result = $query->execute();
+                if($result){
+                    return true;
+                } else{
+                    echo "Erreur lors de la suppression de la playlist (pas de lignes affectées";
+                    return false;
+                }
+
 
             }catch (PDOException $e){
-                echo"Erreur dans la playlist::delete:";
+                echo"Exception lros de la suppression de la playlist";
                 return false;
             }
         }
@@ -190,13 +199,32 @@
         public static function clearVideoFromPlaylist($playlistId){
             try{
                 $pdo = connect_to_db(); // rend pdo accessible
-                $sql="DELETE FROM playlist_videos WHERE playlist_id = :playlist_id";
-                $query = $pdo->prepare($sql);
-                $query->bindParam(':playlist_id',$playlistId,PDO::PARAM_INT);
 
-                return $query->execute();
+                //Vérifiez si des vidéos existent dans la playlist
+                $sqlCheck = "SELECT COUNT(*) FROM videos WHERE playlist_id = :playlist_id";
+                $queryCheck =$pdo->prepare($sqlCheck);
+                $queryCheck->execute(['playlist_id' => $playlistId]);
+                $count = $queryCheck->fetchColumn();
+
+                if($count >0){
+                    //Si les vidéos existent supprimez-les
+                    $sql = "DELETE FROM videos WHERE playlist_id = :playlist_id";
+                    $query = $pdo->prepare($sql);
+
+                    if($query->execute(['playlist_id' => $playlistId])){
+                        return true;
+                    } else{
+                        echo"Errreur lors de la suppression des videos";
+                        return false;
+                    }
+                } else{
+                    //Aucune vidéos à supprimer
+                    return true;
+                }
+
+        
             }catch(PDOException $e){
-                echo "Erreur lors de la suppression des vidéos ";
+                echo "exception lors de la suppression des vidéos ";
                 return false;
             }
 

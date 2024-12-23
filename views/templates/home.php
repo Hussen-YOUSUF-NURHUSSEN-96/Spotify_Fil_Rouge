@@ -12,7 +12,7 @@
 <body>
 
     <header class="header">
-    <div class="burger">
+        <div class="burger">
             <div class="line"></div>
             <div class="line"></div>
             <div class="line"></div>
@@ -98,203 +98,217 @@
     <section>
 
 
-                <!--BIBLIOTHÈQUE-->
-                <div class="library">
-                    <!--Playlist favoris par defaut-->
-                    <div class="logo">
-                        <img src="assets/css/etagere-a-livres.png" alt="">
-                        <button class="add-playlist" onclick="openPopup()">+</button>
-                    </div>
-                    <div id="playlistContainer" class="cont-playlist">
 
-                        <ul>
-                            <?php if (!empty($playlists)): ?>
-                                <!--<?php print_r($playlists); ?>-->
-                                <?php foreach ($playlists as $playlist): ?>
-                                    <li>
-                                        <a href="index.php?action=home&playlist_id=<?= htmlspecialchars($playlist['id']) ?>">
-                                            <?= htmlspecialchars($playlist['name']) ?>
-                                        </a>
-                                        <form method="POST" action="index.php?action=delete_playlist">
-                                            <input type="hidden" name="playlist_id" value="<?= $playlist['id'] ?>">
-                                            <button type="submit" class="delete-btn" title="Supprimer cette playlist" onclick="openModal(<?= htmlspecialchars($playlist['id']) ?>)">
-                                                <i class="fa-solid fa-xmark"></i> <!-- Icône croix -->
-                                            </button>
-                                        </form>
-                                    </li>
 
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <p>Aucune playlist</p>
-                            <?php endif; ?>
 
-                        </ul>
 
-                    </div>
 
-                    <div id="deleteModal" class="modal">
-                        <div class="modal-content">
-                            <span class="clode-btn" onclick="closeMondal()">&times;</span>
-                            <h2>Confirmer la suppression.</h2>
-                            <p>Voulez vous vraiment supprimez cette playlist ?</p>
 
-                            <form method="POST" action="index.php?action=deletePlaylist"></form>
+        <!--BIBLIOTHÈQUE-->
+        <div class="library">
+            <!--Playlist favoris par defaut-->
+            <div class="logo">
+                <img src="assets/css/etagere-a-livres.png" alt="">
+                <button class="add-playlist" onclick="openPopup()">+</button>
+            </div>
+            <div id="playlistContainer" class="cont-playlist">
 
-                        </div>
+                <ul>
+                    <?php if (!empty($playlists)): ?>
+                        <!--<?php print_r($playlists); ?>-->
+                        <?php foreach ($playlists as $playlist): ?>
+                            <li>
+                                <a href="index.php?action=home&playlist_id=<?= htmlspecialchars($playlist['id']) ?>">
+                                    <?= htmlspecialchars($playlist['name']) ?>
+                                </a>
+                                <form method="POST" action="index.php?action=delete_playlist">
+                                    <input type="hidden" name="playlist_id" value="<?= $playlist['id'] ?>">
+                                    <button type="submit" class="delete-btn" title="Supprimer cette playlist"
+                                        onclick="openModal(<?= htmlspecialchars($playlist['id']) ?>)">
+                                        <i class="fa-solid fa-xmark"></i> <!-- Icône croix -->
+                                    </button>
+                                </form>
+                            </li>
 
-                    </div>
-                    <!-- pour créer une playlist-->
-                    <div id="popUp" class="popUp <?= isset($erreur) ? 'open' : '' ?>">
-                        <div class="popUp-content">
-                            <h3>Créer une playlist</h3>
-                            <form action="index.php?action=create" method="POST">
-                                <input type="text" name="name" id="playlistName" placeholder="Titre de la playlist"
-                                    required>
-                                <button type="submit">Valider</button>
-                                <button style="background-color:red;" type="button"
-                                    onclick="closePopup()">Annuler</button>
-                            </form>
-                            <?php if (isset($erreur)): ?>
-                                <div class="error-message">
-                                    <?= htmlspecialchars($erreur) ?>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                    </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>Aucune playlist</p>
+                    <?php endif; ?>
 
-                </div>
+                </ul>
 
-                <!--Parti du centre-->
-                <div class="video-lecture">
-                    <?php if (isset($_GET['message'])): ?>
-                        <div class="message">
-                            <?php if ($_GET['message'] === 'video_added'): ?>
-                                <p class="success">Vidéo ajoutée à la playlist avec succès !</p>
-                            <?php elseif ($_GET['message'] === 'error'): ?>
-                                <p class="error">Erreur lors de l'ajout de la vidéo à la playlist.</p>
-                            <?php endif; ?>
+            </div>
+
+            <div id="deleteModal" class="modal <?= isset($erreur) ? 'open' : '' ?>">
+                <div class="modal-content">
+                    <h2>Confirmer la suppression.</h2>
+                    <p>Voulez vous vraiment supprimez cette playlist ?</p>
+
+                    <form action="index.php?action=delete_playlist" method="POST">
+                        <input type="hidden" id="modal-playlist-id" name="playlist_id" value="">
+                        <input type="hidden"  name="confirm" value="yes">
+                        <button type="submit">
+                            Oui,
+                            supprimer</button>
+                        <button style="background-color:red;" type="button" onclick="closeModal()">Annuler</button>
+                    </form>
+                    <?php if (isset($erreur)): ?>
+                        <div class="error-message">
+                            <?= htmlspecialchars($erreur) ?>
                         </div>
                     <?php endif; ?>
 
-                    <!--Parti Majdoline-->
-                    <?php if (isset($selectedPlaylist) && $selectedPlaylist !== null): ?>
-                        <!--Détails de la playlist séléctionner-->
-                        <h2><?= htmlspecialchars($selectedPlaylist['name']) ?></h2>
-                        <!--<p><?= htmlspecialchars($selectedPlaylist['description']) ?> </p>-->
-                        <ul>
-                            <?php foreach ($selectedPlaylist['videos'] as $video): ?>
-                                <li>
-                                    <h3><?= htmlspecialchars($video['title']) ?></h3>
-                                    <iframe src="<?= htmlspecialchars(Video::convertToEmbedUrl($video['video_url'])) ?>"
-                                        frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowfullscreen>
-                                    </iframe>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php else: ?>
+                </div>
+
+            </div>
+            <!-- pour créer une playlist-->
+            <div id="popUp" class="popUp <?= isset($erreur) ? 'open' : '' ?>">
+                <div class="popUp-content">
+                    <h3>Créer une playlist</h3>
+                    <form action="index.php?action=create" method="POST">
+                        <input type="text" name="name" id="playlistName" placeholder="Titre de la playlist" required>
+                        <button type="submit">Valider</button>
+                        <button style="background-color:red;" type="button" onclick="closePopup()">Annuler</button>
+                    </form>
+                    <?php if (isset($erreur)): ?>
+                        <div class="error-message">
+                            <?= htmlspecialchars($erreur) ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+        </div>
+
+        <!--Parti du centre-->
+        <div class="video-lecture">
+            <?php if (isset($_GET['message'])): ?>
+                <div class="message">
+                    <?php if ($_GET['message'] === 'video_added'): ?>
+                        <p class="success">Vidéo ajoutée à la playlist avec succès !</p>
+                    <?php elseif ($_GET['message'] === 'error'): ?>
+                        <p class="error">Erreur lors de l'ajout de la vidéo à la playlist.</p>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+
+            <!--Parti Majdoline-->
+            <?php if (isset($selectedPlaylist) && $selectedPlaylist !== null): ?>
+                <!--Détails de la playlist séléctionner-->
+                <h2><?= htmlspecialchars($selectedPlaylist['name']) ?></h2>
+                <!--<p><?= htmlspecialchars($selectedPlaylist['description']) ?> </p>-->
+                <ul>
+                    <?php foreach ($selectedPlaylist['videos'] as $video): ?>
+                        <li>
+                            <h3><?= htmlspecialchars($video['title']) ?></h3>
+                            <iframe src="<?= htmlspecialchars(Video::convertToEmbedUrl($video['video_url'])) ?>" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php else: ?>
 
 
-                        <?php if (isset($videosByCategory) && !empty($videosByCategory)): ?>
-                            <h2>Liste de titres par catégorie</h2>
-                            <div class="videos-container">
-                                <button class="scroll-button left" id="scrollLeft">&lt;</button>
+                <?php if (isset($videosByCategory) && !empty($videosByCategory)): ?>
+                    <h2>Liste de titres par catégorie</h2>
+                    <div class="videos-container">
+                        <button class="scroll-button left" id="scrollLeft">&lt;</button>
 
-                                <div class="videos-wrapper" id="videosWrapper">
-                                    <div class="videos-row">
-                                        <?php foreach ($videosByCategory as $category => $videos): ?>
-                                            <div class="category-section">
-                                                <h3 class="category-title"><?= htmlspecialchars($category) ?></h3>
-                                                <?php foreach ($videos as $video): ?>
-                                                    <div class="video-card">
-                                                        <h4><?= htmlspecialchars($video['title']) ?></h4>
-                                                        <p>Artiste : <?= htmlspecialchars($video['artist']) ?></p>
-                                                        <?php if (!empty($video['video_url'])): ?>
-                                                            <div class="video-wrapper">
+                        <div class="videos-wrapper" id="videosWrapper">
+                            <div class="videos-row">
+                                <?php foreach ($videosByCategory as $category => $videos): ?>
+                                    <div class="category-section">
+                                        <h3 class="category-title"><?= htmlspecialchars($category) ?></h3>
+                                        <?php foreach ($videos as $video): ?>
+                                            <div class="video-card">
+                                                <h4><?= htmlspecialchars($video['title']) ?></h4>
+                                                <p>Artiste : <?= htmlspecialchars($video['artist']) ?></p>
+                                                <?php if (!empty($video['video_url'])): ?>
+                                                    <div class="video-wrapper">
 
 
-                                                                <iframe
-                                                                    src="<?= htmlspecialchars(Video::convertToEmbedUrl($video['video_url'])) ?>"
-                                                                    frameborder="0"
-                                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                                    allowfullscreen>
-                                                                </iframe>
-                                                            </div>
-                                                        <?php endif; ?>
-                                                        <!-- Formulaire pour ajouter une vidéo à une playlist -->
-                                                        <form action="index.php?action=addVideoToPlaylist" method="POST">
-                                                            <input type="hidden" name="video_id" value="<?= $video['id'] ?>">
-                                                            <select name="playlist_id" required>
-                                                                <option value="">Choisir une playlist</option>
-                                                                <?php foreach ($playlists as $playlist): ?>
-                                                                    <option value="<?= $playlist['id'] ?>">
-                                                                        <?= htmlspecialchars($playlist['name']) ?>
-                                                                    </option>
-                                                                <?php endforeach; ?>
-                                                            </select>
-                                                            <button type="submit" class="add-button">Ajouter à la playlist</button>
-                                                        </form>
+                                                        <iframe src="<?= htmlspecialchars(Video::convertToEmbedUrl($video['video_url'])) ?>"
+                                                            frameborder="0"
+                                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                            allowfullscreen>
+                                                        </iframe>
                                                     </div>
-                                                <?php endforeach; ?>
+                                                <?php endif; ?>
+                                                <!-- Formulaire pour ajouter une vidéo à une playlist -->
+                                                <form action="index.php?action=addVideoToPlaylist" method="POST">
+                                                    <input type="hidden" name="video_id" value="<?= $video['id'] ?>">
+                                                    <select name="playlist_id" required>
+                                                        <option value="">Choisir une playlist</option>
+                                                        <?php foreach ($playlists as $playlist): ?>
+                                                            <option value="<?= $playlist['id'] ?>">
+                                                                <?= htmlspecialchars($playlist['name']) ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                    <button type="submit" class="add-button">Ajouter à la playlist</button>
+                                                </form>
                                             </div>
                                         <?php endforeach; ?>
                                     </div>
-                                </div>
-
-                                <button class="scroll-button right" id="scrollRight">&gt;</button>
+                                <?php endforeach; ?>
                             </div>
-                        <?php else: ?>
-                            <p>Aucune playlist ou vidéo de disponible</p>
-                        <?php endif; ?>
-
-
-
-
-
-                        <!--Fin liste video-->
-                        <!-- Hussen-->
-
-                        <!-- Section des résultats de recherche -->
-                        <div id="zoneHussen">
-                            <?php if (count($videos_search) > 0): ?>
-
-                                <h2>Résultats de recherche pour "<?= htmlspecialchars($searchTerm) ?>" </h2>
-
-
-                                <div class="videos-container">
-                                    <button class="scroll-button left" id="scrollLeft">&lt;</button>
-
-                                    <div class="videos-wrapper" id="videosWrapper">
-                                        <div class="videos-row">
-                                            <?php foreach ($videos_search as $video_get): ?>
-                                                <div class="video-card">
-                                                    <h4><?= htmlspecialchars($video_get['title']) ?></h4>
-                                                    <p>Artiste : <?= htmlspecialchars($video_get['artist']) ?></p>
-                                                    <?php if (!empty($video_get['video_url'])): ?>
-                                                        <div class="video-wrapper">
-                                                            <iframe
-                                                                src="<?= htmlspecialchars(Video::convertToEmbedUrl($video_get['video_url'])) ?>"
-                                                                frameborder="0"
-                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                                allowfullscreen>
-                                                            </iframe>
-                                                        </div>
-                                                    <?php endif; ?>
-                                                </div>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    </div>
-
-                                    <!-- <button class="scroll-button right" id="scrollRight">&gt;</button> -->
-                                </div>
-                            <?php endif; ?>
                         </div>
 
+                        <button class="scroll-button right" id="scrollRight">&gt;</button>
+                    </div>
+                <?php else: ?>
+                    <p>Aucune playlist ou vidéo de disponible</p>
+                <?php endif; ?>
 
 
+
+
+
+                <!--Fin liste video-->
+                <!-- Hussen-->
+
+                <!-- Section des résultats de recherche -->
+                <div id="zoneHussen">
+                    <?php if (count($videos_search) > 0): ?>
+
+                        <h2>Résultats de recherche pour "<?= htmlspecialchars($searchTerm) ?>" </h2>
+
+
+                        <div class="videos-container">
+                            <button class="scroll-button left" id="scrollLeft">&lt;</button>
+
+                            <div class="videos-wrapper" id="videosWrapper">
+                                <div class="videos-row">
+                                    <?php foreach ($videos_search as $video_get): ?>
+                                        <div class="video-card">
+                                            <h4><?= htmlspecialchars($video_get['title']) ?></h4>
+                                            <p>Artiste : <?= htmlspecialchars($video_get['artist']) ?></p>
+                                            <?php if (!empty($video_get['video_url'])): ?>
+                                                <div class="video-wrapper">
+                                                    <iframe
+                                                        src="<?= htmlspecialchars(Video::convertToEmbedUrl($video_get['video_url'])) ?>"
+                                                        frameborder="0"
+                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                        allowfullscreen>
+                                                    </iframe>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+
+                            <!-- <button class="scroll-button right" id="scrollRight">&gt;</button> -->
+                        </div>
                     <?php endif; ?>
                 </div>
+
+
+
+            <?php endif; ?>
+        </div>
 
 
 
@@ -338,6 +352,13 @@
         function closePopup() {
             document.getElementById("popUp").style.display = "none";
         }
+        function openModal() {
+            document.getElementById("modal-playlist-id").value = playlistId;
+            document.getElementById("deleteModal").style.display = "flex";
+        }
+        function closeModal() {
+            document.getElementById("deleteModal").style.display = "none";
+        }
 
         document.addEventListener('DOMContentLoaded', function () {
             // Vérifier si la popup doit rester ouverte
@@ -357,6 +378,8 @@
             // Animation des lignes du burger
             burger.classList.toggle('toggle');
         });
+
+
 
 
 
