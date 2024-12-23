@@ -258,50 +258,59 @@
                         <div id="zoneHussen">
                             <?php if (isset($videos_search) && is_array($videos_search) && count($videos_search) > 0): ?>
 
-                                <h2>Résultats de recherche pour "<?= htmlspecialchars($searchTerm) ?>" </h2>
+                                <h2 class="hussen-search-title"> Résultats de recherche pour "<?= htmlspecialchars($searchTerm) ?>" </h2>
 
 
-                                <div class="videos-container">
-                                    <button class="scroll-button left" id="scrollLeft">&lt;</button>
+                                <div class="hussen-videos-container">
 
-                                    <div class="videos-wrapper" id="videosWrapper">
-                                        <div class="videos-row">
-                                            <?php foreach ($videos_search as $video_get): ?>
-                                                <div class="video-card">
-                                                    <h4><?= htmlspecialchars($video_get['title']) ?></h4>
-                                                    <p>Artiste : <?= htmlspecialchars($video_get['artist']) ?></p>
-                                                    <?php if (!empty($video_get['video_url'])): ?>
-                                                        <div class="video-wrapper">
-                                                            <iframe
-                                                                src="<?= htmlspecialchars(Video::convertToEmbedUrl($video_get['video_url'])) ?>"
-                                                                frameborder="0"
-                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                                allowfullscreen>
-                                                            </iframe>
-                                                        </div>
-                                                    <?php endif; ?>
+                                        <?php foreach ($videos_search as $video_get): ?>
+                                            
+                                            <div class="hussen-video-card">
+
+                                                <h4><?= htmlspecialchars($video_get['title']) ?></h4>
+
+                                                <p>Artiste : <?= htmlspecialchars($video_get['artist']) ?></p>
+
+                                                <?php if (!empty($video_get['video_url'])): ?>
+
+                                                    <div class="hussen-video-wrapper">
+                                                        <iframe
+                                                            src="<?= htmlspecialchars(Video::convertToEmbedUrl($video_get['video_url'])) ?>"
+                                                            frameborder="0"
+                                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                            allowfullscreen
+                                                            loading="lazy">
+                                                        </iframe>
+                                                    </div>
+                                                <?php endif; ?>
 
 
-                                                    <!-- Formulaire pour ajouter une vidéo à une playlist -->
-                                                    <form action="index.php?action=addVideoToPlaylist" method="POST">
-                                                        <input type="hidden" name="video_id" value="<?= htmlspecialchars($video_get['id']) ?>">
-                                                        <select name="playlist_id" required>
-                                                            <option value="">Choisir une playlist</option>
-                                                            <?php foreach ($playlists as $playlist): ?>
-                                                                <option value="<?= htmlspecialchars($playlist['id']) ?>">
-                                                                    <?= htmlspecialchars($playlist['name']) ?>
-                                                                </option>
-                                                            <?php endforeach; ?>
-                                                        </select>
-                                                        <button type="submit" class="add-button">Ajouter à la playlist</button>
-                                                    </form>
-                
-                                                </div>
-                                            <?php endforeach; ?>
-                                        </div>
+                                                <!-- Formulaire pour ajouter une vidéo à une playlist -->
+                                                <form action="index.php?action=addVideoToPlaylist" method="POST">
+
+                                                    <input type="hidden" name="video_id" value="<?= htmlspecialchars($video_get['id']) ?>">
+
+                                                    <select name="playlist_id" required>
+
+                                                        <option value="">Choisir une playlist</option>
+
+                                                        <?php foreach ($playlists as $playlist): ?>
+
+                                                            <option value="<?= htmlspecialchars($playlist['id']) ?>">
+
+                                                                <?= htmlspecialchars($playlist['name']) ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+
+                                                    </select>
+                                                    <button type="submit" class="hussen-add-button" >Ajouter à la playlist</button>
+                                                </form>
+            
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
 
-                                    <button class="scroll-button right" id="scrollRight">&gt;</button>
+                                    
                                 </div>
                             <?php elseif (isset($videos_search) && count($videos_search) == 0): ?>
                                 <p>Aucun résultat trouvé.</p>
