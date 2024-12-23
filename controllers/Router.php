@@ -83,6 +83,7 @@
                         $controller = new PlaylistController();
                         $controller->addVideoToPLaylist();
                         break;
+        
                     default:
                         // Action non reconnue
                         $this->handleError("Action inconnue : $action");

@@ -187,7 +187,20 @@
             }
         }
 
+        public static function clearVideoFromPlaylist($playlistId){
+            try{
+                $pdo = connect_to_db(); // rend pdo accessible
+                $sql="DELETE FROM playlist_videos WHERE playlist_id = :playlist_id";
+                $query = $pdo->prepare($sql);
+                $query->bindParam(':playlist_id',$playlistId,PDO::PARAM_INT);
 
+                return $query->execute();
+            }catch(PDOException $e){
+                echo "Erreur lors de la suppression des vidéos ";
+                return false;
+            }
+
+        }
     }
         
 ?>

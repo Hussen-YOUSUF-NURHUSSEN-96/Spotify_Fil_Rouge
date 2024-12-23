@@ -79,11 +79,20 @@
                     //Verifie si la playlist appartiens àun utilisateur.
 
                     if (Playlist::belongsToUser($playlistId, $userId)) {
-                        if (Playlist::delete($playlistId)) {
-                            header("Location: index.php?action=home&message=playlist_deleted");
-                            exit();
-                        } else {
-                            echo "Erreur lors de la suppression de la playlist.";
+                        if(isset($_POST['confirm'])&& $_POST['confirm']=== 'yes'){
+
+                            Playlist::clearVideoFromPlaylist($playlistId);
+
+                            if (Playlist::delete($playlistId)) {
+                                header("Location: index.php?action=home&message=playlist_deleted");
+                                exit();
+                            } else {
+                                echo "Erreur lors de la suppression de la playlist.";
+                            }
+                        }else{
+                            //Si l'utilisateur n'as pas confirme
+
+                            $playlist = Playlist::getPlaylistWithVideos($playlistId);
                         }
                     } else {
                         echo "Erreur : cette playlist ne vous appartient pas.";

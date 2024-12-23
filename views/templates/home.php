@@ -117,7 +117,7 @@
                                         </a>
                                         <form method="POST" action="index.php?action=delete_playlist">
                                             <input type="hidden" name="playlist_id" value="<?= $playlist['id'] ?>">
-                                            <button type="submit" class="delete-btn" title="Supprimer cette playlist">
+                                            <button type="submit" class="delete-btn" title="Supprimer cette playlist" onclick="openModal(<?= htmlspecialchars($playlist['id']) ?>)">
                                                 <i class="fa-solid fa-xmark"></i> <!-- Icône croix -->
                                             </button>
                                         </form>
@@ -129,6 +129,18 @@
                             <?php endif; ?>
 
                         </ul>
+
+                    </div>
+
+                    <div id="deleteModal" class="modal">
+                        <div class="modal-content">
+                            <span class="clode-btn" onclick="closeMondal()">&times;</span>
+                            <h2>Confirmer la suppression.</h2>
+                            <p>Voulez vous vraiment supprimez cette playlist ?</p>
+
+                            <form method="POST" action="index.php?action=deletePlaylist"></form>
+
+                        </div>
 
                     </div>
                     <!-- pour créer une playlist-->

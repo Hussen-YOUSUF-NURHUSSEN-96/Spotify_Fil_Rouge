@@ -449,14 +449,13 @@ section{
     object-fit: cover;
     width: 100%;
     margin: 20px 0;
+    overflow-y: scroll; 
+    overflow-x: hidden; 
+    position: relative;
+    display: flex;
+    
 }
 
-.videos-wrapper {
-    overflow: hidden;
-    width: 200px;
-    object-fit: cover;
-   
-}
 
 .videos-row {
     display: flex;
@@ -473,7 +472,7 @@ section{
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 20px;
-    width: 200px;
+    width: 100%;
     object-fit: cover;
 }
 
@@ -483,7 +482,7 @@ section{
     height: 0;
     overflow: hidden;
     margin: 15px 0;
-    width: 100px;
+    width: 100%;
     object-fit: cover;
 }
 
