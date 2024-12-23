@@ -8,14 +8,14 @@
 .header{
     width: 100vw;
     display: flex;
-    padding: 10px;
-    position: absolute;
-    gap: 20px;
-    z-index: 3;
     align-items: center;
-    background-color: rgb(26, 26, 26); /* Harmonisation avec l'artiste en cours */
+    justify-content: space-evenly; 
+    padding: 10px;
+    position: fixed; /* Fixe en haut de la page */
+    top: 0;
+    z-index: 3;
+    background-color: rgb(26, 26, 26);
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
-   
 }
 
 
@@ -25,7 +25,8 @@
     align-items: center;
     background-color: rgb(47, 88, 59);
     border-radius: 20px;
-    padding: 5px 10px;
+    padding: 10px 10px;
+    margin: 10px 0 12px 20px;
 }
 
 /* Conteneur du formulaire de recherche */
@@ -34,14 +35,14 @@
     align-items: center;
     justify-content: space-between;  /*  le champ et le bouton   */
     width: 100%;
-    max-width: 500px;  
-    margin: 0 auto;  
+    width: 100%;
+    max-width: 600px;   
 }
 
 /* Champ de recherche */
 .search-input {
-    flex: 1;               /* Prend tout l'espace disponible a gauche */
-    padding: 8px 10px;
+    flex-grow: 2;             /* Permet au champ de prendre le plus de place possible */
+    padding: 8px 12px;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -49,10 +50,42 @@
     outline: none;
 }
 
+
+/* Menu de catégorie */
+.search-category {
+    padding: 8px 15px; 
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    margin: 0 25px;
+    outline: none;
+    
+}
+
+/* Survol du menu déroulant */
+.search-category:hover {
+    border-color: #888;
+}
+
+/* Focus sur le select */
+.search-category:focus {
+    border-color: #4CAF50;
+    background-color: #f0f0f0;
+}
+
+/* Option par défaut */
+.search-category option {
+    color: #888;
+    font-style: italic;
+}
+
+
 /* Bouton de recherche */
 .search-button {
-    padding: 8px 15px;     
-    margin-left: 14px;
+    padding: 8px 15px;
     background-color: #4caf50;
     color: white;
     border: none;
@@ -64,8 +97,10 @@
     justify-content: center;
     transition: transform 0.2s;
 }
+
 .search button:hover {
-    transform: scale(1.1);
+    transform: scale(1.1); 
+    background-color: #45a049;  
 }
 
 
@@ -80,7 +115,7 @@
 
 .icon {
     display: flex;
-    gap: 10px;
+    gap: 15px;
 }
 
 .icon a {
@@ -909,3 +944,138 @@ section{
 
 
 
+
+
+
+
+
+
+
+
+
+/* HUSEEN  */
+
+
+/* Body */
+
+#zoneHussen {
+    width: 100%;
+    margin: 30px 0;
+    padding: 30px;  
+    background-color: #1d1f27;        /* Fond sombre pour la section */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;  
+}
+
+
+.hussen-search-title {
+    font-size: 1.8em;
+    color: #fff;
+    margin-bottom: 50px !important;   
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Conteneur des vidéos */
+.hussen-videos-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);      /* 3 vidéos par ligne */
+    gap: 30px; 
+    justify-items: center;
+    padding: 20px;  
+}
+
+/* Style de la carte vidéo */
+.hussen-video-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    width: 100%;  
+    max-width: 280px; /* Taille fixe de la carte */
+    height: 450px;  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;  
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    margin-bottom: 30px; 
+}
+
+.hussen-video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Titre de chaque vidéo */
+.hussen-video-card h4 {
+    font-size: 1.3em;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+/* Texte sous le titre */
+.hussen-video-card p {
+    font-size: 1em;
+    color: #ccc;
+    margin: 5px 0;
+}
+
+ 
+.hussen-video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;     
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.hussen-video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* Style du formulaire d'ajout à la playlist */
+#zoneHussen  form {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+#zoneHussen select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px; 
+    background-color: #222;
+    color: #fff;
+}
+
+.hussen-add-button {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.hussen-add-button:hover {
+    background-color: #4cae4c;
+}
+
+/* Si la section ne trouve aucune vidéo */
+#zoneHussen p {
+    font-size: 1.2em;
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+}

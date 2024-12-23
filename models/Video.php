@@ -9,7 +9,7 @@
 
         // Méthode pour rechercher des vidéos par titre ou artiste
 
-        public static function searchVideos($searchTerm) 
+        public static function searchVideos($searchTerm,  $categoryId = '') 
         {
             try 
             {
@@ -20,28 +20,75 @@
                     return [];
                 }
 
-                $sql = "SELECT * FROM videos WHERE title LIKE :searchTerm  OR artist LIKE :searchTerm";
+                // Si une catégorie est sélectionnée, on ajoute un filtre par catégorie
+                $sql = "SELECT * FROM videos WHERE (title LIKE :searchTerm OR artist LIKE :searchTerm)";
+
+
+                // Si un category_id est fourni, on ajoute un filtre supplémentaire
+                if ( !empty($categoryId) ) 
+                {
+                    $sql .= " AND category_id = :categoryId";
+                }
 
                 $query    = $pdo->prepare($sql);
                 $likeTerm = '%' . $searchTerm . '%';
 
                 $query->bindParam(':searchTerm', $likeTerm, PDO::PARAM_STR);
 
+
+                if (!empty($categoryId)) 
+                {
+                    $query->bindParam(':categoryId', $categoryId, PDO::PARAM_INT);
+                }
+
+                
                 $query->execute();
 
                 $results= $query->fetchAll(PDO::FETCH_ASSOC);
-                var_dump($results);
+
+
+                // var_dump($results);
                 
                 return $results;
                 
             } 
             catch (PDOException $e) 
             {
-                echo"Error in Video::searchVideos: ";
+                echo "Error in Video::searchVideos: " . $e->getMessage();
                 
                 return false;
             }
         } 
+
+
+
+        // ###############################################################################
+
+
+        // Récupérer les catégories pour la barre de recherche
+
+        public static function getCategories() 
+        {
+            try 
+            {
+                $pdo   = connect_to_db();
+                $sql   = "SELECT * FROM categories";
+                $query = $pdo->prepare($sql);
+                $query->execute();
+
+                $categories = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+                return $categories;
+            } 
+            catch (PDOException $e) 
+            {
+                echo "Error in Video::getCategories: " . $e->getMessage();
+                return [];
+            }
+        }
+
+        
+        // ###############################################################################
 
 
          /**
