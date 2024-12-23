@@ -92,6 +92,27 @@
                     echo "Aucune playlist spécifiée pour la suppression.";
                 }
             }
+
+            public function addVideoToPLaylist(){
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();  // Démarre la session si ce n'est pas déjà fait
+                }
+
+                if($_SERVER['REQUEST_METHOD']==='POST'){
+                    if(isset($_POST['video_id'], $_POST['playlist_id'])){
+                        $videoId = intval($_POST['video_id']);
+                        $playlistId=intval($_POST['playlist_id']);
+
+                        $success = Playlist::addVideoToPlaylist($videoId,$playlistId);
+
+                        if($success){
+                            header("Location: index.php?action=home&message=video_added");
+                        }else{
+                            header("Location: index.php?action=home&message=message=error");
+                        } exit();
+                    }
+                }
+            }
                 
             }
             

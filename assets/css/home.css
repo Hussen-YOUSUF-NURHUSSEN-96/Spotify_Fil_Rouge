@@ -5,8 +5,8 @@
 
 /*   #############################    Header    #############################    */
 
-header{
-    width: 100%;
+.header{
+    width: 100vw;
     display: flex;
     justify-content: space-around;
     padding: 10px;
@@ -15,6 +15,7 @@ header{
     align-items: center;
     background-color: rgb(26, 26, 26); /* Harmonisation avec l'artiste en cours */
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+   
 }
 
 
@@ -92,7 +93,19 @@ header{
     transform: scale(1.2);
     color: rgb(76, 223, 122);
 }
+.burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
 
+.burger .line {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    transition: all 0.3s ease;
+}
 
 /* --------------- */
 
@@ -171,32 +184,20 @@ main{
 /*Bibliothèquee*/
 
 .library{
-    width: 10vh;
-    height: 72%;
-    background-color: rgb(47, 88, 59);
+    width: 10vw;
+    height: 100%;
+    background-color: rgb(26, 26, 26);
     border-radius: 10px;
     display: flex;
     flex-wrap: wrap;
-    padding: 5px;
     text-align: center;
     flex-direction: column;
     align-items: center;
+    padding: 10px;
+
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
 
     
-}
-
-.favoris{
-    background-color: rgb(76, 223, 122);
-    width: 50px;
-    height: 60px;
-    border-radius: 10px;
-    padding: 8px;
-    margin-top: 10px;
-    margin-right: 10px;
-}
-
-.favoris a  {
-    font-size: 50px;
 }
 
 .logo{
@@ -220,12 +221,18 @@ main{
     display: flex;
     flex-direction: row;
     width: 100%;
+    margin-top: 20px;
+    justify-content: center;
 }
 
 #playlistContainer ul{
     color: white;
     text-decoration: none;
     list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 10px;
     
 }
 
@@ -235,6 +242,7 @@ main{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
 }
 
 #playlistContainer ul li a{
@@ -261,7 +269,7 @@ main{
     border: solid transparent;
     text-align: right;
     font-size: 16px;
-    color: #1f1f1f;
+    color: #a8a8a8;
     margin-left: 5px;
 }
 
@@ -280,38 +288,40 @@ main{
 /*Vidéo*/
 /*Playlist selectionner*/
 .video-lecture{
-    width: 72%;
-    height: 72%;
+    width: 80vw;
+    height: 100%;
     background-color: rgb(70, 102, 79);
     border-radius: 10px;
     display: flex;
-
+    padding: 10px;
     
 }
 
 .video-lecture h2{
     margin: 20px;
+    width: 100%;
 }
 
 
 /*Suggestion*/
 .suggestion{
     width: 100px;
-    height: 72%;
+    height: 100%;
     background-color: rgb(86, 129, 98);
     border-radius: 10px;
-    
+    padding: 10px;
 }
 
 section{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    width: 100%;
-    height: 100vh;
+    width: 100vw;
+    height: 800px;
     padding-top: 30px;
     position: absolute;
-z-index: 2;
+    z-index: 2;
+    margin-top: 5%;
 }
 
 .artiste-en-cours{
@@ -343,13 +353,13 @@ z-index: 2;
     font-size: 16px;
     width: 35%;
 }
-/*Boite modal*/
+
 
 .add-playlist{
     font-size: 30px;
     padding: 5px;
     cursor: pointer;
-    background-color: #1e1e1e5f;
+    background-color: #00a10b5f;
     color: white;
     border: none;
     border-radius: 10px;
@@ -365,24 +375,40 @@ z-index: 2;
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
+    z-index: 2;
 }
 
 .popUp-content{
-    background-color: rgb(46, 46, 46);
-    padding: 20px;
-    border-radius: 8px;
+    background-color: #222;
     width: 300px;
+    padding: 40px;
+    margin: 50px auto;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
 }
 
 .popUp input{
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    margin-top: 10px;
 }
 
 .popUp button{
-    padding: 8px 16px;
-    margin: 5px;
+    background-color: #1db954;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 20px;
 }
 
 .popUp.open{
@@ -399,30 +425,31 @@ z-index: 2;
 
 
 .zone1 {
-    width: 85%;
-    height: 85%;
+    width: 200px;
     background-color: rgb(70, 102, 79);
     border-radius: 10px;
-    overflow: hidden;
     padding: 20px;
-    position: relative;
+    
+    
 }
 
 .zone1-content {
     height: 100%;
-    overflow-y: auto;
+    
     padding-right: 20px; /* Add some padding for the scrollbar */
 }
 
 .videos-container {
-    position: relative;
+    object-fit: cover;
     width: 100%;
     margin: 20px 0;
 }
 
 .videos-wrapper {
     overflow: hidden;
-    position: relative;
+    width: 200px;
+    object-fit: cover;
+   
 }
 
 .videos-row {
@@ -440,6 +467,8 @@ z-index: 2;
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 20px;
+    width: 200px;
+    object-fit: cover;
 }
 
 .video-wrapper {
@@ -448,15 +477,18 @@ z-index: 2;
     height: 0;
     overflow: hidden;
     margin: 15px 0;
+    width: 100px;
+    object-fit: cover;
 }
 
 .video-wrapper iframe {
     position: absolute;
+    z-index: 0;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 300px;
     border-radius: 4px;
+    object-fit: cover;
 }
 
 .scroll-button {
@@ -527,6 +559,8 @@ z-index: 2;
     height: 100vh;
     top: 0;
     left: 0;
+    bottom: 0;
+    right: 0;
     background: #0f0f0f;
     overflow: hidden;
 }
@@ -742,5 +776,84 @@ z-index: 2;
     transform-origin: -9vw 8vh;
     box-shadow: 56vmin 0 7.773008720607723vmin currentColor;
 }
+
+/*Responsive*/
+
+@media(max-width:850px){
+    .icon {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #333;
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+    }
+
+    .icon.active {
+        display: flex;
+    }
+
+    .burger {
+        display: flex;
+    }
+
+    #playlistContainer{
+        width: 60%;
+        height: 90%;
+        overflow-y: scroll; 
+        overflow-x: hidden; 
+        position: relative;
+    }
+
+    #playlistContainer::-webkit-scrollbar {
+        width: 8px; /* Largeur de la scrollbar */
+    }
+    .playlistContainer::-webkit-scrollbar-thumb {
+        background-color: #888; /* Couleur de la barre */
+        border-radius: 4px;
+    }
+    .playlistContainer::-webkit-scrollbar-thumb:hover {
+        background-color: #555; /* Couleur au survol */
+    }
+
+    #playlistContainer ul{
+        flex-direction: row-reverse;
+        gap: 20px;
+    }
+
+    #playlistContainer ul li{
+        width:80px;
+        margin-right: 10px;
+        padding: 10px;
+        
+    }
+
+    .library{
+        width: 80%;
+        height: 10vh;
+        flex-direction: row;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .logo img{
+        width: 50px;
+    }
+
+    .logo{
+        width: 30%;
+    }
+
+    .header{
+        justify-content: left;
+        gap: 30px;
+    }
+
+}
+
 
 

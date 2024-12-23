@@ -60,6 +60,7 @@
                         require_once 'controllers/LogOutController.php';
                         $controller = new LogoutController();
                         $controller->logout();
+                        break;
                     // Rechercher une video
                     case 'search':
                         require_once 'controllers/VideoController.php';
@@ -72,7 +73,16 @@
                         $controller = new PlaylistController();
                         $controller->delete();
                         break;
-
+                    case 'video':
+                        require_once 'controllers/VideoController.php';
+                        $controller = new VideoController();
+                        $controller->home();
+                        break;
+                    case 'addVideoToPlaylist':
+                        require_once 'controllers/PlaylistController.php';
+                        $controller = new PlaylistController();
+                        $controller->addVideoToPLaylist();
+                        break;
                     default:
                         // Action non reconnue
                         $this->handleError("Action inconnue : $action");

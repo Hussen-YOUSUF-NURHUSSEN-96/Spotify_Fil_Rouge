@@ -29,11 +29,15 @@
 
                 $query->execute();
 
-                return $query->fetchAll(PDO::FETCH_ASSOC);
+                $results= $query->fetchAll(PDO::FETCH_ASSOC);
+                var_dump($results);
+                
+                return $results;
+                
             } 
             catch (PDOException $e) 
             {
-                error_log("Error in Video::searchVideos: " . $e->getMessage());
+                echo"Error in Video::searchVideos: ";
                 
                 return false;
             }

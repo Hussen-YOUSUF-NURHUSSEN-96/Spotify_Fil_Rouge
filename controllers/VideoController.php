@@ -8,10 +8,11 @@
     {
 
         // Methode pour afficher les resultats de recherche
-        public function search() 
-        { if (session_status() === PHP_SESSION_NONE) {
+        public function search() { 
+            
+            if (session_status() === PHP_SESSION_NONE) {
             session_start();
-        }
+            }
         
             // Verifier si une recherche a ete effectue
             $searchTerm = $_GET['query'] ?? '';
@@ -40,29 +41,28 @@
             // include 'views/templates/home.php';
         }
 
-        public function getVideosByCategory()
-    {   
-        if (session_status() === PHP_SESSION_NONE) {
+        public function getVideosByCategory(){   
+            if (session_status() === PHP_SESSION_NONE) {
             session_start();
-        }
+            }
         
-        $videosByCategory = Video::getVideosByCategory();
+            $videosByCategory = Video::getVideosByCategory();
         
-        // Stocker les vidéos par catégorie dans la session
-        $_SESSION['videos_by_category'] = $videosByCategory;
+            // Stocker les vidéos par catégorie dans la session
+            $_SESSION['videos_by_category'] = $videosByCategory;
 
-        // Rediriger vers la page home
-        header('Location: index.php?action=home');
-        exit();
+            // Rediriger vers la page home
+            header('Location: index.php?action=home');
+            exit();
     }
 
     /**
      * Affiche la page d'accueil avec les vidéos par catégorie
      */
-    public function home()
-    {   if (session_status() === PHP_SESSION_NONE) {
+    public function home(){   
+        if (session_status() === PHP_SESSION_NONE) {
         session_start();
-    }
+        }
     
         // Si les vidéos par catégorie ne sont pas dans la session, les récupérer
         if (!isset($_SESSION['videos_by_category'])) {
@@ -70,6 +70,15 @@
         }
 
         $videosByCategory = $_SESSION['videos_by_category'];
-        require_once 'views/templates/home.php';
+
+        var_dump($videosByCategory); // Vérifier que les vidéos sont bien récupérées
+    
+        if (empty($videosByCategory)) {
+            echo "Aucune vidéo par catégorie disponible."; // Message de débogage
+        }
+         
+
+        require_once  'views/templates/home.php';
     }
-    }
+}
+?>

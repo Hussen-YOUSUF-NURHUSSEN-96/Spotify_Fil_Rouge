@@ -6,14 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Spotifeux</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/home.css?v=1.0">
+    <link rel="stylesheet" href="assets/css/home.css?v=1.6">
 </head>
 
 <body>
     <header class="header">
-        <?php if (isset($_SESSION['user'])): ?>
-            <a href="index.php?action=logout">Déconnexion</a>
-        <?php endif; ?>
+        <div class="burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
         <!-- Recherche -->
         <div class="search">
             <form method="GET" action="index.php" class="search-form">
@@ -54,6 +56,9 @@
         </div>
         <div class="icon">
             <a href="index.php?action=home"><i class="fas fa-home"></i></a>
+            <?php if (isset($_SESSION['user'])): ?>
+                <a href="index.php?action=logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+            <?php endif; ?>
         </div>
     </header>
     <section>
@@ -98,7 +103,7 @@
                     <form action="index.php?action=create" method="POST">
                         <input type="text" name="name" id="playlistName" placeholder="Titre de la playlist" required>
                         <button type="submit">Valider</button>
-                        <button type="button" onclick="closePopup()">Annuler</button>
+                        <button style="background-color:red;" type="button" onclick="closePopup()">Annuler</button>
                     </form>
                     <?php if (isset($erreur)): ?>
                         <div class="error-message">
@@ -112,6 +117,16 @@
 
         <!--Parti du centre-->
         <div class="video-lecture">
+            <?php if (isset($_GET['message'])): ?>
+                <div class="message">
+                    <?php if ($_GET['message'] === 'video_added'): ?>
+                        <p class="success">Vidéo ajoutée à la playlist avec succès !</p>
+                    <?php elseif ($_GET['message'] === 'error'): ?>
+                        <p class="error">Erreur lors de l'ajout de la vidéo à la playlist.</p>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+
             <!--Parti Majdoline-->
             <?php if (isset($selectedPlaylist) && $selectedPlaylist !== null): ?>
                 <!--Détails de la playlist séléctionner-->
@@ -121,20 +136,17 @@
                     <?php foreach ($selectedPlaylist['videos'] as $video): ?>
                         <li>
                             <h3><?= htmlspecialchars($video['title']) ?></h3>
-
-                            <iframe src="<?= htmlspecialchars($video['url']) ?>" width="560" height="315" frameborder="0"
-                                allowfullscreen></iframe>
+                            <iframe src="<?= htmlspecialchars(Video::convertToEmbedUrl($video['video_url'])) ?>" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
                         </li>
                     <?php endforeach; ?>
                 </ul>
             <?php else: ?>
 
 
-                <?php if (isset($selectedPlaylist) && $selectedPlaylist !== null): ?>
-                    <h2><?= htmlspecialchars($selectedPlaylist['name']) ?></h2>
-                    <p><?= htmlspecialchars($selectedPlaylist['description']) ?></p>
-
-                <?php elseif (isset($videosByCategory) && !empty($videosByCategory)): ?>
+                <?php if (isset($videosByCategory) && !empty($videosByCategory)): ?>
                     <h2>Liste de titres par catégorie</h2>
                     <div class="videos-container">
                         <button class="scroll-button left" id="scrollLeft">&lt;</button>
@@ -150,6 +162,8 @@
                                                 <p>Artiste : <?= htmlspecialchars($video['artist']) ?></p>
                                                 <?php if (!empty($video['video_url'])): ?>
                                                     <div class="video-wrapper">
+
+
                                                         <iframe src="<?= htmlspecialchars(Video::convertToEmbedUrl($video['video_url'])) ?>"
                                                             frameborder="0"
                                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -157,6 +171,19 @@
                                                         </iframe>
                                                     </div>
                                                 <?php endif; ?>
+                                                <!-- Formulaire pour ajouter une vidéo à une playlist -->
+                                                <form action="index.php?action=addVideoToPlaylist" method="POST">
+                                                    <input type="hidden" name="video_id" value="<?= $video['id'] ?>">
+                                                    <select name="playlist_id" required>
+                                                        <option value="">Choisir une playlist</option>
+                                                        <?php foreach ($playlists as $playlist): ?>
+                                                            <option value="<?= $playlist['id'] ?>">
+                                                                <?= htmlspecialchars($playlist['name']) ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                    <button type="submit" class="add-button">Ajouter à la playlist</button>
+                                                </form>
                                             </div>
                                         <?php endforeach; ?>
                                     </div>
@@ -183,10 +210,8 @@
 
             <?php endif; ?>
         </div>
-        <div class="suggestion">
 
-        </div>
-        <div class="artiste-en-cours">
+        <!--  <div class="artiste-en-cours">
             <div class="artiste">
                 <img src="assets/css/babymetal-album.jpeg" alt="">
                 <h2>Gimme Chocolate</h2>
@@ -194,36 +219,36 @@
 
             </div>
 
-        </div>
+        </div>-->
 
         </div>
 
     </section>
-                <!---Fond-->
-                <div class="background">
- <span></span>
- <span></span>
- <span></span>
- <span></span>
- <span></span>
- <span></span>
- <span></span>
- <span></span>
- <span></span>
- <span></span>
- <span></span>
- <span></span>
- <span></span>
- <span></span>
- <span></span>
- <span></span>
- <span></span>
- <span></span>
- <span></span>
- <span></span>
- <span></span>
- <span></span>
-</div>
+    <!---Fond
+    <div class="background">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>-->
 
     <script>
         function openPopup() {
@@ -241,48 +266,59 @@
                 popUp.style.display = "flex";
             }
         });
+        // Sélection des éléments
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.icon');
+
+        // Ajout de l'événement pour ouvrir/fermer le menu
+        burger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+
+            // Animation des lignes du burger
+            burger.classList.toggle('toggle');
+        });
 
 
 
 
-           document.addEventListener('DOMContentLoaded', function() {
-       const wrapper = document.getElementById('videosWrapper');
-      // const row = wrapper.querySelector('.videos-row');
-       const leftButton = document.getElementById('scrollLeft');
-       const rightButton = document.getElementById('scrollRight');
-      
-       let currentIndex = 0;
-       const sections = document.querySelectorAll('.category-section');
-      
-       // Hide left button initially
-       //leftButton.style.display = 'none';
-      
-       function updateButtons() {
-           leftButton.style.display = currentIndex > 0 ? 'block' : 'none';
-           rightButton.style.display = currentIndex < sections.length - 1 ? 'block' : 'none';
-       }
-      
-       function scrollToSection(direction) {
-           if (direction === 'left' && currentIndex > 0) {
-               currentIndex--;
-           } else if (direction === 'right' && currentIndex < sections.length - 1) {
-               currentIndex++;
-           }
-      
-           const scrollAmount = wrapper.clientWidth * currentIndex;
-           row.style.transform = `translateX(-${scrollAmount}px)`;
-           updateButtons();
-       }
-      
-       leftButton.addEventListener('click', () => scrollToSection('left'));
-       rightButton.addEventListener('click', () => scrollToSection('right'));
-      
-       // Update buttons visibility on window resize
-       window.addEventListener('resize', updateButtons);
-      
-       // Initial button state
-       updateButtons();
-      });
+        document.addEventListener('DOMContentLoaded', function () {
+            const wrapper = document.getElementById('videosWrapper');
+            // const row = wrapper.querySelector('.videos-row');
+            const leftButton = document.getElementById('scrollLeft');
+            const rightButton = document.getElementById('scrollRight');
+
+            let currentIndex = 0;
+            const sections = document.querySelectorAll('.category-section');
+
+            // Hide left button initially
+            //leftButton.style.display = 'none';
+
+            function updateButtons() {
+                leftButton.style.display = currentIndex > 0 ? 'block' : 'none';
+                rightButton.style.display = currentIndex < sections.length - 1 ? 'block' : 'none';
+            }
+
+            function scrollToSection(direction) {
+                if (direction === 'left' && currentIndex > 0) {
+                    currentIndex--;
+                } else if (direction === 'right' && currentIndex < sections.length - 1) {
+                    currentIndex++;
+                }
+
+                const scrollAmount = wrapper.clientWidth * currentIndex;
+                row.style.transform = `translateX(-${scrollAmount}px)`;
+                updateButtons();
+            }
+
+            leftButton.addEventListener('click', () => scrollToSection('left'));
+            rightButton.addEventListener('click', () => scrollToSection('right'));
+
+            // Update buttons visibility on window resize
+            window.addEventListener('resize', updateButtons);
+
+            // Initial button state
+            updateButtons();
+        });
 
 
 

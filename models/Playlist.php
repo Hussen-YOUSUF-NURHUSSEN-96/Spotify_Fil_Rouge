@@ -153,8 +153,38 @@
 
                 //Retourne true si la playlist apparient à l'utilisateur
 
-                return $query->rowCount()>0;
+                return $query->fetchColumn()>0;
 
+        }
+
+        public static function addVideoToPLaylist($videoId, $playlistId){
+            try{
+
+                $pdo = connect_to_db(); // rend pdo accessible
+
+                $checksql="SELECT COUNT(*) FROM playlist_videos WHERE playlist_id = :playlist_id AND video_id = :video_id";
+                $checkquery = $pdo->prepare($checksql);
+                $checkquery->execute([
+                    ':playlist_id'=>$playlistId,
+                    ':video_id'=>$videoId,
+                ]);
+
+                if($checkquery->fetchColumn()>0){
+                    return false;
+                }
+
+                //Ajouter la vidéo à la playlist
+
+                $sql = "INSERT INTO playlist_videos (playlist_id, video_id) VALUES (:playlist_id, :video_id)";
+                $query = $pdo->prepare($sql);
+                return $query->execute([
+                    ':playlist_id'=>$playlistId,
+                    ':video_id'=>$videoId,
+                ]);
+            } catch(PDOException $e){
+                echo "Erreur dans le Playlist::AddVideoToPlaylist : ";
+                return false;
+            }
         }
 
 

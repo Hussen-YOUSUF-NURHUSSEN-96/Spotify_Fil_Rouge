@@ -32,7 +32,7 @@
                  <label for="password">Entrez un mot de passe</label>
                  <input type="text" name="password" placeholder=" Password" required>
                  <button class="login-button" type="submit">S'inscrire</button>
-                <p>Vous possédez déjà un compte chez nous ? <a href="index.php?action=login">Connectez-vous.</a></p>
+                <p class="register-text">Vous possédez déjà un compte chez nous ? <a href="index.php?action=login">Connectez-vous.</a></p>
             </form>
         </div>
 

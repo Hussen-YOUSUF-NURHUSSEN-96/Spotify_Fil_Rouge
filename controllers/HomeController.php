@@ -3,6 +3,8 @@
 
     require_once 'views/View.php';
     require_once 'models/Playlist.php';
+    require_once 'models/Video.php';
+    
     
 
 
@@ -38,7 +40,7 @@
             if(isset($_GET['playlist_id'])){
                 $playlistsId = intval($_GET['playlist_id']);
                 $selectedPlaylist = Playlist::getPlaylistWithVideos($playlistsId);
-            }
+            } 
 
             
 //var_dump($playlists);
@@ -57,12 +59,15 @@
 
             try
             {
+                $videosByCategory = Video::getVideosByCategory();
+
                 $View = new View('templates/home');                            // charge  home.php dans views/templates/home.php ;     
 
                 $View->generer( [
                     'title' => 'Page d\'Accueil',
                     'playlists' =>$playlists, //Passez les playlists à la vue
-                    'selectedPlaylist'=>$selectedPlaylist, //Playlist séléctionnées
+                    'selectedPlaylist'=>$selectedPlaylist,
+                    'videosByCategory' => $videosByCategory, //Playlist séléctionnées
                     'erreur'=> isset($erreur)?$erreur :null
                     ]);              // 
             }

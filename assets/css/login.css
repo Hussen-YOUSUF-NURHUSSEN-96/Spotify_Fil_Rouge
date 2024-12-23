@@ -306,3 +306,10 @@
     box-shadow: 56vmin 0 7.773008720607723vmin currentColor;
 }
 
+@media(max-width:800px){
+    .login-container{
+        width: 300px;
+    }
+    
+    
+}
