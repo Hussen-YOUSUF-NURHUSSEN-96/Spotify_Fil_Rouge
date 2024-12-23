@@ -1,3 +1,15 @@
+<?php
+// Vérification et initialisation des résultats de recherche
+if (isset($_SESSION['search_results'])) {
+    $videos_search = $_SESSION['search_results']['videos_search'] ?? [];
+    $searchTerm = $_SESSION['search_results']['searchTerm'] ?? '';
+    unset($_SESSION['search_results']);
+} else {
+    $videos_search = [];
+    $searchTerm = '';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -258,40 +270,28 @@
                 <!-- Hussen-->
 
                 <!-- Section des résultats de recherche -->
-                <div id="zoneHussen">
+                <div class="zoneHussen <?= !empty($videos_search) ? '' : 'hidden' ?>">
                     <?php if (count($videos_search) > 0): ?>
-
-                        <h2>Résultats de recherche pour "<?= htmlspecialchars($searchTerm) ?>" </h2>
-
-
+                        <h2>Résultats de recherche pour "<?= htmlspecialchars($searchTerm) ?>"</h2>
                         <div class="videos-container">
-                            <button class="scroll-button left" id="scrollLeft">&lt;</button>
-
-                            <div class="videos-wrapper" id="videosWrapper">
-                                <div class="videos-row">
-                                    <?php foreach ($videos_search as $video_get): ?>
-                                        <div class="video-card">
-                                            <h4><?= htmlspecialchars($video_get['title']) ?></h4>
-                                            <p>Artiste : <?= htmlspecialchars($video_get['artist']) ?></p>
-                                            <?php if (!empty($video_get['video_url'])): ?>
-                                                <div class="video-wrapper">
-                                                    <iframe
-                                                        src="<?= htmlspecialchars(Video::convertToEmbedUrl($video_get['video_url'])) ?>"
-                                                        frameborder="0"
-                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                        allowfullscreen>
-                                                    </iframe>
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>
-                                    <?php endforeach; ?>
+                            <?php foreach ($videos_search as $video_get): ?>
+                                <div class="video-card">
+                                    <h4><?= htmlspecialchars($video_get['title']) ?></h4>
+                                    <p>Artiste : <?= htmlspecialchars($video_get['artist']) ?></p>
+                                    <?php if (!empty($video_get['video_url'])): ?>
+                                        <iframe src="<?= htmlspecialchars(Video::convertToEmbedUrl($video_get['video_url'])) ?>"
+                                            frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen>
+                                        </iframe>
+                                    <?php endif; ?>
                                 </div>
-                            </div>
-
-                            <!-- <button class="scroll-button right" id="scrollRight">&gt;</button> -->
+                            <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
                 </div>
+
+
 
 
 
