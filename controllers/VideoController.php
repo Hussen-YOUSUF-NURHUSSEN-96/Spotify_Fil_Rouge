@@ -18,14 +18,14 @@
             $searchTerm = $_GET['query'] ?? '';
     
             // Rechercher les videos
-            $videos = Video::searchVideos($searchTerm);
+            $videos_search = Video::searchVideos($searchTerm);
             
 
              // Stocker les résultats de recherche dans la session
             $_SESSION['search_results'] = 
             [
-                'videos'     => $videos,
-                'searchTerm' => $searchTerm,
+                'videos_search'  => $videos_search,
+                'searchTerm'     => $searchTerm,
             ];
 
             // Rediriger vers la page home

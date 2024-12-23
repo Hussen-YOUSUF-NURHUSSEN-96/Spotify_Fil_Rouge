@@ -10,55 +10,95 @@
 </head>
 
 <body>
-    <header class="header">
-        <div class="burger">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-        </div>
-        <!-- Recherche -->
-        <div class="search">
-            <form method="GET" action="index.php" class="search-form">
-                <input type="hidden" name="action" value="search">
-                <input type="text" name="query" placeholder="Rechercher"
-                    value="<?= htmlspecialchars($searchTerm ?? '') ?>" class="search-input">
-                <button type="submit" class="search-button"> <i class="fas fa-search"></i> </button>
-            </form>
 
-            <?php
+<header class="header">
+    <?php  if (isset($_SESSION['user'])): ?>
+        <a href="index.php?action=logout">Déconnexion</a>
+    <?php endif; ?>
+    <!-- Recherche -->
+    <div class="search">
+        <form method="GET" action="index.php" class="search-form"  >
+            <input type="hidden" name="action" value="search">
+            <input type="text" name="query" placeholder="Rechercher" value="<?= htmlspecialchars($searchTerm ?? '') ?>" class="search-input">
+            <button type="submit" class="search-button"> <i class="fas fa-search"></i> </button>
+        </form>
+ 
+        <?php
+
+            // Initialisation stricte des variables
+            $videos_search  = $videos_search ?? [];
+            $searchTerm     = $searchTerm ?? '';
+
             // Vérifier s'il y a des resultats de recherche dans la session
-            if (isset($_SESSION['search_results'])) {
-                $videos = $_SESSION['search_results']['videos'];
-                $searchTerm = $_SESSION['search_results']['searchTerm'];
+            if (isset($_SESSION['search_results'])) 
+            {
+                $videos_search  = $_SESSION['search_results']['videos_search'];
+                $searchTerm     = $_SESSION['search_results']['searchTerm'];
 
                 // Supprimer les résultats de la session après les avoir récupérés
                 unset($_SESSION['search_results']);
             }
-            ?>
-            <!-- Pour tester -->
-            <?php if (isset($videos)): ?>
 
-                <div class="search-results-container">
-                    <span class="search-results">
-                        <?= count($videos) ?> résultat(s) trouvé(s)
-                    </span>
+        ?>
 
-                    <ul class="search-results-list">
-                        <?php foreach ($videos as $video): ?>
-                            <li class="search-result-item">
-                                <h4><?= htmlspecialchars($video['title']) ?></h3>
-                                    <p>Artiste : <?= htmlspecialchars($video['artist']) ?></p>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-            <?php endif; ?>
+        <?php 
+            // Vérifie si la variable $videos n'est pas définie ou est vide
+            if ( empty($videos_search) || empty(trim($searchTerm))): ?>
+                <style>
+                    
+                    .zone1 {
+                        display: block;    /* Affiche la section .zone1 */
+                    }
+                    .zoneHussen {
+                        display: none;  
+                    }
+                </style>
+        <?php else: ?>
+                <style>
+                    /* Si $videos est définie et contient une valeur, on cache la zone1 */
+                    .zone1 {
+                        display: none;  
+                    }
+                    .zoneHussen {
+                        display: block;  
+                    }
+                </style>
+        <?php endif; ?>
+
+        <!-- Pour tester -->
+        <?php if (isset($videos_search)): ?>
+
+            <div class="search-results-container">
+                <span class="search-results">
+                    <?= count($videos_search) ?> résultat(s) trouvé(s)  pour "<?= htmlspecialchars($searchTerm) ?>"   
+                </span>
+
+                <ul class="search-results-list">
+                    <?php foreach ($videos_search as $video_get): ?>
+                        <li class="search-result-item">
+                            <h4><?= htmlspecialchars($video_get['title']) ?></h3>
+                            <p>Artiste : <?= htmlspecialchars($video_get['artist']) ?></p>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+    </div>
+    <div class="icon">
+        <a href="index.php?action=home"><i class="fas fa-home"></i></a>
+    </div>
+</header>
+   <section>
+
+<!--BIBLIOTHÈQUE-->
+    <div class="library">
+    <!--Playlist favoris par defaut-->
+        <div class="logo">
+            <img src="assets/css/etagere-a-livres.png" alt="">
+            <button class="add-playlist" onclick="openPopup()">+</button>
         </div>
         <div class="icon">
             <a href="index.php?action=home"><i class="fas fa-home"></i></a>
-            <?php if (isset($_SESSION['user'])): ?>
-                <a href="index.php?action=logout"><i class="fa-solid fa-right-from-bracket"></i></a>
-            <?php endif; ?>
         </div>
     </header>
     <section>
@@ -201,17 +241,53 @@
 
 
 
+        <!--Fin liste video-->
+        <!-- Hussen-->
 
-                <!--Fin liste video-->
+        <!-- Section des résultats de recherche -->
+        <div id="zoneHussen">
+            <?php if (count($videos_search) > 0): ?>
 
-                <!--Fin liste video-->
-                <!-- Hussen-->
+                <h2>Résultats de recherche pour "<?= htmlspecialchars($searchTerm) ?>" </h2>
+
+
+                <div class="videos-container">
+                    <button class="scroll-button left" id="scrollLeft">&lt;</button>
+                    
+                    <div class="videos-wrapper" id="videosWrapper">
+                        <div class="videos-row">
+                            <?php foreach ($videos_search as $video_get): ?>
+                                <div class="video-card">
+                                    <h4><?= htmlspecialchars($video_get['title']) ?></h4>
+                                    <p>Artiste : <?= htmlspecialchars($video_get['artist']) ?></p>
+                                    <?php if (!empty($video_get['video_url'])): ?>
+                                        <div class="video-wrapper">
+                                            <iframe 
+                                                src="<?= htmlspecialchars(Video::convertToEmbedUrl($video_get['video_url'])) ?>" 
+                                                frameborder="0" 
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen>
+                                            </iframe>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>  
+                    
+                    <!-- <button class="scroll-button right" id="scrollRight">&gt;</button> -->
+                </div>
+            <?php endif; ?>
+        </div>
+       
 
 
             <?php endif; ?>
         </div>
+        <div class="suggestion">
 
-        <!--  <div class="artiste-en-cours">
+        </div>
+        <div class="artiste-en-cours">
             <div class="artiste">
                 <img src="assets/css/babymetal-album.jpeg" alt="">
                 <h2>Gimme Chocolate</h2>
