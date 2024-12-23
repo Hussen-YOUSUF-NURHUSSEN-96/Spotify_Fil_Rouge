@@ -8,9 +8,9 @@
 .header{
     width: 100vw;
     display: flex;
-    justify-content: space-around;
     padding: 10px;
     position: absolute;
+    gap: 20px;
     z-index: 3;
     align-items: center;
     background-color: rgb(26, 26, 26); /* Harmonisation avec l'artiste en cours */
@@ -215,6 +215,11 @@ main{
 }
 /*Playlist*/
 
+.message{
+    width: 100%;
+    text-align: center;
+}
+
 #playlistContainer{
     color: white;
     text-decoration: none;
@@ -294,6 +299,7 @@ main{
     border-radius: 10px;
     display: flex;
     padding: 10px;
+    flex-wrap: wrap;
     
 }
 
@@ -821,8 +827,9 @@ section{
 
     #playlistContainer ul{
         flex-direction: row-reverse;
-        gap: 20px;
+        gap: 10px;
     }
+
 
     #playlistContainer ul li{
         width:80px;
