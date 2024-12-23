@@ -29,8 +29,8 @@
             <?php
 
                 // Initialisation stricte des variables
-                $videos_search  = $videos_search ?? [];
-                $searchTerm     = $searchTerm ?? '';
+                // $videos_search  = $videos_search ?? [];
+                // $searchTerm     = $searchTerm ?? '';
 
                 // Vérifier s'il y a des resultats de recherche dans la session
                 if (isset($_SESSION['search_results'])) 
@@ -46,7 +46,8 @@
 
             <?php 
                 // Vérifie si la variable $videos n'est pas définie ou est vide
-                if ( empty($videos_search) || empty(trim($searchTerm))): ?>
+                // if ( empty($videos_search) || empty(trim($searchTerm))): ? >
+                if (!isset($videos_search)): ?>
                     <style>
                         
                         .zoneMasi {
@@ -255,7 +256,7 @@
 
                         <!-- Section des résultats de recherche -->
                         <div id="zoneHussen">
-                            <?php if (count($videos_search) > 0): ?>
+                            <?php if (isset($videos_search) && is_array($videos_search) && count($videos_search) > 0): ?>
 
                                 <h2>Résultats de recherche pour "<?= htmlspecialchars($searchTerm) ?>" </h2>
 
@@ -302,7 +303,10 @@
 
                                     <button class="scroll-button right" id="scrollRight">&gt;</button>
                                 </div>
+                            <?php elseif (isset($videos_search) && count($videos_search) == 0): ?>
+                                <p>Aucun résultat trouvé.</p>
                             <?php endif; ?>
+                        <!-- FIn hussen -->
                         </div>
 
 
