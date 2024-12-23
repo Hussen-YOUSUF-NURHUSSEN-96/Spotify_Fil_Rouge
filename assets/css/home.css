@@ -863,3 +863,136 @@ section{
 
 
 
+
+
+
+
+
+
+
+
+
+/* HUSEEN  */
+
+
+#zoneHussen {
+    width: 100%;
+    margin: 30px 0;
+    padding: 30px;  
+    background-color: #1d1f27;        /* Fond sombre pour la section */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;  
+}
+
+ 
+.hussen-search-title {
+    font-size: 1.8em;
+    color: #fff;
+    margin-bottom: 50px !important;   
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Conteneur des vidéos */
+.hussen-videos-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);      /* 3 vidéos par ligne */
+    gap: 30px; 
+    justify-items: center;
+    padding: 20px;  
+}
+
+/* Style de la carte vidéo */
+.hussen-video-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    width: 100%;  
+    max-width: 280px; /* Taille fixe de la carte */
+    height: 450px;  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;  
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    margin-bottom: 30px; 
+}
+
+.hussen-video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Titre de chaque vidéo */
+.hussen-video-card h4 {
+    font-size: 1.3em;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+/* Texte sous le titre */
+.hussen-video-card p {
+    font-size: 1em;
+    color: #ccc;
+    margin: 5px 0;
+}
+
+ 
+.hussen-video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;     
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.hussen-video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* Style du formulaire d'ajout à la playlist */
+#zoneHussen  form {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+#zoneHussen select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px; 
+    background-color: #222;
+    color: #fff;
+}
+
+.hussen-add-button {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.hussen-add-button:hover {
+    background-color: #4cae4c;
+}
+
+/* Si la section ne trouve aucune vidéo */
+#zoneHussen p {
+    font-size: 1.2em;
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+}
