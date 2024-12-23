@@ -59,6 +59,16 @@
 
             try
             {
+                // Hussen  -------------------------------------------
+
+                 // Récupérer les catégories pour le filtre
+
+                 $categories  = Video::getCategories();                           // Récupérer toutes les catégories
+                 $category_id = $_SESSION['search_results']['categoryId'] ?? '';  // Catégorie sélectionnée, s'il y en a
+ 
+                // Fin     -------------------------------------------
+
+
                 $videosByCategory = Video::getVideosByCategory();
 
                 $View = new View('templates/home');                            // charge  home.php dans views/templates/home.php ;     
@@ -68,7 +78,11 @@
                     'playlists' =>$playlists, //Passez les playlists à la vue
                     'selectedPlaylist'=>$selectedPlaylist,
                     'videosByCategory' => $videosByCategory, //Playlist séléctionnées
-                    'erreur'=> isset($erreur)?$erreur :null
+                    'erreur'=> isset($erreur)?$erreur :null, 
+
+                    // Hussen
+                    'categories'  => $categories,  // Catégories pour le filtre
+                    'category_id' => $category_id  // ID de la catégorie sélectionnée
                     ]);              // 
             }
             catch (Exception $e) 

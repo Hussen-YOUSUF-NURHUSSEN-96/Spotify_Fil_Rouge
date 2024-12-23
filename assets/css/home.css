@@ -8,14 +8,14 @@
 .header{
     width: 100vw;
     display: flex;
-    padding: 10px;
-    position: absolute;
-    gap: 20px;
-    z-index: 3;
     align-items: center;
-    background-color: rgb(26, 26, 26); /* Harmonisation avec l'artiste en cours */
+    justify-content: space-evenly; 
+    padding: 10px;
+    position: fixed; /* Fixe en haut de la page */
+    top: 0;
+    z-index: 3;
+    background-color: rgb(26, 26, 26);
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
-   
 }
 
 
@@ -25,7 +25,8 @@
     align-items: center;
     background-color: rgb(47, 88, 59);
     border-radius: 20px;
-    padding: 5px 10px;
+    padding: 10px 10px;
+    margin: 10px 0 12px 20px;
 }
 
 /* Conteneur du formulaire de recherche */
@@ -34,14 +35,14 @@
     align-items: center;
     justify-content: space-between;  /*  le champ et le bouton   */
     width: 100%;
-    max-width: 500px;  
-    margin: 0 auto;  
+    width: 100%;
+    max-width: 600px;   
 }
 
 /* Champ de recherche */
 .search-input {
-    flex: 1;               /* Prend tout l'espace disponible a gauche */
-    padding: 8px 10px;
+    flex-grow: 2;             /* Permet au champ de prendre le plus de place possible */
+    padding: 8px 12px;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -49,10 +50,42 @@
     outline: none;
 }
 
+
+/* Menu de catégorie */
+.search-category {
+    padding: 8px 15px; 
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    margin: 0 25px;
+    outline: none;
+    
+}
+
+/* Survol du menu déroulant */
+.search-category:hover {
+    border-color: #888;
+}
+
+/* Focus sur le select */
+.search-category:focus {
+    border-color: #4CAF50;
+    background-color: #f0f0f0;
+}
+
+/* Option par défaut */
+.search-category option {
+    color: #888;
+    font-style: italic;
+}
+
+
 /* Bouton de recherche */
 .search-button {
-    padding: 8px 15px;     
-    margin-left: 14px;
+    padding: 8px 15px;
     background-color: #4caf50;
     color: white;
     border: none;
@@ -64,8 +97,10 @@
     justify-content: center;
     transition: transform 0.2s;
 }
+
 .search button:hover {
-    transform: scale(1.1);
+    transform: scale(1.1); 
+    background-color: #45a049;  
 }
 
 
@@ -80,7 +115,7 @@
 
 .icon {
     display: flex;
-    gap: 10px;
+    gap: 15px;
 }
 
 .icon a {
@@ -875,6 +910,8 @@ section{
 /* HUSEEN  */
 
 
+/* Body */
+
 #zoneHussen {
     width: 100%;
     margin: 30px 0;
@@ -885,7 +922,7 @@ section{
     overflow: hidden;  
 }
 
- 
+
 .hussen-search-title {
     font-size: 1.8em;
     color: #fff;
