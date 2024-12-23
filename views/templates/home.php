@@ -69,7 +69,7 @@
             <?php endif; ?>
 
             <!-- Pour tester -->
-            <?php if (isset($videos_search)): ?>
+            <!-- <?php if (isset($videos_search)): ?>
 
                 <div class="search-results-container">
                     <span class="search-results">
@@ -85,7 +85,7 @@
                         <?php endforeach; ?>
                     </ul>
                 </div>
-            <?php endif; ?>
+            <?php endif; ?> -->
         </div>
         <div class="icon">
             <a href="index.php?action=home"><i class="fas fa-home"></i></a>
