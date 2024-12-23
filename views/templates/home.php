@@ -284,18 +284,11 @@
 
             <?php endif; ?>
         </div>
-        <div class="suggestion">
+    
 
-        </div>
-        <div class="artiste-en-cours">
-            <div class="artiste">
-                <img src="assets/css/babymetal-album.jpeg" alt="">
-                <h2>Gimme Chocolate</h2>
-                <p>Baby Metal</p>
+    
 
-            </div>
 
-        </div>-->
 
         </div>
 
