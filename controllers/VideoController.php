@@ -10,15 +10,17 @@
         // Methode pour afficher les resultats de recherche
         public function search() { 
             
-            if (session_status() === PHP_SESSION_NONE) {
-            session_start();
+            if (session_status() === PHP_SESSION_NONE) 
+            {
+                session_start();
             }
         
             // Verifier si une recherche a ete effectue
             $searchTerm = $_GET['query'] ?? '';
+            $categoryId = $_GET['category_id'] ?? '';
     
-            // Rechercher les videos
-            $videos_search = Video::searchVideos($searchTerm);
+            // Rechercher les videos avec ou sans filtre de catégorie
+            $videos_search = Video::searchVideos($searchTerm, $categoryId);
             
 
              // Stocker les résultats de recherche dans la session
@@ -26,20 +28,17 @@
             [
                 'videos_search'  => $videos_search,
                 'searchTerm'     => $searchTerm,
+                'categoryId'     => $categoryId,
             ];
 
             // Rediriger vers la page home
             header('Location: index.php?action=home');
             exit();
             
-            // Option 1
-            // Charger la vue avec les resultats
-            // $view = new View('templates/home');
-            // $view->generer(['videos' => $videos, 'searchTerm' => $searchTerm]);
-
-            // Option 2 
-            // include 'views/templates/home.php';
         }
+
+        // ############################################################
+
 
         public function getVideosByCategory(){   
             if (session_status() === PHP_SESSION_NONE) {
