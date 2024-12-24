@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- Feuille de style principale -->
-    <link rel="stylesheet" href="assets/css/home.css?v=1.7">
+    <link rel="stylesheet" href="assets/css/home.css?v=1.0">
 </head>
 
 
@@ -213,7 +213,6 @@
                 <div class="zoneMasi">
                     <?php if (isset($videosByCategory) && !empty($videosByCategory)): ?>
                         <div class="videos-container">
-                            <button class="scroll-button left" id="scrollLeft">&lt;</button>
                             <div class="videos-wrapper" id="videosWrapper">
                                 <?php foreach ($videosByCategory as $category => $videos): ?>
                                     <div class="category-section">
@@ -254,7 +253,7 @@
                                 <?php endforeach; ?>
                             </div>
                         </div>
-                        <button class="scroll-button right" id="scrollRight">&gt;</button>
+                        
                     </div>
                 <?php else: ?>
 

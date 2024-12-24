@@ -83,27 +83,27 @@ INSERT INTO categories (name) VALUES
 
 INSERT INTO videos (title, artist, category_id, video_url, thumbnail_url, duration) VALUES
     -- City Pop
-    ('Plastic Love', 'Mariya Takeuchi', (SELECT id FROM categories WHERE name = 'City Pop'), 'https://www.youtube.com/watch?v=T_lC2O1oIew', 'https://img.youtube.com/vi/3bNITQR4Uso/hqdefault.jpg', '05:12'),
-    ('Stay With Me', 'Miki Matsubara', (SELECT id FROM categories WHERE name = 'City Pop'), 'https://www.youtube.com/watch?v=QNYT9wVwQ8A', 'https://img.youtube.com/vi/2bALDEeFOh8/hqdefault.jpg', '04:38'),
+    ('Plastic Love', 'Mariya Takeuchi', (SELECT id FROM categories WHERE name = 'City Pop'), 'https://www.youtube.com/watch?v=T_lC2O1oIew', 'https://img.youtube.com/vi/3bNITQR4Uso/hqdefault.jpg', 512),
+    ('Stay With Me', 'Miki Matsubara', (SELECT id FROM categories WHERE name = 'City Pop'), 'https://www.youtube.com/watch?v=QNYT9wVwQ8A', 'https://img.youtube.com/vi/2bALDEeFOh8/hqdefault.jpg', 438),
     
     -- Funk
-    ('Uptown Funk', 'Mark Ronson ft. Bruno Mars', (SELECT id FROM categories WHERE name = 'Funk'), 'https://www.youtube.com/watch?v=OPf0YbXqDm0', 'https://img.youtube.com/vi/OPf0YbXqDm0/hqdefault.jpg', '04:30'),
-    ('Super Freak', 'Rick James', (SELECT id FROM categories WHERE name = 'Funk'), 'https://www.youtube.com/watch?v=QYHxGBH6o4M', 'https://img.youtube.com/vi/QYHxGBH6o4M/hqdefault.jpg', '03:23'),
+    ('Uptown Funk', 'Mark Ronson ft. Bruno Mars', (SELECT id FROM categories WHERE name = 'Funk'), 'https://www.youtube.com/watch?v=OPf0YbXqDm0', 'https://img.youtube.com/vi/OPf0YbXqDm0/hqdefault.jpg', 430),
+    ('Super Freak', 'Rick James', (SELECT id FROM categories WHERE name = 'Funk'), 'https://www.youtube.com/watch?v=QYHxGBH6o4M', 'https://img.youtube.com/vi/QYHxGBH6o4M/hqdefault.jpg', 323),
     
     -- Rock
-    ('Bohemian Rhapsody', 'Queen', (SELECT id FROM categories WHERE name = 'Rock'), 'https://www.youtube.com/watch?v=fJ9rUzIMcZQ', 'https://img.youtube.com/vi/fJ9rUzIMcZQ/hqdefault.jpg', '05:55'),
-    ('Hotel California', 'Eagles', (SELECT id FROM categories WHERE name = 'Rock'), 'https://www.youtube.com/watch?v=EqPtz5qN7HM', 'https://img.youtube.com/vi/EqPtz5qN7HM/hqdefault.jpg', '06:31'),
+    ('Bohemian Rhapsody', 'Queen', (SELECT id FROM categories WHERE name = 'Rock'), 'https://www.youtube.com/watch?v=fJ9rUzIMcZQ', 'https://img.youtube.com/vi/fJ9rUzIMcZQ/hqdefault.jpg', 555),
+    ('Hotel California', 'Eagles', (SELECT id FROM categories WHERE name = 'Rock'), 'https://www.youtube.com/watch?v=EqPtz5qN7HM', 'https://img.youtube.com/vi/EqPtz5qN7HM/hqdefault.jpg', 631),
     
     -- Anime
-    ('A Cruel Angel Thesis', 'Yoko Takahashi', (SELECT id FROM categories WHERE name = 'Anime'), 'https://www.youtube.com/watch?v=o6wtDPVkKqI', 'https://img.youtube.com/vi/IWJUPY-2EIM/hqdefault.jpg', '04:06'),
-    ('Gurenge', 'LiSA', (SELECT id FROM categories WHERE name = 'Anime'), 'https://www.youtube.com/watch?v=CwkzK-F0Y00', 'https://img.youtube.com/vi/CwkzK-F0Y00/hqdefault.jpg', '03:56'),
-    
+    ('A Cruel Angel Thesis', 'Yoko Takahashi', (SELECT id FROM categories WHERE name = 'Anime'), 'https://www.youtube.com/watch?v=o6wtDPVkKqI', 'https://img.youtube.com/vi/IWJUPY-2EIM/hqdefault.jpg', 406),
+    ('Gurenge', 'LiSA', (SELECT id FROM categories WHERE name = 'Anime'), 'https://www.youtube.com/watch?v=CwkzK-F0Y00', 'https://img.youtube.com/vi/CwkzK-F0Y00/hqdefault.jpg', 356),
+    ('Angel Night', 'PSY.S', (SELECT id FROM categories WHERE name = 'Anime'), 'https://www.youtube.com/watch?v=2HYtSRpupig', 'https://img.youtube.com/vi/3bNITQR4Uso/hqdefault.jpg', 427),
     -- Classique
-    ('Nocturne Op.9 No.2', 'Frédéric Chopin', (SELECT id FROM categories WHERE name = 'Classique'), 'https://www.youtube.com/watch?v=9E6b3swbnWg', 'https://img.youtube.com/vi/9E6b3swbnWg/hqdefault.jpg', '04:28'),
-    ('Clair de Lune', 'Claude Debussy', (SELECT id FROM categories WHERE name = 'Classique'), 'https://www.youtube.com/watch?v=CvFH_6DNRCY', 'https://img.youtube.com/vi/CvFH_6DNRCY/hqdefault.jpg', '05:23'),
+    ('Nocturne Op.9 No.2', 'Frédéric Chopin', (SELECT id FROM categories WHERE name = 'Classique'), 'https://www.youtube.com/watch?v=9E6b3swbnWg', 'https://img.youtube.com/vi/9E6b3swbnWg/hqdefault.jpg', 428),
+    ('Clair de Lune', 'Claude Debussy', (SELECT id FROM categories WHERE name = 'Classique'), 'https://www.youtube.com/watch?v=CvFH_6DNRCY', 'https://img.youtube.com/vi/CvFH_6DNRCY/hqdefault.jpg', 523),
     
     -- Hip-Hop
-    ('Lose Yourself', 'Eminem', (SELECT id FROM categories WHERE name = 'Hip-Hop'), 'https://www.youtube.com/watch?v=_Yhyp-_hX2s', 'https://img.youtube.com/vi/_Yhyp-_hX2s/hqdefault.jpg', '05:26'),
-    ('SICKO MODE', 'Travis Scott', (SELECT id FROM categories WHERE name = 'Hip-Hop'), 'https://www.youtube.com/watch?v=6ONRf7h3Mdk', 'https://img.youtube.com/vi/6ONRf7h3Mdk/hqdefault.jpg', '05:12');
+    ('Lose Yourself', 'Eminem', (SELECT id FROM categories WHERE name = 'Hip-Hop'), 'https://www.youtube.com/watch?v=_Yhyp-_hX2s', 'https://img.youtube.com/vi/_Yhyp-_hX2s/hqdefault.jpg', 526),
+    ('SICKO MODE', 'Travis Scott', (SELECT id FROM categories WHERE name = 'Hip-Hop'), 'https://www.youtube.com/watch?v=6ONRf7h3Mdk', 'https://img.youtube.com/vi/6ONRf7h3Mdk/hqdefault.jpg', 512);
 
 
