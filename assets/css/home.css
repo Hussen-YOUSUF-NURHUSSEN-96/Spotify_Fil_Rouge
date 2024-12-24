@@ -327,16 +327,15 @@ main{
 }
 /*Vidéo*/
 /*Playlist selectionner*/
-.video-lecture{
-    width: 80vw;
-    height: 100%;
-    background-color: rgb(70, 102, 79);
-    border-radius: 10px;
-    display: flex;
-    padding: 10px;
-    flex-wrap: wrap;
-    
-}
+
+
+
+
+
+
+
+
+
 
 .video-lecture h2{
     margin: 20px;
@@ -537,6 +536,20 @@ section{
     
 }
 
+.video-lecture{
+    width: 80vw;
+    height: 100%;
+    background-color: rgb(70, 102, 79);
+    border-radius: 10px;
+    display: flex;
+    padding: 10px;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    overflow-y: scroll;
+overflow-x: hidden;
+position: relative;
+    
+}
 
 /* Conteneur principal */
 .videos-wrapper {

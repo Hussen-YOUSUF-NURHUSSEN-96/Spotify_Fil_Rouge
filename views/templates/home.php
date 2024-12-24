@@ -78,21 +78,21 @@ if (isset($_SESSION['search_results'])) {
             }
             ?>
 
-            <style>
-                /* Si $videos_search n'est pas défini, on affiche .zoneMasi et cache .zoneHussen */
-                .zoneMasi {
-                    display:
-                        <?php echo isset($videos_search) ? 'none' : 'block'; ?>
-                    ;
-                }
+         <style>
+             /* Si $videos_search n'est pas défini, on affiche .zoneMasi et cache .zoneHussen */
+             .zoneMasi {
+                 display:
+                     <?php echo isset($videos_search) ? 'none' : 'block'; ?>
+                 ;
+             }
 
-                /* Si $videos_search est défini, on cache .zoneMasi et affiche .zoneHussen */
-                .zoneHussen {
-                    display:
-                        <?php echo isset($videos_search) ? 'block' : 'none'; ?>
-                    ;
-                }
-            </style>
+             /* Si $videos_search est défini, on cache .zoneMasi et affiche .zoneHussen */
+             .zoneHussen {
+                 display:
+                     <?php echo isset($videos_search) ? 'block' : 'none'; ?>
+                 ;
+             }
+         </style>
         </div>
 
         <!-- ===== ICÔNES DE NAVIGATION ===== -->
