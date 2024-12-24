@@ -22,7 +22,7 @@ if (isset($_SESSION['search_results'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- Feuille de style principale -->
-    <link rel="stylesheet" href="assets/css/home.css?v=1.1">
+    <link rel="stylesheet" href="assets/css/home.css?v=1.2">
 </head>
 
 
@@ -211,52 +211,69 @@ if (isset($_SESSION['search_results'])) {
             <?php else: ?>
 
 
+
                 <?php if (isset($videosByCategory) && !empty($videosByCategory)): ?>
-                    <h2>Liste de titres par catégorie</h2>
                     <div class="videos-container">
-                        <button class="scroll-button left" id="scrollLeft">&lt;</button>
-
                         <div class="videos-wrapper" id="videosWrapper">
-                            <div class="videos-row">
-                                <?php foreach ($videosByCategory as $category => $videos): ?>
-                                    <div class="category-section">
-                                        <h3 class="category-title"><?= htmlspecialchars($category) ?></h3>
-                                        <?php foreach ($videos as $video): ?>
-                                            <div class="video-card">
-                                                <h4><?= htmlspecialchars($video['title']) ?></h4>
-                                                <p>Artiste : <?= htmlspecialchars($video['artist']) ?></p>
-                                                <?php if (!empty($video['video_url'])): ?>
-                                                    <div class="video-wrapper">
-
-
-                                                        <iframe src="<?= htmlspecialchars(Video::convertToEmbedUrl($video['video_url'])) ?>"
-                                                            frameborder="0"
-                                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                            allowfullscreen>
-                                                        </iframe>
-                                                    </div>
-                                                <?php endif; ?>
-                                                <!-- Formulaire pour ajouter une vidéo à une playlist -->
-                                                <form action="index.php?action=addVideoToPlaylist" method="POST">
-                                                    <input type="hidden" name="video_id" value="<?= $video['id'] ?>">
-                                                    <select name="playlist_id" required>
-                                                        <option value="">Choisir une playlist</option>
-                                                        <?php foreach ($playlists as $playlist): ?>
-                                                            <option value="<?= $playlist['id'] ?>">
-                                                                <?= htmlspecialchars($playlist['name']) ?>
-                                                            </option>
-                                                        <?php endforeach; ?>
-                                                    </select>
-                                                    <button type="submit" class="add-button">Ajouter à la playlist</button>
-                                                </form>
-                                            </div>
-                                        <?php endforeach; ?>
+                            <?php foreach ($videosByCategory as $category => $videos): ?>
+                                <div class="category-section">
+                                    <h3 class="category-title"><?= htmlspecialchars($category) ?></h3>
+                                    <div class="videos-row-wrapper">
+                                        <div class="videos-row">
+                                            <?php foreach ($videos as $video): ?>
+                                                <div class="video-card">
+                                                    <h4><?= htmlspecialchars($video['title']) ?></h4>
+                                                    <p>Artiste : <?= htmlspecialchars($video['artist']) ?></p>
+                                                    <?php if (!empty($video['video_url'])): ?>
+                                                        <div class="video-wrapper">
+                                                            <iframe
+                                                                src="<?= htmlspecialchars(Video::convertToEmbedUrl($video['video_url'])) ?>"
+                                                                frameborder="0"
+                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                                allowfullscreen>
+                                                            </iframe>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                    <form action="index.php?action=addVideoToPlaylist" method="POST">
+                                                        <input type="hidden" name="video_id" value="<?= $video['id'] ?>">
+                                                        <select name="playlist_id" required>
+                                                            <option value="">Choisir une playlist</option>
+                                                            <?php foreach ($playlists as $playlist): ?>
+                                                                <option value="<?= $playlist['id'] ?>">
+                                                                    <?= htmlspecialchars($playlist['name']) ?>
+                                                                </option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                        <button type="submit" class="add-button">+</button>
+                                                    </form>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
                                     </div>
-                                <?php endforeach; ?>
-                            </div>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
 
-                        <button class="scroll-button right" id="scrollRight">&gt;</button>
+                        <div class="zoneHussen <?= !empty($videos_search) ? '' : 'hidden' ?>">
+                            <?php if (count($videos_search) > 0): ?>
+                                <h2>Résultats de recherche pour "<?= htmlspecialchars($searchTerm) ?>"</h2>
+                                <div class="videos-container">
+                                    <?php foreach ($videos_search as $video_get): ?>
+                                        <div class="video-card">
+                                            <h4><?= htmlspecialchars($video_get['title']) ?></h4>
+                                            <p>Artiste : <?= htmlspecialchars($video_get['artist']) ?></p>
+                                            <?php if (!empty($video_get['video_url'])): ?>
+                                                <iframe src="<?= htmlspecialchars(Video::convertToEmbedUrl($video_get['video_url'])) ?>"
+                                                    frameborder="0"
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                    allowfullscreen>
+                                                </iframe>
+                                            <?php endif; ?>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 <?php else: ?>
                     <p>Aucune playlist ou vidéo de disponible</p>
@@ -270,26 +287,26 @@ if (isset($_SESSION['search_results'])) {
                 <!-- Hussen-->
 
                 <!-- Section des résultats de recherche -->
-                <div class="zoneHussen <?= !empty($videos_search) ? '' : 'hidden' ?>">
-                    <?php if (count($videos_search) > 0): ?>
-                        <h2>Résultats de recherche pour "<?= htmlspecialchars($searchTerm) ?>"</h2>
-                        <div class="videos-container">
-                            <?php foreach ($videos_search as $video_get): ?>
-                                <div class="video-card">
-                                    <h4><?= htmlspecialchars($video_get['title']) ?></h4>
-                                    <p>Artiste : <?= htmlspecialchars($video_get['artist']) ?></p>
-                                    <?php if (!empty($video_get['video_url'])): ?>
-                                        <iframe src="<?= htmlspecialchars(Video::convertToEmbedUrl($video_get['video_url'])) ?>"
-                                            frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen>
-                                        </iframe>
-                                    <?php endif; ?>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endif; ?>
-                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -345,44 +362,70 @@ if (isset($_SESSION['search_results'])) {
 
 
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const wrapper = document.getElementById('videosWrapper');
-            // const row = wrapper.querySelector('.videos-row');
-            const leftButton = document.getElementById('scrollLeft');
-            const rightButton = document.getElementById('scrollRight');
+        /*  document.addEventListener('DOMContentLoaded', function () {
+              const wrapper = document.getElementById('videosWrapper');
+              // const row = wrapper.querySelector('.videos-row');
+              const leftButton = document.getElementById('scrollLeft');
+              const rightButton = document.getElementById('scrollRight');
+  
+              let currentIndex = 0;
+              const sections = document.querySelectorAll('.category-section');
+  
+              // Hide left button initially
+              //leftButton.style.display = 'none';
+  
+              function updateButtons() {
+                  leftButton.style.display = currentIndex > 0 ? 'block' : 'none';
+                  rightButton.style.display = currentIndex < sections.length - 1 ? 'block' : 'none';
+              }
+  
+              function scrollToSection(direction) {
+                  if (direction === 'left' && currentIndex > 0) {
+                      currentIndex--;
+                  } else if (direction === 'right' && currentIndex < sections.length - 1) {
+                      currentIndex++;
+                  }
+  
+                  const scrollAmount = wrapper.clientWidth * currentIndex;
+                  row.style.transform = `translateX(-${scrollAmount}px)`;
+                  updateButtons();
+              }
+  
+              leftButton.addEventListener('click', () => scrollToSection('left'));
+              rightButton.addEventListener('click', () => scrollToSection('right'));
+  
+              // Update buttons visibility on window resize
+              window.addEventListener('resize', updateButtons);
+  
+              // Initial button state
+              updateButtons();
+          });*/
 
-            let currentIndex = 0;
-            const sections = document.querySelectorAll('.category-section');
+        document.querySelectorAll('.videos-row').forEach(row => {
+            const scrollLeftButton = document.createElement('button');
+            const scrollRightButton = document.createElement('button');
 
-            // Hide left button initially
-            //leftButton.style.display = 'none';
+            // Style des boutons
+            scrollLeftButton.textContent = '<';
+            scrollRightButton.textContent = '>';
+            scrollLeftButton.style.position = 'absolute';
+            scrollRightButton.style.position = 'absolute';
 
-            function updateButtons() {
-                leftButton.style.display = currentIndex > 0 ? 'block' : 'none';
-                rightButton.style.display = currentIndex < sections.length - 1 ? 'block' : 'none';
-            }
+            scrollLeftButton.className = 'scroll-left';
+            scrollRightButton.className = 'scroll-right';
 
-            function scrollToSection(direction) {
-                if (direction === 'left' && currentIndex > 0) {
-                    currentIndex--;
-                } else if (direction === 'right' && currentIndex < sections.length - 1) {
-                    currentIndex++;
-                }
+            row.parentElement.appendChild(scrollLeftButton);
+            row.parentElement.appendChild(scrollRightButton);
 
-                const scrollAmount = wrapper.clientWidth * currentIndex;
-                row.style.transform = `translateX(-${scrollAmount}px)`;
-                updateButtons();
-            }
-
-            leftButton.addEventListener('click', () => scrollToSection('left'));
-            rightButton.addEventListener('click', () => scrollToSection('right'));
-
-            // Update buttons visibility on window resize
-            window.addEventListener('resize', updateButtons);
-
-            // Initial button state
-            updateButtons();
+            // Actions des boutons
+            scrollLeftButton.addEventListener('click', () => {
+                row.scrollBy({ left: -250, behavior: 'smooth' });
+            });
+            scrollRightButton.addEventListener('click', () => {
+                row.scrollBy({ left: 250, behavior: 'smooth' });
+            });
         });
+
     </script>
 </body>
 

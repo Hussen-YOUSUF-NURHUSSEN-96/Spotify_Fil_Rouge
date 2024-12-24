@@ -27,7 +27,7 @@
                 
                  <label for="email">Entrez votre email</label>
 
-                 <input type="text" name="email" placeholder=" nom@domaine.com" required>
+                 <input type="email" name="email" placeholder=" nom@domaine.com" required>
                 
                  <label for="password">Entrez un mot de passe</label>
                  <input type="text" name="password" placeholder=" Password" required>
