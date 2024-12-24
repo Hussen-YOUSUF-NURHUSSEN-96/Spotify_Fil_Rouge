@@ -49,7 +49,7 @@ class HomeController
         }
 
 
-//var_dump($playlists);
+        //var_dump($playlists);
         //Gestion de la créations des playlists
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'])) {
             $name = trim($_POST['name']);
@@ -62,7 +62,6 @@ class HomeController
                 exit();
             }
         }
-
         try {
             // Hussen  -------------------------------------------
 
@@ -72,10 +71,12 @@ class HomeController
             $category_id = $_SESSION['search_results']['categoryId'] ?? null;
             $videosByCategory = Video::getVideosByCategory();  // Catégorie sélectionnée, s'il y en a
 
+
+
             // Fin     -------------------------------------------
 
 
-            
+
 
             $View = new View('templates/home');                            // charge  home.php dans views/templates/home.php ;     
 
@@ -89,11 +90,10 @@ class HomeController
                 // Hussen
                 'categories' => $categories,  // Catégories pour le filtre
                 'category_id' => $category_id  // ID de la catégorie sélectionnée
-            ]);              // 
+            ]);           // 
         } catch (Exception $e) {
             echo 'Erreur : ' . $e->getMessage();
         }
     }
 }
-
 ?>

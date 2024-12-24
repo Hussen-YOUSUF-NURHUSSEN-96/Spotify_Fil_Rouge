@@ -71,4 +71,39 @@ CREATE TABLE user_video_interactions (
     UNIQUE KEY (user_id, video_id)         -- Garantit qu'un utilisateur ne peut interagir avec une vidéo qu'une seule fois
 ) ENGINE=InnoDB;
 
+INSERT INTO categories (name) VALUES 
+    ('City Pop'), 
+    ('Funk'), 
+    ('Rock'), 
+    ('Anime'), 
+    ('Classique'), 
+    ('Hip-Hop');
+
+
+
+INSERT INTO videos (title, artist, category_id, video_url, thumbnail_url, duration) VALUES
+    -- City Pop
+    ('Plastic Love', 'Mariya Takeuchi', (SELECT id FROM categories WHERE name = 'City Pop'), 'https://www.youtube.com/watch?v=T_lC2O1oIew', 'https://img.youtube.com/vi/3bNITQR4Uso/hqdefault.jpg', '05:12'),
+    ('Stay With Me', 'Miki Matsubara', (SELECT id FROM categories WHERE name = 'City Pop'), 'https://www.youtube.com/watch?v=QNYT9wVwQ8A', 'https://img.youtube.com/vi/2bALDEeFOh8/hqdefault.jpg', '04:38'),
+    
+    -- Funk
+    ('Uptown Funk', 'Mark Ronson ft. Bruno Mars', (SELECT id FROM categories WHERE name = 'Funk'), 'https://www.youtube.com/watch?v=OPf0YbXqDm0', 'https://img.youtube.com/vi/OPf0YbXqDm0/hqdefault.jpg', '04:30'),
+    ('Super Freak', 'Rick James', (SELECT id FROM categories WHERE name = 'Funk'), 'https://www.youtube.com/watch?v=QYHxGBH6o4M', 'https://img.youtube.com/vi/QYHxGBH6o4M/hqdefault.jpg', '03:23'),
+    
+    -- Rock
+    ('Bohemian Rhapsody', 'Queen', (SELECT id FROM categories WHERE name = 'Rock'), 'https://www.youtube.com/watch?v=fJ9rUzIMcZQ', 'https://img.youtube.com/vi/fJ9rUzIMcZQ/hqdefault.jpg', '05:55'),
+    ('Hotel California', 'Eagles', (SELECT id FROM categories WHERE name = 'Rock'), 'https://www.youtube.com/watch?v=EqPtz5qN7HM', 'https://img.youtube.com/vi/EqPtz5qN7HM/hqdefault.jpg', '06:31'),
+    
+    -- Anime
+    ('A Cruel Angel Thesis', 'Yoko Takahashi', (SELECT id FROM categories WHERE name = 'Anime'), 'https://www.youtube.com/watch?v=o6wtDPVkKqI', 'https://img.youtube.com/vi/IWJUPY-2EIM/hqdefault.jpg', '04:06'),
+    ('Gurenge', 'LiSA', (SELECT id FROM categories WHERE name = 'Anime'), 'https://www.youtube.com/watch?v=CwkzK-F0Y00', 'https://img.youtube.com/vi/CwkzK-F0Y00/hqdefault.jpg', '03:56'),
+    
+    -- Classique
+    ('Nocturne Op.9 No.2', 'Frédéric Chopin', (SELECT id FROM categories WHERE name = 'Classique'), 'https://www.youtube.com/watch?v=9E6b3swbnWg', 'https://img.youtube.com/vi/9E6b3swbnWg/hqdefault.jpg', '04:28'),
+    ('Clair de Lune', 'Claude Debussy', (SELECT id FROM categories WHERE name = 'Classique'), 'https://www.youtube.com/watch?v=CvFH_6DNRCY', 'https://img.youtube.com/vi/CvFH_6DNRCY/hqdefault.jpg', '05:23'),
+    
+    -- Hip-Hop
+    ('Lose Yourself', 'Eminem', (SELECT id FROM categories WHERE name = 'Hip-Hop'), 'https://www.youtube.com/watch?v=_Yhyp-_hX2s', 'https://img.youtube.com/vi/_Yhyp-_hX2s/hqdefault.jpg', '05:26'),
+    ('SICKO MODE', 'Travis Scott', (SELECT id FROM categories WHERE name = 'Hip-Hop'), 'https://www.youtube.com/watch?v=6ONRf7h3Mdk', 'https://img.youtube.com/vi/6ONRf7h3Mdk/hqdefault.jpg', '05:12');
+
 

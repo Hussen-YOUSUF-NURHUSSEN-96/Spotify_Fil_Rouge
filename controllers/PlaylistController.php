@@ -123,12 +123,13 @@ class PlaylistController
                 $videoId = intval($_POST['video_id']);
                 $playlistId = intval($_POST['playlist_id']);
 
+
                 $success = Playlist::addVideoToPlaylist($videoId, $playlistId);
 
                 if ($success) {
                     header("Location: index.php?action=home&message=video_added");
                 } else {
-                    header("Location: index.php?action=home&message=message=error");
+                    header("Location: index.php?action=home&message=error");
                 }
                 exit();
             }
